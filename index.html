@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>單字實驗室 · Word Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,600&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#fff8ef;
+  --paper2:#fef1e3;
+  --ink:#42342a;
+  --ink-soft:#7a6a5c;
+  --grape:#8b6dd6;
+  --grape-deep:#6f51c4;
+  --bubble:#ff8fb1;
+  --bubble-deep:#f56a96;
+  --mint:#4ecdb0;
+  --mint-deep:#2fae93;
+  --sun:#ffc94d;
+  --sun-deep:#f0ab1f;
+  --sky:#5fc4ee;
+  --coral:#ff7a59;
+  --card-shadow:0 10px 0 rgba(110,81,196,.18), 0 18px 34px rgba(110,81,196,.20);
+  --pop:cubic-bezier(.34,1.56,.64,1);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:"Fredoka","Noto Sans TC",sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 18% 12%, #ffe9d2 0, transparent 42%),
+    radial-gradient(circle at 84% 8%, #e7ddff 0, transparent 40%),
+    radial-gradient(circle at 90% 88%, #d2f6ec 0, transparent 38%),
+    radial-gradient(circle at 8% 92%, #ffe0ec 0, transparent 38%),
+    var(--paper);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+/* ===== floating background doodles ===== */
+#sky{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.doodle{position:absolute;opacity:.5;animation:drift linear infinite}
+@keyframes drift{
+  0%{transform:translateY(0) rotate(0)}
+  50%{transform:translateY(-26px) rotate(12deg)}
+  100%{transform:translateY(0) rotate(0)}
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ===== layout ===== */
+.wrap{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:18px 16px 120px}
+
+/* ===== header ===== */
+header.top{text-align:center;padding:14px 0 8px;position:relative}
+.mascot-wrap{position:relative;display:inline-block}
+#mascot{width:118px;height:118px;display:block;margin:0 auto;cursor:pointer;
+  filter:drop-shadow(0 8px 10px rgba(110,81,196,.25));
+  animation:bob 2.6s ease-in-out infinite;transform-origin:bottom center}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+#mascot.cheer{animation:cheer .6s var(--pop)}
+@keyframes cheer{0%{transform:scale(1) rotate(0)}30%{transform:scale(1.15) rotate(-7deg)}60%{transform:scale(1.1) rotate(7deg)}100%{transform:scale(1) rotate(0)}}
+.title{font-family:"Baloo 2","Noto Sans TC",cursive;font-weight:800;font-size:clamp(30px,7vw,46px);
+  margin:6px 0 2px;letter-spacing:.5px;line-height:1;
+  background:linear-gradient(95deg,var(--grape),var(--bubble) 45%,var(--coral));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.subtitle{font-weight:600;color:var(--ink-soft);font-size:15px;margin:0 0 4px}
+.speech{display:inline-block;background:#fff;border:2.5px solid var(--ink);border-radius:16px;
+  padding:7px 14px;font-weight:600;font-size:14px;margin-top:6px;position:relative;
+  box-shadow:0 4px 0 rgba(66,52,42,.15);color:var(--ink);min-height:20px}
+.speech::after{content:"";position:absolute;top:-9px;left:50%;transform:translateX(-50%) rotate(45deg);
+  width:14px;height:14px;background:#fff;border-left:2.5px solid var(--ink);border-top:2.5px solid var(--ink)}
+
+/* ===== progress jar ===== */
+.statbar{display:flex;align-items:center;gap:12px;justify-content:center;margin:16px auto 6px;flex-wrap:wrap}
+.jar{width:54px;height:66px;border:3px solid var(--ink);border-radius:8px 8px 14px 14px;position:relative;
+  background:rgba(255,255,255,.6);overflow:hidden;flex:0 0 auto;box-shadow:0 4px 0 rgba(66,52,42,.12)}
+.jar::before{content:"";position:absolute;top:-9px;left:50%;transform:translateX(-50%);width:30px;height:9px;
+  background:var(--ink);border-radius:4px 4px 0 0}
+.jar-fill{position:absolute;left:0;right:0;bottom:0;height:0%;
+  background:linear-gradient(180deg,var(--mint),var(--mint-deep));transition:height .6s var(--pop)}
+.jar-fill::after{content:"";position:absolute;top:-6px;left:0;right:0;height:8px;border-radius:50%;
+  background:rgba(255,255,255,.4)}
+.stattext{font-family:"Baloo 2";font-weight:700;font-size:15px;color:var(--ink)}
+.stattext b{color:var(--mint-deep);font-size:20px}
+.chip{display:inline-flex;align-items:center;gap:5px;background:#fff;border:2.5px solid var(--ink);
+  border-radius:999px;padding:5px 12px;font-weight:700;font-size:13px;box-shadow:0 3px 0 rgba(66,52,42,.14)}
+.chip svg{width:16px;height:16px}
+
+/* ===== controls ===== */
+.controls{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:14px 0 4px}
+.pill{font-family:"Baloo 2";font-weight:700;border:2.5px solid var(--ink);background:#fff;color:var(--ink);
+  border-radius:999px;padding:8px 16px;font-size:14px;cursor:pointer;box-shadow:0 4px 0 rgba(66,52,42,.16);
+  transition:transform .12s var(--pop),box-shadow .12s,background .15s}
+.pill:hover{transform:translateY(-2px);box-shadow:0 6px 0 rgba(66,52,42,.16)}
+.pill:active{transform:translateY(2px);box-shadow:0 2px 0 rgba(66,52,42,.16)}
+.pill.on{background:var(--grape);color:#fff;border-color:var(--grape-deep)}
+.pill.shuffle{background:var(--sun);border-color:var(--sun-deep)}
+.pill.reset{background:var(--bubble);border-color:var(--bubble-deep);color:#fff}
+
+/* ===== card deck ===== */
+.deck{margin-top:18px;perspective:1600px}
+.cardpos{position:relative}
+.counter{text-align:center;font-family:"Baloo 2";font-weight:700;color:var(--ink-soft);font-size:14px;margin-bottom:8px}
+.counter span{color:var(--grape-deep)}
+
+.flip{position:relative;width:100%;transform-style:preserve-3d;transition:transform .7s var(--pop),height .35s ease;min-height:430px}
+.flip.flipped{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  border:3px solid var(--ink);border-radius:26px;padding:22px 20px 20px;
+  background:#fff;box-shadow:var(--card-shadow);display:flex;flex-direction:column}
+.face.back{transform:rotateY(180deg);background:linear-gradient(170deg,#fff 60%,var(--paper2))}
+
+/* front face */
+.facehead{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.qnum{font-family:"Baloo 2";font-weight:800;font-size:15px;color:#fff;background:var(--grape);
+  border:2.5px solid var(--grape-deep);border-radius:12px;padding:3px 11px;box-shadow:0 3px 0 var(--grape-deep)}
+.tag{font-weight:700;font-size:12px;color:var(--ink-soft);background:var(--paper2);border-radius:999px;
+  padding:4px 11px;border:2px dashed #d8c3a8}
+.sentence{font-family:"Nunito",sans-serif;font-weight:600;font-size:18px;line-height:1.7;color:var(--ink);
+  margin:4px 0 14px;letter-spacing:.1px}
+.blank{display:inline-block;min-width:84px;text-align:center;border-bottom:3px dotted var(--grape);
+  color:transparent;font-weight:800;margin:0 3px;position:relative;transition:color .3s}
+.blank.filled{color:var(--grape-deep);border-bottom-color:var(--mint-deep)}
+.blank.filled::after{content:"";position:absolute;left:50%;bottom:-18px;transform:translateX(-50%)}
+
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:auto}
+.opt{font-family:"Fredoka","Noto Sans TC",sans-serif;text-align:left;border:2.5px solid var(--ink);
+  background:#fff;border-radius:15px;padding:10px 12px;cursor:pointer;font-size:15px;font-weight:600;
+  box-shadow:0 4px 0 rgba(66,52,42,.14);transition:transform .12s var(--pop),box-shadow .12s,background .2s,border-color .2s;
+  display:flex;flex-direction:column;gap:1px;position:relative;overflow:hidden}
+.opt .lt{font-family:"Baloo 2";font-weight:800;color:var(--grape);font-size:13px}
+.opt .en{font-weight:700;color:var(--ink)}
+.opt .zh{font-size:12px;color:var(--ink-soft);font-weight:600}
+.opt:hover:not(.done){transform:translateY(-2px) rotate(-.5deg);box-shadow:0 6px 0 rgba(66,52,42,.14)}
+.opt:active:not(.done){transform:translateY(2px)}
+.opt.correct{background:linear-gradient(180deg,#e6fff6,#c6f6e6);border-color:var(--mint-deep);box-shadow:0 4px 0 var(--mint-deep)}
+.opt.correct .lt{color:var(--mint-deep)}
+.opt.wrong{background:linear-gradient(180deg,#ffeef2,#ffd9e3);border-color:var(--bubble-deep);box-shadow:0 4px 0 var(--bubble-deep);animation:shake .4s}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(7px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
+.opt.dim{opacity:.45}
+.opt .mark{position:absolute;top:6px;right:8px;font-size:18px;opacity:0;transform:scale(0)}
+.opt.correct .mark,.opt.wrong .mark{opacity:1;transform:scale(1);transition:transform .3s var(--pop) .1s}
+
+/* collocation reveal */
+.colloBox{background:linear-gradient(180deg,#fff7e9,#ffeecb);border:2.5px dashed var(--sun-deep);
+  border-radius:16px;padding:12px 14px;margin-top:12px;display:none}
+.colloBox.show{display:block;animation:revealPop .45s var(--pop)}
+@keyframes revealPop{0%{opacity:0;transform:translateY(10px) scale(.96)}100%{opacity:1;transform:translateY(0) scale(1)}}
+.colloBox .lab{font-family:"Baloo 2";font-weight:800;color:var(--sun-deep);font-size:13px;display:flex;align-items:center;gap:5px;margin-bottom:4px}
+.colloBox .colloen{font-family:"Nunito";font-weight:800;font-size:17px;color:var(--coral)}
+.colloBox .collozh{font-weight:600;color:var(--ink-soft);font-size:13px;margin:2px 0 6px}
+.colloBox .tip{font-size:13.5px;line-height:1.55;color:var(--ink);font-weight:500}
+
+/* flip hint button on front */
+.flipbtn{margin-top:12px;align-self:center;font-family:"Baloo 2";font-weight:800;border:none;cursor:pointer;
+  background:linear-gradient(95deg,var(--grape),var(--bubble));color:#fff;border-radius:999px;padding:11px 22px;
+  font-size:15px;box-shadow:0 5px 0 var(--grape-deep);transition:transform .12s var(--pop),box-shadow .12s;
+  display:flex;align-items:center;gap:8px}
+.flipbtn:hover{transform:translateY(-2px);box-shadow:0 7px 0 var(--grape-deep)}
+.flipbtn:active{transform:translateY(3px);box-shadow:0 2px 0 var(--grape-deep)}
+.flipbtn svg{width:18px;height:18px;animation:spin 4s linear infinite}
+
+/* back face : etymology */
+.backhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.bword{font-family:"Baloo 2";font-weight:800;font-size:30px;color:var(--grape-deep);line-height:1}
+.bword small{font-size:14px;color:var(--ink-soft);font-weight:600;display:block;margin-top:2px}
+.dna{font-family:"Baloo 2";font-weight:800;color:var(--coral);font-size:13px;background:#fff3ee;
+  border:2px solid var(--coral);border-radius:999px;padding:4px 11px}
+.morphs{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch;margin:6px 0 14px}
+.morph{background:#fff;border:2.5px solid var(--ink);border-radius:14px;padding:8px 11px;min-width:78px;
+  position:relative;box-shadow:0 4px 0 rgba(66,52,42,.13);opacity:0;transform:translateY(14px) scale(.85)}
+.flip.flipped .face.back .morph{animation:popin .5s var(--pop) forwards}
+@keyframes popin{to{opacity:1;transform:translateY(0) scale(1)}}
+.morph .mpart{font-family:"Baloo 2";font-weight:800;font-size:18px}
+.morph .mmean{font-size:11.5px;color:var(--ink-soft);font-weight:600;margin-top:1px;line-height:1.35}
+.morph:nth-child(odd) .mpart{color:var(--grape-deep)}
+.morph:nth-child(even) .mpart{color:var(--bubble-deep)}
+.plus{align-self:center;font-family:"Baloo 2";font-weight:800;font-size:20px;color:var(--ink-soft);opacity:0}
+.flip.flipped .face.back .plus{animation:popin .4s var(--pop) forwards}
+.storybox{background:linear-gradient(170deg,#f3eeff,#e9e0ff);border:2.5px solid var(--grape);border-radius:16px;
+  padding:13px 15px;margin-top:auto}
+.storybox .lab{font-family:"Baloo 2";font-weight:800;color:var(--grape-deep);font-size:13px;margin-bottom:5px;display:flex;align-items:center;gap:5px}
+.storybox .txt{font-size:15px;line-height:1.6;font-weight:600;color:var(--ink)}
+.storybox .arrow{color:var(--coral);font-weight:800;display:inline;white-space:nowrap;padding:0 4px}
+
+.backfoot{display:flex;justify-content:center;margin-top:12px}
+.flipback{font-family:"Baloo 2";font-weight:800;border:2.5px solid var(--ink);background:#fff;color:var(--ink);
+  cursor:pointer;border-radius:999px;padding:9px 20px;font-size:14px;box-shadow:0 4px 0 rgba(66,52,42,.16);
+  display:flex;align-items:center;gap:7px;transition:transform .12s var(--pop)}
+.flipback:hover{transform:translateY(-2px)}
+.flipback:active{transform:translateY(2px)}
+.flipback svg{width:16px;height:16px}
+
+/* nav arrows */
+.nav{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:18px}
+.arrow{font-family:"Baloo 2";font-weight:800;border:3px solid var(--ink);background:#fff;color:var(--ink);
+  cursor:pointer;border-radius:18px;padding:12px 18px;font-size:16px;box-shadow:0 5px 0 rgba(66,52,42,.16);
+  display:flex;align-items:center;gap:6px;transition:transform .12s var(--pop),box-shadow .12s;flex:1;justify-content:center}
+.arrow:hover{transform:translateY(-2px);box-shadow:0 7px 0 rgba(66,52,42,.16)}
+.arrow:active{transform:translateY(3px);box-shadow:0 2px 0 rgba(66,52,42,.16)}
+.arrow.next{background:var(--mint);border-color:var(--mint-deep);color:#fff;box-shadow:0 5px 0 var(--mint-deep)}
+.arrow:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:0 5px 0 rgba(66,52,42,.16)}
+.arrow svg{width:18px;height:18px}
+
+/* jump grid */
+.jumpwrap{margin-top:22px}
+.jumptitle{font-family:"Baloo 2";font-weight:800;color:var(--ink-soft);font-size:14px;text-align:center;margin-bottom:10px}
+.grid{display:grid;grid-template-columns:repeat(10,1fr);gap:6px}
+.cell{aspect-ratio:1;border:2px solid var(--ink);border-radius:9px;background:#fff;cursor:pointer;
+  font-family:"Baloo 2";font-weight:800;font-size:13px;color:var(--ink-soft);transition:transform .12s var(--pop),background .2s;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 2px 0 rgba(66,52,42,.12)}
+.cell:hover{transform:translateY(-2px)}
+.cell.cur{background:var(--grape);color:#fff;border-color:var(--grape-deep)}
+.cell.done{background:var(--mint);color:#fff;border-color:var(--mint-deep)}
+.cell.cur.done{background:var(--grape);border-color:var(--grape-deep)}
+
+/* confetti + sticker pop */
+#fx{position:fixed;inset:0;pointer-events:none;z-index:50;overflow:hidden}
+.conf{position:absolute;width:11px;height:11px;will-change:transform,opacity}
+.bigstar{position:fixed;left:50%;top:42%;font-size:64px;transform:translate(-50%,-50%) scale(0);z-index:60;pointer-events:none}
+.bigstar.go{animation:starpop .8s var(--pop)}
+@keyframes starpop{0%{transform:translate(-50%,-50%) scale(0) rotate(-30deg);opacity:1}
+  60%{transform:translate(-50%,-50%) scale(1.25) rotate(10deg);opacity:1}
+  100%{transform:translate(-50%,-50%) scale(1) rotate(0);opacity:0}}
+
+footer{text-align:center;color:var(--ink-soft);font-size:12px;font-weight:600;margin-top:30px;opacity:.8}
+
+@media (max-width:520px){
+  .opts{grid-template-columns:1fr 1fr}
+  .sentence{font-size:16.5px}
+  .grid{grid-template-columns:repeat(5,1fr)}
+  .flip{min-height:470px}
+  .bword{font-size:26px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.001s!important;transition-duration:.05s!important}
+  .doodle{display:none}
+}
+</style>
+</head>
+<body>
+<div id="sky"></div>
+<div id="fx"></div>
+<div class="bigstar" id="bigstar">🌟</div>
+
+<div class="wrap">
+  <header class="top">
+    <div class="mascot-wrap">
+      <!-- mascot: a cute owl-ish study buddy -->
+      <svg id="mascot" viewBox="0 0 120 120" aria-label="study buddy">
+        <ellipse cx="60" cy="108" rx="30" ry="6" fill="#6f51c4" opacity=".15"/>
+        <path d="M60 18C40 18 28 34 28 58c0 24 14 42 32 42s32-18 32-42C92 34 80 18 60 18Z" fill="#a98be8"/>
+        <path d="M60 22c-16 0-26 13-26 34 0 9 2 17 6 23 5-3 12-5 20-5s15 2 20 5c4-6 6-14 6-23 0-21-10-34-26-34Z" fill="#c7b2f2"/>
+        <ellipse cx="60" cy="78" rx="20" ry="17" fill="#fff6e9"/>
+        <circle cx="47" cy="55" r="13" fill="#fff"/>
+        <circle cx="73" cy="55" r="13" fill="#fff"/>
+        <circle cx="49" cy="57" r="6.5" fill="#42342a" class="eye"/>
+        <circle cx="71" cy="57" r="6.5" fill="#42342a" class="eye"/>
+        <circle cx="51" cy="55" r="2" fill="#fff"/>
+        <circle cx="73" cy="55" r="2" fill="#fff"/>
+        <path d="M55 66l5 6 5-6Z" fill="#ffb02e"/>
+        <circle cx="40" cy="70" r="5" fill="#ff9db5" opacity=".7"/>
+        <circle cx="80" cy="70" r="5" fill="#ff9db5" opacity=".7"/>
+        <path d="M52 30c-3-6-10-8-15-5 2 6 8 9 15 5Z" fill="#8b6dd6"/>
+        <path d="M68 30c3-6 10-8 15-5-2 6-8 9-15 5Z" fill="#8b6dd6"/>
+        <!-- little grad cap -->
+        <path d="M40 24l20-9 20 9-20 8Z" fill="#42342a"/>
+        <path d="M60 32v7" stroke="#42342a" stroke-width="2"/>
+        <circle cx="60" cy="40" r="3" fill="#ffc94d"/>
+      </svg>
+    </div>
+    <h1 class="title">單字實驗室</h1>
+    <p class="subtitle">Word Lab · 搭配詞解題 ✕ 字根字首拆解</p>
+    <div class="speech" id="speech">嗨～點我會給你打氣！一起破關 50 個單字吧 🎈</div>
+  </header>
+
+  <div class="statbar">
+    <div class="jar" title="進度罐"><div class="jar-fill" id="jarfill"></div></div>
+    <div class="stattext">答對 <b id="doneCount">0</b> / 50</div>
+    <div class="chip" id="streakChip" style="display:none">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 2s5 4 5 10a5 5 0 0 1-10 0c0-2 1-3 1-3s-1 4 2 4 2-3 2-3 0-5-2-8Z" fill="#ff7a59"/></svg>
+      <span><b id="streakNum">0</b> 連勝</span>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button class="pill on" id="modeQuiz">🧠 解題模式</button>
+    <button class="pill" id="modeStudy">📖 直接看答案</button>
+    <button class="pill shuffle" id="shuffleBtn">🔀 隨機洗牌</button>
+    <button class="pill reset" id="resetBtn">↺ 重來</button>
+  </div>
+
+  <div class="deck">
+    <div class="counter">第 <span id="curIdx">1</span> 張 · 共 50 張</div>
+    <div class="cardpos">
+      <div class="flip" id="flip">
+        <!-- FRONT -->
+        <div class="face front" id="front"></div>
+        <!-- BACK -->
+        <div class="face back" id="back"></div>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="arrow prev" id="prevBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        上一個
+      </button>
+      <button class="arrow next" id="nextBtn">
+        下一個
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="jumpwrap">
+    <div class="jumptitle">⚡ 快速跳到任一題（綠色＝已答對）</div>
+    <div class="grid" id="grid"></div>
+  </div>
+
+  <footer>Live ABC 考前衝刺複習精選 · 第 1–50 題全收錄 🦉</footer>
+</div>
+
+<script>
+// 50 題完整資料：句子、搭配詞、選項、解題提示、字根字首拆解
+const QUESTIONS = [
+  {
+    n:1, word:"significance", ans:"A",
+    sentence:["This discovery ","is of great ","significance"," to historians studying early human civilizations."],
+    collo:"is of great significance to",
+    colloZh:"對……有重大意義",
+    tip:"「is of + 抽象名詞」= 形容詞結構。is of great significance = is very significant。",
+    options:[["A","significance","意義、重要性"],["B","comparison","比較"],["C","equipment","設備"],["D","humanity","人類"]],
+    roots:[["sign","記號"],["fic","做（源自拉丁文 facere）"],["ance","名詞字尾"]],
+    rootStory:"做出特別標記、有重要指標性的事物 → 「重要性、意義」"
+  },
+  {
+    n:2, word:"diverse", ans:"C",
+    sentence:["The city is known for its ","diverse"," population, with people from various cultures."],
+    collo:"diverse population",
+    colloZh:"多元的人口組成",
+    tip:"後方提到「來自各種不同文化與背景」，故選修飾人口多元的形容詞。",
+    options:[["A","outdated","過時的"],["B","restricted","受限的"],["C","diverse","多元的"],["D","competitive","競爭的"]],
+    roots:[["di-/dis-","分開、朝四方"],["verse","轉（源自 vertere）"]],
+    rootStory:"朝著不同的方向轉動 → 「多元的、多樣的」"
+  },
+  {
+    n:3, word:"access", ans:"B",
+    sentence:["Because of the heavy snow, the rescue team couldn't ","access"," the remote mountain village."],
+    collo:"access + 地方",
+    colloZh:"進入／到達某地",
+    tip:"因大雪封路，救援隊無法「進入」偏遠山村。access 在此作及物動詞。",
+    options:[["A","summarize","概述"],["B","access","進入、到達"],["C","attach","附加"],["D","convey","傳達"]],
+    roots:[["ac-","朝向（ad- 的變體）"],["cess","走（源自 cedere）"]],
+    rootStory:"能夠朝向某個地方走過去 → 「進入、接近的管道與權利」"
+  },
+  {
+    n:4, word:"convey", ans:"D",
+    sentence:["The artist intentionally used dark colors in her painting to ","convey"," a deep feeling of sadness."],
+    collo:"convey a feeling",
+    colloZh:"傳達一種情感",
+    tip:"藝術家故意使用深色，是為了向觀看者「傳達」深沉的悲傷感。",
+    options:[["A","analyze","分析"],["B","collapse","倒塌"],["C","promote","促進"],["D","convey","傳達"]],
+    roots:[["con-","共同、一起"],["vey","道路（源自拉丁文 via）"]],
+    rootStory:"帶到大馬路上與大家一同前行、傳播 → 「傳達、運送」"
+  },
+  {
+    n:5, word:"encounter", ans:"A",
+    sentence:["While hiking deep in the forest, they were surprised to ","encounter"," a rare species of bird."],
+    collo:"encounter a rare species",
+    colloZh:"偶然遇見罕見物種",
+    tip:"在森林深處健行時，驚喜地「巧遇」只在書中看過的罕見鳥類。",
+    options:[["A","encounter","偶遇"],["B","outgrow","因長大而穿不下"],["C","recommend","推薦"],["D","possess","擁有"]],
+    roots:[["en-","使進入"],["counter","面對、反對（源自 contra）"]],
+    rootStory:"進入到彼此正面相對的狀態 → 「偶然遇見、遭遇」"
+  },
+  {
+    n:6, word:"strategy", ans:"D",
+    sentence:["To win the chess match, you must develop a brilliant ","strategy"," rather than just relying on luck."],
+    collo:"develop a strategy",
+    colloZh:"發展／擬定策略",
+    tip:"為了贏得棋賽，必須發展出高明的「策略」，而非僅靠運氣。",
+    options:[["A","apology","道歉"],["B","battery","電池"],["C","footage","影片片段"],["D","strategy","策略"]],
+    roots:[["stratos","軍隊、大眾（希臘文）"],["agein","帶領、驅動"]],
+    rootStory:"統領並帶領軍隊作戰的藝術 → 「策略、戰略」"
+  },
+  {
+    n:7, word:"ensure", ans:"B",
+    sentence:["Please double-check your seatbelt to ","ensure"," your safety before the roller coaster starts."],
+    collo:"ensure one's safety",
+    colloZh:"確保某人的安全",
+    tip:"雲霄飛車啟動前，請再次檢查安全帶以「確保」自身安全。",
+    options:[["A","regret","後悔"],["B","ensure","確保"],["C","bury","埋葬"],["D","circulate","循環"]],
+    roots:[["en-","使成為"],["sure","安全的（securus: se-免除 + cura憂慮）"]],
+    rootStory:"使其進入無憂無慮的絕對安全狀態 → 「確保、保證」"
+  },
+  {
+    n:8, word:"relief", ans:"C",
+    sentence:["It was a huge ","relief"," to find out that my lost dog had been found safe."],
+    collo:"It is a relief to + V",
+    colloZh:"得知……讓人鬆了一口氣",
+    tip:"固定虛主詞句型。得知走失的狗被安全尋獲，真是極大的「寬慰」。",
+    options:[["A","consequence","後果"],["B","substance","物質"],["C","relief","寬慰、輕鬆"],["D","adjustment","調整"]],
+    roots:[["re-","再次、往回"],["lief/lev","舉起、變輕（源自 levare）"]],
+    rootStory:"將沉重的負擔再度舉起並減輕 → 「寬慰、輕鬆、緩解」"
+  },
+  {
+    n:9, word:"occupy", ans:"C",
+    sentence:["The enemy army managed to ","occupy"," the city after a long and fierce battle."],
+    collo:"occupy the city",
+    colloZh:"佔領城市",
+    tip:"經過漫長激烈的戰鬥，敵軍成功「佔領」這座城市。",
+    options:[["A","identify","指認"],["B","transform","轉變"],["C","occupy","佔領"],["D","advise","建議"]],
+    roots:[["oc-","去、朝向（ob- 的變體）"],["cup","抓、拿（源自 capere）"]],
+    rootStory:"將手用力抓在某個位置、據為己有 → 「佔領、佔據」"
+  },
+  {
+    n:10, word:"enormous", ans:"A",
+    sentence:["The billionaire lives in an ","enormous"," mansion that features twenty bedrooms, a huge pool, and a private cinema."],
+    collo:"an enormous mansion",
+    colloZh:"一棟巨大的豪宅",
+    tip:"後方修飾語提到「20 間臥室、大泳池、私人電影院」，可推知是「巨大的」豪宅。",
+    options:[["A","enormous","巨大的"],["B","offensive","冒犯的"],["C","reasonable","合理的"],["D","capable","有能力的"]],
+    roots:[["e-/ex-","超出、在外"],["norm","常規、標準、角尺（norma）"],["ous","形容詞字尾"]],
+    rootStory:"遠遠超出了常規標準與尺度 → 「巨大的、龐大的」"
+  },
+  {
+    n:11, word:"consequence", ans:"D",
+    sentence:["The teacher warned that failing the final exam would be the natural ","consequence"," of skipping classes."],
+    collo:"natural consequence",
+    colloZh:"自然發生的後果／必然的結果",
+    tip:"老師警告若繼續翹課，期末考不及格將是「必然的後果」。",
+    options:[["A","invention","發明"],["B","endurance","耐力"],["C","scent","氣味"],["D","consequence","後果"]],
+    roots:[["con-","共同、隨著"],["sequ","跟隨、前進（源自 sequi）"],["ence","名詞字尾"]],
+    rootStory:"隨著前因必然一同跟隨而來的結果 → 「後果、結果」"
+  },
+  {
+    n:12, word:"identify", ans:"B",
+    sentence:["The witness was asked to look at the photos carefully and ","identify"," the man who had stolen the car."],
+    collo:"identify the person",
+    colloZh:"指認／確認對象的身分",
+    tip:"目擊者被要求看照片，以「指認」偷車的男人。",
+    options:[["A","deepen","加深"],["B","identify","指認"],["C","maximize","最大化"],["D","crossbreed","雜交、培育"]],
+    roots:[["ident","相同（源自 idem）"],["fy","使成為、做出"]],
+    rootStory:"確認眼前的人與嫌犯是「同一個人」 → 「指認、辨識」"
+  },
+  {
+    n:13, word:"circulate", ans:"B",
+    sentence:["Once you turn on the air conditioner, the cool air will begin to ","circulate"," quickly throughout the entire room."],
+    collo:"circulate throughout...",
+    colloZh:"在……四處循環／流通",
+    tip:"冷氣打開後，冷空氣會開始在整個房間快速「循環」。",
+    options:[["A","stem","起源"],["B","circulate","循環"],["C","warn","警告"],["D","fade","褪色"]],
+    roots:[["circ","圓圈、圓環（源自 circus）"],["ulate","動詞字尾"]],
+    rootStory:"沿著固定的圓圈軌道不斷繞行 → 「循環、流通」"
+  },
+  {
+    n:14, word:"intend", ans:"C",
+    sentence:["Because I'm deeply interested in modern art, I ","intend"," to study at a famous design school in Paris next year."],
+    collo:"intend to + V",
+    colloZh:"打算／企圖做某事",
+    tip:"因為對現代藝術深感興趣，我「打算」去巴黎的設計學校就讀。",
+    options:[["A","groan","呻吟"],["B","scream","尖叫"],["C","intend","打算"],["D","regret","後悔"]],
+    roots:[["in-","朝向、往內"],["tend","伸展、拉緊（源自 tendere）"]],
+    rootStory:"內心的志向與目標朝著某個方向伸展過去 → 「打算、企圖」"
+  },
+  {
+    n:15, word:"release", ans:"A",
+    sentence:["The rock band is planning to ","release"," their highly anticipated new album next Friday."],
+    collo:"release an album",
+    colloZh:"發行專輯",
+    tip:"搖滾樂團計畫在下週五「發行」備受期待的新專輯。",
+    options:[["A","release","發行、釋放"],["B","secure","獲得、安全"],["C","murder","謀殺"],["D","outline","概述"]],
+    roots:[["re-","往回、向後"],["lease/lax","鬆開、放寬（源自 laxare）"]],
+    rootStory:"往回把緊繃的繩索解開，讓其自由解放 → 「發行、釋放、發布」"
+  },
+  {
+    n:16, word:"transform", ans:"D",
+    sentence:["They managed to ","transform"," the dusty old garage ","into"," a beautiful art studio."],
+    collo:"transform A into B",
+    colloZh:"將 A 轉變為 B",
+    tip:"看到空格後方的 into，即可鎖定 transform，表示將舊車庫「轉變為」畫室。",
+    options:[["A","bury","埋葬"],["B","collapse","倒塌"],["C","terrify","使驚嚇"],["D","transform","轉變"]],
+    roots:[["trans-","跨越、轉變、從那側到這側"],["form","形狀、形態"]],
+    rootStory:"跨越了原有的外形限制 → 「轉變、改造、使改頭換面」"
+  },
+  {
+    n:17, word:"miserable", ans:"C",
+    sentence:["After catching a bad cold during winter break, he felt absolutely ","miserable"," and had to stay in bed for four days."],
+    collo:"feel miserable",
+    colloZh:"感到極其痛苦／悲慘",
+    tip:"寒假得了重感冒，他感到無比「痛苦」，必須臥床四天。",
+    options:[["A","respectful","尊重的"],["B","pregnant","懷孕的"],["C","miserable","悲慘的、痛苦的"],["D","straightforward","直截了當的"]],
+    roots:[["miser","可憐的、悲慘的"],["able","值得……的、可……的"]],
+    rootStory:"狀態極差、令人深感憐憫痛苦的 → 「痛苦的、悲慘的」"
+  },
+  {
+    n:18, word:"guilty", ans:"A",
+    sentence:["She felt terribly ","guilty"," for forgetting her best friend's birthday, so she bought a gift to make amends."],
+    collo:"feel guilty for... / make amends",
+    colloZh:"因……感到內疚／彌補賠罪",
+    tip:"因忘記好友生日而非常「內疚」，於是買禮物「彌補」。",
+    options:[["A","guilty","內疚的"],["B","adorable","可愛的"],["C","extended","延長的"],["D","exotic","異國風情的"]],
+    roots:[["gylt","罪行、債務（源自古英語）"]],
+    rootStory:"違背道德法律後，內心深處產生的虧欠感與負債心理 → 「內疚的、有罪的」"
+  },
+  {
+    n:19, word:"disaster", ans:"D",
+    sentence:["The earthquake was a terrible ","disaster"," that destroyed hundreds of homes and left many residents homeless."],
+    collo:"a terrible disaster",
+    colloZh:"一場可怕的災難",
+    tip:"地震是一場摧毀數百棟房屋、讓居民無家可歸的「災難」。",
+    options:[["A","mission","任務"],["B","pioneer","先驅"],["C","comparison","比較"],["D","disaster","災難"]],
+    roots:[["dis-","壞、否定、背離"],["aster","星星（源自希臘文 astron）"]],
+    rootStory:"星體軌道錯亂，古人認為星象不祥預示巨大天災 → 「災難、大禍」"
+  },
+  {
+    n:20, word:"equipment", ans:"B",
+    sentence:["Before you go diving, make sure you have all the necessary ","equipment",", including a mask and an oxygen tank."],
+    collo:"necessary equipment",
+    colloZh:"必備的設備／裝備",
+    tip:"去潛水前，確保帶齊了所有必要的「裝備」，包括面鏡與氣瓶。",
+    options:[["A","jewelry","珠寶"],["B","equipment","裝備"],["C","rubble","碎石"],["D","battery","電池"]],
+    roots:[["skipa","裝配、整備船隻（古諾斯語）"],["ment","名詞字尾"]],
+    rootStory:"演變為法文 équiper 與英文 equip → 行動所需的成套器具 → 「裝備、設備」"
+  },
+  {
+    n:21, word:"attach", ans:"B",
+    sentence:["Please remember to ","attach"," the receipt ","to"," your expense report before you submit it."],
+    collo:"attach A to B",
+    colloZh:"將 A 附加／釘在 B 上",
+    tip:"看到空格後的介系詞 to，得知是要將發票「黏貼／附在」報銷單上。",
+    options:[["A","associate","聯想"],["B","attach","附加"],["C","refine","提煉"],["D","consult","諮詢"]],
+    roots:[["at-","朝向（ad- 的變體）"],["tach","釘子、連接物（與 tack 同源）"]],
+    rootStory:"用小釘子把物件固定在另一個平面上 → 「附加、黏貼」"
+  },
+  {
+    n:22, word:"capable", ans:"D",
+    sentence:["The young boy is highly ","capable"," ","of"," handling complex mathematical equations."],
+    collo:"be capable of + Ving",
+    colloZh:"有能力做某事",
+    tip:"看到空格後的介系詞 of，直接選形容詞 capable（能勝任的）。",
+    options:[["A","intense","強烈的"],["B","deadly","致命的"],["C","minimal","最小的"],["D","capable","有能力的"]],
+    roots:[["cap","抓取、掌控、容納（源自 capere）"],["able","有能力的"]],
+    rootStory:"能夠全盤抓住並掌控得很好的 → 「有能力的、能勝任的」"
+  },
+  {
+    n:23, word:"creative", ans:"C",
+    sentence:["The marketing team needs to brainstorm a ","creative"," idea to make our new product stand out in the market."],
+    collo:"a creative idea",
+    colloZh:"創新的點子／創意",
+    tip:"行銷團隊需要集思廣益一個「有創意的」點子，好讓新產品脫穎而出。",
+    options:[["A","restricted","受限的"],["B","political","政治的"],["C","creative","有創意的"],["D","competitive","競爭的"]],
+    roots:[["cre/cresc","生長、孕育、創造（源自 creare）"],["ative","形容詞字尾"]],
+    rootStory:"具有生生不息、孕育全新點子特質的 → 「有創意的、有創造力的」"
+  },
+  {
+    n:24, word:"impact", ans:"A",
+    sentence:["The new policy will undoubtedly have a significant ","impact"," ","on"," how local factories manage their waste."],
+    collo:"have an impact on...",
+    colloZh:"對……有影響",
+    tip:"看到後方的介系詞 on，此格填入名詞 impact，指新政策將產生重大「影響」。",
+    options:[["A","impact","影響"],["B","resolution","決心／解析度"],["C","terrain","地形"],["D","humanity","人類"]],
+    roots:[["im-","往內、進入（in- 的變體）"],["pact","緊壓、釘牢（源自 pangere）"]],
+    rootStory:"狠狠地朝內部砸入、釘牢，產生巨大震盪 → 「巨大影響、衝擊」"
+  },
+  {
+    n:25, word:"outline", ans:"D",
+    sentence:["During the opening speech, the CEO will ","outline"," the company's main goals for the next year."],
+    collo:"outline goals",
+    colloZh:"概述目標",
+    tip:"開幕致詞時，執行長將會「概述」公司明年的主要目標。",
+    options:[["A","recommend","推薦"],["B","sweat","流汗"],["C","assist","協助"],["D","outline","概述"]],
+    roots:[["out","在外面"],["line","線條"]],
+    rootStory:"在最外圈勾勒出的線條，隱去細節只留核心骨架 → 「概述、輪廓」"
+  },
+  {
+    n:26, word:"competitive", ans:"B",
+    sentence:["The smartphone market is highly ","competitive",", so tech companies must constantly innovate to attract buyers."],
+    collo:"highly competitive",
+    colloZh:"高度競爭的",
+    tip:"後方提到科技公司必須不斷創新才能吸引買家，表示市場「競爭激烈」。",
+    options:[["A","collaborative","合作的"],["B","competitive","競爭的"],["C","rebellious","叛逆的"],["D","opposite","相反的"]],
+    roots:[["com-","共同、一起"],["pet","追逐、追求（源自 petere）"],["itive","形容詞字尾"]],
+    rootStory:"大家為了同一個目標共同在後面拼命追逐 → 「競爭激烈的」"
+  },
+  {
+    n:27, word:"prime", ans:"C",
+    sentence:["Because he had both a strong motive and the opportunity, the detective considered him the ","prime"," suspect in the case."],
+    collo:"the prime suspect",
+    colloZh:"主要嫌疑犯／主嫌",
+    tip:"因為他同時具備強烈動機與作案時間，偵探將他視為本案的「主嫌」。",
+    options:[["A","outdated","過時的"],["B","conductive","具傳導性的"],["C","prime","主要的、首要的"],["D","archaeological","考古學的"]],
+    roots:[["prim","第一、最初、最源頭（源自 primus）"]],
+    rootStory:"排在最前面的、最核心關鍵的 → 「主要的、首要的、極佳的」"
+  },
+  {
+    n:28, word:"secure", ans:"A",
+    sentence:["After months of searching and many interviews, she finally managed to ","secure"," a well-paying job in the city center."],
+    collo:"secure a job",
+    colloZh:"牢牢獲得／爭取到一份工作",
+    tip:"經過數月的尋找與多次面試，她終於成功「獲得」一份高薪工作。",
+    options:[["A","secure","獲得、使安全"],["B","recognize","認出"],["C","murder","謀殺"],["D","possess","擁有"]],
+    roots:[["se-","免除、分離"],["cure","心操、擔憂（源自 cura）"]],
+    rootStory:"穩穩拿在手中後，讓人徹底免除任何擔憂 → 「牢牢獲得、使安全」"
+  },
+  {
+    n:29, word:"benefit", ans:"B",
+    sentence:["A balanced diet and regular exercise will greatly ","benefit"," your long-term physical and mental well-being."],
+    collo:"benefit one's well-being",
+    colloZh:"有益於某人的健康／福祉",
+    tip:"均衡飲食與規律運動將大大「有益於」你的長期身心健康。",
+    options:[["A","haunt","糾纏"],["B","benefit","有益於"],["C","regret","後悔"],["D","acknowledge","承認"]],
+    roots:[["bene","好、善"],["fic/fit","做、製造（源自 facere）"]],
+    rootStory:"做出好的事情、帶來正向價值 → 「有益於、對……有益」"
+  },
+  {
+    n:30, word:"collapse", ans:"A",
+    sentence:["The old wooden bridge was so fragile that engineers feared it would ","collapse"," under the weight of heavy delivery trucks."],
+    collo:"collapse under the weight of...",
+    colloZh:"在……的重量下倒塌",
+    tip:"老舊木橋結構脆弱，工程師擔心它會在重型卡車的重量下「塌陷」。",
+    options:[["A","collapse","倒塌"],["B","snore","打呼"],["C","fade","褪色"],["D","stem","起源"]],
+    roots:[["con-","共同（com- 的變體）"],["lapse","滑落、跌倒（源自 labi）"]],
+    rootStory:"所有的支撐點結構同時一起滑落塌陷 → 「倒塌、崩潰」"
+  },
+  {
+    n:31, word:"issue", ans:"C",
+    sentence:["Climate change is a critical global ","issue"," that requires immediate cooperation among all countries."],
+    collo:"global issue",
+    colloZh:"全球議題",
+    tip:"氣候變遷是一個關鍵的全球「議題」，需要各國立即合作。",
+    options:[["A","assistant","助手"],["B","jewel","珠寶"],["C","issue","議題"],["D","entry","條目、進入"]],
+    roots:[["is-/ex-","出去"],["sue/ire","走"]],
+    rootStory:"從源頭走出來、流傳流動到公眾眼前被廣泛討論的事物 → 「議題、重要問題」"
+  },
+  {
+    n:32, word:"promote", ans:"D",
+    sentence:["The government launched a new campaign to ","promote"," public awareness about the dangers of drunk driving."],
+    collo:"promote public awareness",
+    colloZh:"提升大眾意識",
+    tip:"政府發起新活動，目的是「提升」大眾對酒駕危險性的意識。",
+    options:[["A","analyze","分析"],["B","conserve","保育"],["C","apologize","道歉"],["D","promote","提升、促進"]],
+    roots:[["pro-","向前"],["mot","移動（源自 movere）"]],
+    rootStory:"驅使、推動事物不斷朝前方更進一步前進 → 「提升、促進、晉升」"
+  },
+  {
+    n:33, word:"associate", ans:"A",
+    sentence:["Whenever I smell freshly baked cookies, I immediately ","associate"," it ","with"," warm memories of my grandmother's house."],
+    collo:"associate A with B",
+    colloZh:"將 A 與 B 聯想在一起",
+    tip:"看到後半句的介系詞 with，得知會把香味與阿嬤家的溫暖回憶「聯想在一起」。",
+    options:[["A","associate","聯想"],["B","convey","傳達"],["C","encounter","遇見"],["D","identify","指認"]],
+    roots:[["as-","朝向（ad- 的變體）"],["soci","夥伴、同伴（源自 socius）"],["ate","動詞字尾"]],
+    rootStory:"將某件事物拉過來與另一件事物「結為同伴」 → 「聯想、使有聯繫」"
+  },
+  {
+    n:34, word:"advised", ans:"D",
+    sentence:["The doctor strongly ","advised"," him ","to"," quit smoking and start eating healthier food to lower his high blood pressure."],
+    collo:"advise someone to + V",
+    colloZh:"建議某人做某事",
+    tip:"句型為 advise + 人 + to V。醫生強烈「建議」他戒菸。",
+    options:[["A","screamed","尖叫"],["B","occupied","佔領"],["C","intended","打算"],["D","advised","建議"]],
+    roots:[["ad-","朝向"],["vis","看（源自 videre）"]],
+    rootStory:"站出來替對方的局勢審視、提供全盤的眼光與看法 → 「建議、忠告」"
+  },
+  {
+    n:35, word:"consult", ans:"B",
+    sentence:["If your symptoms last for more than a week, you should ","consult"," a medical professional immediately."],
+    collo:"consult a professional",
+    colloZh:"諮詢專業人士／看醫生",
+    tip:"如果症狀持續超過一週，你應立刻「諮詢」醫療專業人員。",
+    options:[["A","maximize","最大化"],["B","consult","諮詢"],["C","release","發行"],["D","summarize","概述"]],
+    roots:[["con-","共同"],["sult/sal","跳、聚在一起商議（源自 consulere）"]],
+    rootStory:"大家聚在一起共同商量商討對策 → 「諮詢、請教」"
+  },
+  {
+    n:36, word:"adjustment", ans:"C",
+    sentence:["Moving from a tropical country to cold Alaska required a major ","adjustment"," in her daily lifestyle and wardrobe."],
+    collo:"a major adjustment in...",
+    colloZh:"在……方面做重大調整",
+    tip:"從熱帶國家搬到寒冷的阿拉斯加，需要在生活方式與衣著上做重大「調整」。",
+    options:[["A","indifference","冷漠"],["B","endurance","耐力"],["C","adjustment","調整"],["D","apology","道歉"]],
+    roots:[["ad-","朝向"],["just","正確、正義、剛好"],["ment","名詞字尾"]],
+    rootStory:"朝著正軌、剛好合適的標準進行修正 → 「調整、適應」"
+  },
+  {
+    n:37, word:"comparison", ans:"C",
+    sentence:["When making a ","comparison"," ","between"," the two laptops, consider both price and performance."],
+    collo:"make a comparison between A and B",
+    colloZh:"在 A 與 B 之間做比較",
+    tip:"看到關鍵動詞 making 與後方的 between，此處應填名詞「比較」。",
+    options:[["A","cheek","臉頰"],["B","flock","群"],["C","comparison","比較"],["D","mission","任務"]],
+    roots:[["com-","共同、在一起"],["par","平等、相同"]],
+    rootStory:"將兩個對等、級別相近的事物擺放在一起檢視 → 「比較、對照」"
+  },
+  {
+    n:38, word:"substances", ans:"D",
+    sentence:["The laboratory handles dangerous chemical ","substances"," that must be kept in strictly controlled conditions."],
+    collo:"chemical substances",
+    colloZh:"化學物質",
+    tip:"實驗室處理的是危險的「化學物質」，必須全程嚴格控管。",
+    options:[["A","landscapes","風景"],["B","canyons","峽谷"],["C","sensors","感應器"],["D","substances","物質"]],
+    roots:[["sub-","在……下方"],["sta","站立、存在（源自 stare）"],["nce","名詞字尾"]],
+    rootStory:"站在表象最底部、支撐起物理本質的核心實體 → 「物質、實質內容」"
+  },
+  {
+    n:39, word:"intense", ans:"A",
+    sentence:["The marathon runners faced ","intense"," heat during the afternoon race, which made finishing very difficult."],
+    collo:"intense heat",
+    colloZh:"酷熱／強烈的熱氣",
+    tip:"馬拉松選手在午後比賽中面臨「強烈的」高溫，讓完賽十分困難。",
+    options:[["A","intense","強烈的"],["B","reasonable","合理的"],["C","exotic","異國風情的"],["D","democratic","民主的"]],
+    roots:[["in-","朝內、加強語氣"],["tense/tend","拉緊、伸展（源自 tendere）"]],
+    rootStory:"內部的張力線被拉扯扯緊到最高極限 → 「強烈的、緊張刺激的」"
+  },
+  {
+    n:40, word:"analyze", ans:"B",
+    sentence:["The researchers will carefully ","analyze"," the data they collected to see if their hypothesis is correct."],
+    collo:"analyze data",
+    colloZh:"分析數據",
+    tip:"研究人員將仔細「分析」收集到的數據，以確認科學假設是否正確。",
+    options:[["A","circulate","循環"],["B","analyze","分析"],["C","warn","警告"],["D","outgrow","因長大而穿不下"]],
+    roots:[["ana-","由下往上、澈澈底底（希臘文）"],["lysis","解開、鬆開、釋放"]],
+    rootStory:"將一整塊複雜交錯的事物澈底解開、抽絲剝繭 → 「分析」"
+  },
+  {
+    n:41, word:"relevant", ans:"A",
+    sentence:["When writing an essay, make sure you only include information that is strictly ","relevant"," ","to"," the topic of your research."],
+    collo:"be relevant to...",
+    colloZh:"與……有關聯、切題",
+    tip:"看到空格後的介系詞 to，加上 strictly，表示內容要跟主題完全「相關」。",
+    options:[["A","relevant","相關的"],["B","adorable","可愛的"],["C","horrible","可怕的"],["D","pregnant","懷孕的"]],
+    roots:[["re-","反覆、再次"],["lev","舉起、減輕（源自 levare）"]],
+    rootStory:"能夠再次被高高舉起呼應、與目前話題緊密相幫扶的 → 「相關的、切題的」"
+  },
+  {
+    n:42, word:"outdated", ans:"C",
+    sentence:["Using a heavy typewriter nowadays is considered highly ","outdated"," because computers are much faster."],
+    collo:"highly outdated",
+    colloZh:"高度過時的",
+    tip:"現今使用沉重的打字機相當「過時」，因為電腦速度快得多。",
+    options:[["A","diverse","多元的"],["B","respectful","尊重的"],["C","outdated","過時的"],["D","extended","延長的"]],
+    roots:[["out","超越、在……之外"],["date","日期、時間"]],
+    rootStory:"時間軸遠遠超出了當前合理的當代日期範圍 → 「過時的、老舊的」"
+  },
+  {
+    n:43, word:"stem", ans:"B",
+    sentence:["The psychologist explained that the patient's severe fear of dogs might ","stem"," ","from"," a traumatic experience in his childhood."],
+    collo:"stem from...",
+    colloZh:"根源於／起源於……",
+    tip:"看到空格後的介系詞 from，得知對狗的恐懼可能「根源於」童年的創傷經驗。",
+    options:[["A","deepen","加深"],["B","stem","根源於"],["C","fade","褪色"],["D","collapse","倒塌"]],
+    roots:[["stamniz","植物的莖、樹幹（日耳曼語族）"]],
+    rootStory:"事物像枝條一樣從最底下的根基處抽芽生長出來 → 「根源於、起源於」"
+  },
+  {
+    n:44, word:"possess", ans:"D",
+    sentence:["To be a successful and respected leader, one must ","possess"," strong communication skills and a clear vision."],
+    collo:"possess skills",
+    colloZh:"具備／擁有技能",
+    tip:"要成為成功的領導者，一個人必須「具備」強大的溝通技巧與清晰的遠景。",
+    options:[["A","bury","埋葬"],["B","refine","提煉"],["C","terrify","使恐懼"],["D","possess","擁有、具備"]],
+    roots:[["potis","有力量的主人、統治者"],["sedere","坐、安坐"]],
+    rootStory:"身為主人穩穩坐在統治寶座上，對萬物享有支配權 → 「擁有、具備」"
+  },
+  {
+    n:45, word:"opposite", ans:"D",
+    sentence:["We realized we were walking in the ","opposite"," direction of the train station, so we had to turn back right away."],
+    collo:"in the opposite direction of...",
+    colloZh:"朝著與……相反的方向",
+    tip:"我們發現正朝著火車站的「相反」方向走，所以必須立刻回頭。",
+    options:[["A","collaborative","合作的"],["B","restricted","受限的"],["C","prime","主要的"],["D","opposite","相反的"]],
+    roots:[["ob-","反對、對著（op- 的變體）"],["posit","放置（源自 ponere）"]],
+    rootStory:"被故意放置在正正相對抗、朝向反面的位置 → 「相反的、正對面的」"
+  },
+  {
+    n:46, word:"outgrow", ans:"B",
+    sentence:["Children grow so fast that they often ","outgrow"," their clothes and shoes, forcing parents to buy new ones every few months."],
+    collo:"outgrow clothes/shoes",
+    colloZh:"因長大而穿不下衣服／鞋子",
+    tip:"小孩長大速度很快，往往很快就「穿不下」衣服鞋子。",
+    options:[["A","regret","後悔"],["B","outgrow","長大穿不下"],["C","recognize","認出"],["D","admire","欣賞"]],
+    roots:[["out","超越"],["grow","生長"]],
+    rootStory:"身體生長、發育的速度遠遠超越了原有衣服鞋子的限制尺寸 → 「因長大而穿不下」"
+  },
+  {
+    n:47, word:"partially", ans:"A",
+    sentence:["The construction of the new highway is only ","partially"," completed; it will definitely take another year to finish."],
+    collo:"partially completed",
+    colloZh:"部分完工／部分完成",
+    tip:"後方提到「還需再一年才能完成」，表示新公路目前僅「部分」完工。",
+    options:[["A","partially","部分地"],["B","otherwise","否則"],["C","similarly","同樣地"],["D","eventually","最終"]],
+    roots:[["part","部分（源自拉丁文 pars）"],["ial","形容詞字尾"],["ly","副詞字尾"]],
+    rootStory:"僅僅屬於局部的比例、非全面性地 → 「部分地」"
+  },
+  {
+    n:48, word:"otherwise", ans:"C",
+    sentence:["You need to leave for the airport right now; ","otherwise",", you will definitely get stuck in traffic and miss your flight."],
+    collo:"分號(;) + otherwise + 逗號(,)",
+    colloZh:"副詞連接詞：否則",
+    tip:"你現在就得前往機場；「否則」，你一定會塞車並錯過班機。",
+    options:[["A","besides","此外"],["B","partially","部分地"],["C","otherwise","否則"],["D","via","經由"]],
+    roots:[["other","其他的"],["wise","方式、方向、途徑（日耳曼語源）"]],
+    rootStory:"如果不採取前述路線，換成「其他方式或情況」的話 → 「否則、不然」"
+  },
+  {
+    n:49, word:"respectful", ans:"A",
+    sentence:["Even if you strongly disagree with someone, it is very important to maintain a ","respectful"," attitude during the discussion."],
+    collo:"maintain an attitude",
+    colloZh:"保持一種態度",
+    tip:"即使強烈反對某人，在討論過程中保持「尊重的」態度仍非常重要。",
+    options:[["A","respectful","尊重的"],["B","miserable","痛苦的"],["C","rebellious","叛逆的"],["D","offensive","冒犯的"]],
+    roots:[["re-","反覆、再次"],["spect","看（源自 specere）"],["ful","充滿的"]],
+    rootStory:"行為端正、令人禁不住想反覆投以敬重目光的 → 「尊重的、恭敬的」"
+  },
+  {
+    n:50, word:"pioneer", ans:"B",
+    sentence:["Marie Curie was a ","pioneer"," in the field of radioactivity, and her groundbreaking research paved the way for modern physics."],
+    collo:"a pioneer in the field of... / pave the way for...",
+    colloZh:"某領域的先驅／為……鋪路",
+    tip:"居禮夫人是放射線領域的「先驅」，她的研究為現代物理學「奠定基礎」。",
+    options:[["A","cyborg","生化人"],["B","pioneer","先驅"],["C","assistant","助手"],["D","villager","村民"]],
+    roots:[["peon","步兵、用雙腳在最前方探路開疆的開路先鋒（古法文）"],["pes/pedis","腳（拉丁文）"]],
+    rootStory:"用雙腳在最前方探路與開闢疆土 → 「先驅、拓荒者」"
+  }
+];
+
+</script>
+<script>
+/* ===== state ===== */
+let order = QUESTIONS.map((_,i)=>i);
+let pos = 0;                 // position in order
+let mode = 'quiz';          // 'quiz' | 'study'
+const solved = new Set();   // indices (original) answered correctly
+let streak = 0;
+
+const $ = id => document.getElementById(id);
+const flip = $('flip');
+const cheers = ['太棒啦！','你超強的！','答對囉 🎉','根本天才！','繼續保持！','好厲害～','完美命中！','穩穩的！'];
+const nudges = ['再想想看～','差一點點！','看看搭配詞提示？','沒關係，試別的！','深呼吸，再來一次～'];
+
+/* ===== background doodles ===== */
+(function(){
+  const sky=$('sky');
+  const items=['✏️','📚','⭐','🔤','💡','🌈','🎀','🍬','📝','🫧','🔡','✨'];
+  for(let i=0;i<16;i++){
+    const d=document.createElement('div');
+    d.className='doodle';
+    d.textContent=items[i%items.length];
+    d.style.left=Math.random()*96+'%';
+    d.style.top=Math.random()*96+'%';
+    d.style.fontSize=(18+Math.random()*26)+'px';
+    d.style.animationDuration=(5+Math.random()*6)+'s';
+    d.style.animationDelay=(-Math.random()*6)+'s';
+    sky.appendChild(d);
+  }
+})();
+
+/* ===== render front (quiz / study) ===== */
+function renderFront(){
+  const q = QUESTIONS[order[pos]];
+  const answered = solved.has(order[pos]);
+  const showAnswer = (mode==='study') || answered;
+
+  // build sentence with blank
+  let html = '<div class="facehead">';
+  html += `<span class="qnum">Q${q.n}</span>`;
+  html += `<span class="tag">${mode==='study'?'看答案＋拆解':'選出正確的字'}</span></div>`;
+
+  let sent = '';
+  q.sentence.forEach(seg=>{
+    if(seg===q.word){
+      sent += `<span class="blank ${showAnswer?'filled':''}" id="blank">${showAnswer?q.word:'?????'}</span>`;
+    } else {
+      sent += seg;
+    }
+  });
+  html += `<div class="sentence">${sent}</div>`;
+
+  // options
+  html += '<div class="opts" id="opts">';
+  q.options.forEach(o=>{
+    const [lt,en,zh]=o;
+    let cls='opt';
+    if(showAnswer){
+      cls += ' done';
+      if(lt===q.ans){cls+=' correct';} else {cls+=' dim';}
+    }
+    html += `<button class="${cls}" data-lt="${lt}">
+        <span class="mark">${lt===q.ans?'✅':''}</span>
+        <span class="lt">${lt}</span>
+        <span class="en">${en}</span>
+        <span class="zh">${zh}</span>
+      </button>`;
+  });
+  html += '</div>';
+
+  // collocation box
+  html += `<div class="colloBox ${showAnswer?'show':''}" id="colloBox">
+      <div class="lab">🎯 核心搭配詞</div>
+      <div class="colloen">${q.collo}</div>
+      <div class="collozh">${q.colloZh}</div>
+      <div class="tip">💡 ${q.tip}</div>
+    </div>`;
+
+  // flip button
+  html += `<button class="flipbtn" id="toBack">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M3 22v-6h6"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/></svg>
+      翻到背面看字根拆解
+    </button>`;
+
+  $('front').innerHTML = html;
+
+  // wire options
+  if(!showAnswer){
+    $('opts').querySelectorAll('.opt').forEach(btn=>{
+      btn.addEventListener('click',()=>handleAnswer(btn,q));
+    });
+  }
+  $('toBack').addEventListener('click',()=>{flip.classList.add('flipped');sizeFlip();});
+}
+
+/* ===== render back (etymology) ===== */
+function renderBack(){
+  const q = QUESTIONS[order[pos]];
+  let html = '<div class="backhead">';
+  html += `<div class="bword">${q.word}<small>第 ${q.n} 題 · 字根字首拆解</small></div>`;
+  html += `<span class="dna">🧬 DNA</span></div>`;
+
+  html += '<div class="morphs">';
+  q.roots.forEach((r,i)=>{
+    if(i>0) html += `<span class="plus" style="animation-delay:${i*0.12-0.04}s">+</span>`;
+    html += `<div class="morph" style="animation-delay:${i*0.12}s">
+        <div class="mpart">${r[0]}</div>
+        <div class="mmean">${r[1]}</div>
+      </div>`;
+  });
+  html += '</div>';
+
+  html += `<div class="storybox">
+      <div class="lab">✨ 串起來記</div>
+      <div class="txt">${q.rootStory.replace(/→/g,'<span class="arrow">→</span>')}</div>
+    </div>`;
+
+  html += `<div class="backfoot">
+      <button class="flipback" id="toFront">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14l-4-4 4-4"/><path d="M5 10h11a4 4 0 0 1 0 8h-1"/></svg>
+        翻回正面
+      </button>
+    </div>`;
+
+  $('back').innerHTML = html;
+  $('toFront').addEventListener('click',()=>{flip.classList.remove('flipped');sizeFlip();});
+}
+
+/* ===== size flip container to visible face ===== */
+function sizeFlip(){
+  const showingBack = flip.classList.contains('flipped');
+  const face = showingBack ? $('back') : $('front');
+  // temporarily allow natural measurement
+  const h = face.scrollHeight;
+  flip.style.height = h + 'px';
+}
+const _ro = new ResizeObserver(()=>sizeFlip());
+
+/* ===== answer handling ===== */
+function handleAnswer(btn,q){
+  const chosen = btn.dataset.lt;
+  const opts = $('opts');
+  if(opts.dataset.locked) return;
+
+  if(chosen===q.ans){
+    opts.dataset.locked='1';
+    btn.classList.add('correct');
+    btn.querySelector('.mark').textContent='✅';
+    opts.querySelectorAll('.opt').forEach(b=>{if(b!==btn){b.classList.add('done','dim')}});
+    $('blank').textContent=q.word;
+    $('blank').classList.add('filled');
+    $('colloBox').classList.add('show');
+    sizeFlip();
+    const wasNew = !solved.has(order[pos]);
+    solved.add(order[pos]);
+    streak++;
+    burstConfetti();
+    cheerMascot(cheers[Math.floor(Math.random()*cheers.length)]);
+    if(wasNew && solved.size%10===0){ popBigStar(); }
+    updateStats();
+  } else {
+    btn.classList.add('wrong');
+    btn.querySelector('.mark').textContent='❌';
+    streak=0;
+    updateStats();
+    sayMascot(nudges[Math.floor(Math.random()*nudges.length)]);
+    setTimeout(()=>{btn.classList.remove('wrong');btn.querySelector('.mark').textContent='';},700);
+  }
+}
+
+/* ===== stats / jar ===== */
+function updateStats(){
+  $('doneCount').textContent = solved.size;
+  $('jarfill').style.height = (solved.size/50*100)+'%';
+  $('curIdx').textContent = pos+1;
+  // streak chip
+  const chip=$('streakChip');
+  if(streak>=2){chip.style.display='inline-flex';$('streakNum').textContent=streak;}
+  else chip.style.display='none';
+  renderGrid();
+}
+
+/* ===== mascot speech ===== */
+let speechTimer;
+function sayMascot(t){
+  $('speech').textContent=t;
+  clearTimeout(speechTimer);
+  speechTimer=setTimeout(()=>{$('speech').textContent='繼續加油！翻牌看字根會記更牢 🦉';},2600);
+}
+function cheerMascot(t){
+  sayMascot(t);
+  const m=$('mascot');
+  m.classList.remove('cheer');void m.offsetWidth;m.classList.add('cheer');
+}
+$('mascot').addEventListener('click',()=>{
+  const lines=['你今天好認真！','字根拆開就不用死背囉～','搭配詞是解題的鑰匙 🔑','再 5 題就破關！','相信你做得到 💪','拍拍～休息一下也可以'];
+  cheerMascot(lines[Math.floor(Math.random()*lines.length)]);
+});
+
+/* ===== confetti ===== */
+function burstConfetti(){
+  const fx=$('fx');
+  const colors=['#8b6dd6','#ff8fb1','#4ecdb0','#ffc94d','#ff7a59','#5fc4ee'];
+  const shapes=['','50%','0'];
+  for(let i=0;i<34;i++){
+    const c=document.createElement('div');
+    c.className='conf';
+    const col=colors[Math.floor(Math.random()*colors.length)];
+    c.style.background=col;
+    c.style.borderRadius=shapes[Math.floor(Math.random()*shapes.length)];
+    const startX=20+Math.random()*60;
+    c.style.left=startX+'%';
+    c.style.top='38%';
+    const dx=(Math.random()-0.5)*340;
+    const dy=260+Math.random()*220;
+    const rot=Math.random()*720-360;
+    fx.appendChild(c);
+    c.animate([
+      {transform:`translate(0,0) rotate(0)`,opacity:1},
+      {transform:`translate(${dx}px,${dy}px) rotate(${rot}deg)`,opacity:0}
+    ],{duration:1100+Math.random()*500,easing:'cubic-bezier(.2,.6,.4,1)'}).onfinish=()=>c.remove();
+  }
+}
+function popBigStar(){
+  const s=$('bigstar');
+  s.classList.remove('go');void s.offsetWidth;s.classList.add('go');
+  sayMascot('哇！又破 10 題，太厲害了 🌟');
+}
+
+/* ===== grid ===== */
+function renderGrid(){
+  const g=$('grid');
+  g.innerHTML='';
+  order.forEach((origIdx,i)=>{
+    const q=QUESTIONS[origIdx];
+    const cell=document.createElement('button');
+    cell.className='cell'+(i===pos?' cur':'')+(solved.has(origIdx)?' done':'');
+    cell.textContent=q.n;
+    cell.addEventListener('click',()=>{pos=i;goto();});
+    g.appendChild(cell);
+  });
+}
+
+/* ===== navigation ===== */
+function goto(){
+  flip.classList.remove('flipped');
+  // brief delay so the flip resets before content swaps
+  renderFront();
+  renderBack();
+  updateStats();
+  $('prevBtn').disabled = pos===0;
+  $('nextBtn').disabled = pos===order.length-1;
+  sizeFlip();
+  // pop animation on card
+  flip.animate([{transform:'scale(.96)'},{transform:'scale(1)'}],{duration:260,easing:'cubic-bezier(.34,1.56,.64,1)'});
+}
+$('prevBtn').addEventListener('click',()=>{if(pos>0){pos--;goto();}});
+$('nextBtn').addEventListener('click',()=>{if(pos<order.length-1){pos++;goto();}});
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowLeft'&&pos>0){pos--;goto();}
+  if(e.key==='ArrowRight'&&pos<order.length-1){pos++;goto();}
+  if(e.key===' '||e.key==='Enter'){e.preventDefault();flip.classList.toggle('flipped');sizeFlip();}
+});
+
+/* ===== modes ===== */
+function setMode(m){
+  mode=m;
+  $('modeQuiz').classList.toggle('on',m==='quiz');
+  $('modeStudy').classList.toggle('on',m==='study');
+  renderFront();
+  sizeFlip();
+}
+$('modeQuiz').addEventListener('click',()=>setMode('quiz'));
+$('modeStudy').addEventListener('click',()=>{setMode('study');sayMascot('好的！直接看答案＋拆解，慢慢吸收～');});
+
+/* ===== shuffle / reset ===== */
+$('shuffleBtn').addEventListener('click',()=>{
+  for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]];}
+  pos=0;goto();sayMascot('洗好牌囉！換個順序更能檢測實力 🔀');
+});
+$('resetBtn').addEventListener('click',()=>{
+  if(!confirm('確定要清除進度、重新開始嗎？')) return;
+  solved.clear();streak=0;order=QUESTIONS.map((_,i)=>i);pos=0;goto();
+  sayMascot('全部歸零！我們重新挑戰一次 💪');
+});
+
+/* ===== init ===== */
+window.addEventListener('resize',()=>sizeFlip());
+goto();
+setTimeout(sizeFlip,300); // after fonts settle
+</script>
+</body>
+</html>
