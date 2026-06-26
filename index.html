@@ -100,6 +100,77 @@ header.top{text-align:center;padding:14px 0 8px;position:relative}
 .pill.on{background:var(--grape);color:#fff;border-color:var(--grape-deep)}
 .pill.shuffle{background:var(--sun);border-color:var(--sun-deep)}
 .pill.reset{background:var(--bubble);border-color:var(--bubble-deep);color:#fff}
+.pill.weak{background:#fff;border-color:var(--grape-deep);color:var(--grape-deep);position:relative}
+.pill.weak.on{background:var(--grape);color:#fff}
+.weakBadge{display:inline-flex;align-items:center;justify-content:center;min-width:18px;height:18px;
+  padding:0 4px;margin-left:6px;border-radius:999px;background:var(--coral);color:#fff;font-size:11px;
+  font-weight:800;border:2px solid #fff;box-shadow:0 0 0 1.5px var(--coral)}
+
+/* ===== weak panel (錯題榜) ===== */
+.weakPanel{max-height:0;overflow:hidden;opacity:0;transition:max-height .4s var(--pop),opacity .3s,margin .3s;
+  margin-top:0;border-radius:22px}
+.weakPanel.show{max-height:640px;opacity:1;margin-top:16px;overflow:auto;
+  border:3px solid var(--grape);background:linear-gradient(170deg,#fff,#f6f1ff);
+  box-shadow:0 8px 0 rgba(110,81,196,.16);padding:16px 16px 18px}
+.weak-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.weak-title{font-family:"Baloo 2","Noto Sans TC";font-weight:800;font-size:16px;color:var(--grape-deep);
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.weak-pill{font-size:12px;background:#fff;border:2px solid var(--grape);border-radius:999px;padding:2px 9px;color:var(--grape-deep)}
+.weak-x{border:2.5px solid var(--ink);background:#fff;border-radius:11px;width:32px;height:32px;cursor:pointer;
+  font-weight:800;color:var(--ink-soft);box-shadow:0 3px 0 rgba(66,52,42,.14);transition:transform .12s var(--pop)}
+.weak-x:hover{transform:translateY(-2px)}
+.weak-x:active{transform:translateY(2px)}
+.weak-sub{font-size:12.5px;color:var(--ink-soft);font-weight:600;margin-bottom:10px}
+.weak-sub b{color:var(--coral)}
+.weak-empty{text-align:center;font-family:"Baloo 2","Noto Sans TC";font-weight:700;color:var(--mint-deep);
+  font-size:16px;line-height:1.7;padding:22px 8px}
+.weak-item{display:flex;align-items:center;gap:11px;width:100%;text-align:left;background:#fff;cursor:pointer;
+  border:2.5px solid var(--ink);border-radius:15px;padding:9px 11px;margin-bottom:9px;
+  box-shadow:0 4px 0 rgba(66,52,42,.12);transition:transform .12s var(--pop),box-shadow .12s}
+.weak-item:hover{transform:translateY(-2px) rotate(-.4deg);box-shadow:0 6px 0 rgba(66,52,42,.12)}
+.weak-item:active{transform:translateY(2px)}
+.weak-item.danger{border-color:var(--coral);box-shadow:0 4px 0 var(--coral);background:linear-gradient(180deg,#fff,#fff2ee)}
+.weak-rank{flex:0 0 auto;width:26px;height:26px;border-radius:50%;background:var(--grape);color:#fff;
+  font-family:"Baloo 2";font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center}
+.weak-item.danger .weak-rank{background:var(--coral)}
+.weak-item:nth-child(2) .weak-rank{background:var(--sun-deep)}
+.weak-main{flex:1;display:flex;flex-direction:column;gap:5px;min-width:0}
+.weak-word{font-family:"Nunito";font-weight:800;font-size:16px;color:var(--ink);display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.weak-zh{font-size:12px;color:var(--ink-soft);font-weight:600}
+.weak-bar{height:9px;background:#eee6f7;border-radius:999px;overflow:hidden}
+.weak-fill{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--grape),var(--bubble))}
+.weak-item.danger .weak-fill{background:linear-gradient(90deg,var(--coral),var(--bubble-deep))}
+.weak-num{flex:0 0 auto;font-family:"Baloo 2";font-weight:800;font-size:20px;color:var(--coral)}
+.weak-num small{font-size:11px;color:var(--ink-soft);font-weight:700;margin-left:1px}
+
+/* ===== alert modal (錯滿 5 次) ===== */
+.overlay{position:fixed;inset:0;z-index:80;background:rgba(66,52,42,.42);backdrop-filter:blur(3px);
+  display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .25s}
+.overlay.show{opacity:1;pointer-events:auto}
+.alertcard{position:relative;width:100%;max-width:420px;background:#fff;border:3.5px solid var(--ink);
+  border-radius:26px;padding:24px 22px 20px;box-shadow:0 14px 0 rgba(66,52,42,.2);text-align:center;
+  transform:scale(.8) translateY(20px);transition:transform .35s var(--pop)}
+.overlay.show .alertcard{transform:scale(1) translateY(0)}
+.alert-close{position:absolute;top:12px;right:12px;border:2.5px solid var(--ink);background:#fff;border-radius:11px;
+  width:32px;height:32px;cursor:pointer;font-weight:800;color:var(--ink-soft);box-shadow:0 3px 0 rgba(66,52,42,.14)}
+.alert-close:active{transform:translateY(2px)}
+.alert-emoji{font-size:52px;line-height:1;animation:wobble 1s ease-in-out infinite}
+@keyframes wobble{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(6deg)}}
+.alert-h{font-family:"Baloo 2","Noto Sans TC";font-weight:800;font-size:20px;color:var(--coral);margin:8px 0 4px}
+.alert-word{font-family:"Nunito";font-weight:800;font-size:30px;color:var(--grape-deep);line-height:1.1}
+.alert-word small{display:block;font-size:14px;color:var(--ink-soft);font-weight:600;margin-top:2px}
+.alert-count{font-weight:700;font-size:14px;color:var(--ink);margin:8px 0 12px}
+.alert-count b{color:var(--coral);font-size:18px}
+.alert-info{background:var(--paper2);border:2.5px dashed #e0c8a8;border-radius:16px;padding:12px 14px;text-align:left;margin-bottom:16px}
+.alert-row{font-size:13.5px;line-height:1.55;color:var(--ink);font-weight:500;margin:3px 0}
+.alert-lab{font-family:"Baloo 2";font-weight:800;color:var(--grape-deep);margin-right:6px;white-space:nowrap}
+.alert-acts{display:flex;gap:10px}
+.alert-btn{flex:1;font-family:"Baloo 2","Noto Sans TC";font-weight:800;cursor:pointer;border-radius:14px;
+  padding:12px;font-size:15px;border:3px solid var(--ink);transition:transform .12s var(--pop),box-shadow .12s}
+.alert-btn.ghost{background:#fff;color:var(--ink);box-shadow:0 4px 0 rgba(66,52,42,.16)}
+.alert-btn.go{background:var(--grape);color:#fff;border-color:var(--grape-deep);box-shadow:0 4px 0 var(--grape-deep)}
+.alert-btn:hover{transform:translateY(-2px)}
+.alert-btn:active{transform:translateY(2px);box-shadow:0 1px 0 rgba(66,52,42,.16)}
 
 /* ===== card deck ===== */
 .deck{margin-top:18px;perspective:1600px}
@@ -310,7 +381,17 @@ footer{text-align:center;color:var(--ink-soft);font-size:12px;font-weight:600;ma
     <button class="pill on" id="modeQuiz">🧠 解題模式</button>
     <button class="pill" id="modeStudy">📖 直接看答案</button>
     <button class="pill shuffle" id="shuffleBtn">🔀 隨機洗牌</button>
+    <button class="pill weak" id="weakToggle">📊 我的弱點<span class="weakBadge" id="weakBadge" style="display:none">0</span></button>
     <button class="pill reset" id="resetBtn">↺ 重來</button>
+  </div>
+
+  <!-- 弱點面板：錯題排行榜 -->
+  <div class="weakPanel" id="weakPanel">
+    <div class="weak-head">
+      <div class="weak-title">📊 我的弱點 · 錯最多的字 <span class="weak-pill"><b id="weakCount">0</b> 個字</span></div>
+      <button class="weak-x" id="weakClose" aria-label="關閉">✕</button>
+    </div>
+    <div class="weak-body" id="weakBody"></div>
   </div>
 
   <div class="deck">
@@ -342,6 +423,25 @@ footer{text-align:center;color:var(--ink-soft);font-size:12px;font-weight:600;ma
   </div>
 
   <footer>Live ABC 考前衝刺複習精選 · 第 1–50 題全收錄 🦉</footer>
+</div>
+
+<!-- 錯滿 5 次的提醒視窗 -->
+<div class="overlay" id="overlay">
+  <div class="alertcard" role="alertdialog" aria-modal="true">
+    <button class="alert-close" id="alertClose" aria-label="關閉">✕</button>
+    <div class="alert-emoji">🙀</div>
+    <div class="alert-h">這個字要特別加強！</div>
+    <div class="alert-word"><span id="alertWord">word</span><small id="alertZh">中文</small></div>
+    <div class="alert-count">已經累積答錯 <b id="alertNum">5</b> 次</div>
+    <div class="alert-info">
+      <div class="alert-row"><span class="alert-lab">🎯 搭配詞</span><span id="alertCollo"></span></div>
+      <div class="alert-row"><span class="alert-lab">💡 訣竅</span><span id="alertTip"></span></div>
+    </div>
+    <div class="alert-acts">
+      <button class="alert-btn ghost" id="alertClose2" onclick="closeAlert()">知道了</button>
+      <button class="alert-btn go" id="alertGo">前往複習這題 →</button>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -858,10 +958,48 @@ let mode = 'quiz';          // 'quiz' | 'study'
 const solved = new Set();   // indices (original) answered correctly
 let streak = 0;
 
+/* ===== persistence (localStorage) ===== */
+/* 在 GitHub Pages 等正式網站可正常運作；Claude 內建預覽會擋 storage，
+   故以下全部包 try/catch，擋掉時自動退回「只在本次有效」模式。 */
+const LS_WRONG  = 'wordlab.wrong.v1';   // { word: 次數 }
+const LS_SOLVED = 'wordlab.solved.v1';  // [ word, word, ... ]
+const WRONG_ALERT = 5;                  // 錯幾次跳提醒
+let storageOK = true;
+let wrongCounts = {};                   // word -> 累積答錯次數
+const alerted = new Set();              // 本次已提醒過、避免洗版
+
+function loadProgress(){
+  try{
+    const w = JSON.parse(localStorage.getItem(LS_WRONG) || '{}');
+    if(w && typeof w==='object') wrongCounts = w;
+    const s = JSON.parse(localStorage.getItem(LS_SOLVED) || '[]');
+    if(Array.isArray(s)){
+      const byWord = {}; QUESTIONS.forEach((q,i)=>byWord[q.word]=i);
+      s.forEach(word=>{ if(word in byWord) solved.add(byWord[word]); });
+    }
+  }catch(e){ storageOK=false; }
+}
+function saveProgress(){
+  if(!storageOK) return;
+  try{
+    localStorage.setItem(LS_WRONG, JSON.stringify(wrongCounts));
+    const words = [...solved].map(i=>QUESTIONS[i].word);
+    localStorage.setItem(LS_SOLVED, JSON.stringify(words));
+  }catch(e){ storageOK=false; }
+}
+function clearProgress(){
+  wrongCounts = {}; alerted.clear();
+  try{ localStorage.removeItem(LS_WRONG); localStorage.removeItem(LS_SOLVED); }catch(e){}
+}
+// 偵測 storage 是否可用
+try{ const k='wordlab.test'; localStorage.setItem(k,'1'); localStorage.removeItem(k); }
+catch(e){ storageOK=false; }
+
 const $ = id => document.getElementById(id);
 const flip = $('flip');
 const cheers = ['太棒啦！','你超強的！','答對囉 🎉','根本天才！','繼續保持！','好厲害～','完美命中！','穩穩的！'];
 const nudges = ['再想想看～','差一點點！','看看搭配詞提示？','沒關係，試別的！','深呼吸，再來一次～'];
+
 
 /* ===== background doodles ===== */
 (function(){
@@ -1080,6 +1218,7 @@ function handleAnswer(btn,q){
     const wasNew = !solved.has(order[pos]);
     solved.add(order[pos]);
     streak++;
+    saveProgress();
     burstConfetti();
     cheerMascot(cheers[Math.floor(Math.random()*cheers.length)]);
     if(wasNew && solved.size%10===0){ popBigStar(); }
@@ -1088,8 +1227,17 @@ function handleAnswer(btn,q){
     btn.classList.add('wrong');
     btn.querySelector('.mark').textContent='❌';
     streak=0;
+    // 累積答錯次數（以單字為 key，洗牌後仍正確）
+    wrongCounts[q.word] = (wrongCounts[q.word]||0) + 1;
+    saveProgress();
+    const n = wrongCounts[q.word];
     updateStats();
-    sayMascot(nudges[Math.floor(Math.random()*nudges.length)]);
+    if(n>=WRONG_ALERT && !alerted.has(q.word)){
+      alerted.add(q.word);
+      showWrongAlert(q, n);          // 錯滿 5 次：跳提醒
+    } else {
+      sayMascot(nudges[Math.floor(Math.random()*nudges.length)] + (n>=2?` （這個字錯 ${n} 次了）`:''));
+    }
     setTimeout(()=>{btn.classList.remove('wrong');btn.querySelector('.mark').textContent='';},700);
   }
 }
@@ -1104,6 +1252,7 @@ function updateStats(){
   if(streak>=2){chip.style.display='inline-flex';$('streakNum').textContent=streak;}
   else chip.style.display='none';
   renderGrid();
+  renderWeak();
 }
 
 /* ===== mascot speech ===== */
@@ -1151,6 +1300,77 @@ function popBigStar(){
   const s=$('bigstar');
   s.classList.remove('go');void s.offsetWidth;s.classList.add('go');
   sayMascot('哇！又破 10 題，太厲害了 🌟');
+}
+
+/* ===== 錯滿 5 次提醒 ===== */
+function showWrongAlert(q, n){
+  cheerMascot('這個字要特別注意喔！');
+  const ov = $('overlay');
+  $('alertWord').textContent = q.word;
+  $('alertZh').textContent = (q.options.find(o=>o[0]===q.ans)||[])[2] || '';
+  $('alertNum').textContent = n;
+  $('alertCollo').textContent = q.collo;
+  $('alertTip').textContent = q.tip;
+  ov.classList.add('show');
+  ov.dataset.word = q.word;
+}
+function closeAlert(){ $('overlay').classList.remove('show'); }
+
+/* ===== 我的弱點 / 錯題排行榜 ===== */
+let weakOpen = false;
+function wrongList(){
+  // 回傳 [ [word, count], ... ] 由多到少，只含 count>0
+  return Object.entries(wrongCounts)
+    .filter(([,c])=>c>0)
+    .sort((a,b)=> b[1]-a[1] || a[0].localeCompare(b[0]));
+}
+function renderWeak(){
+  const list = wrongList();
+  const total = list.reduce((s,[,c])=>s+c,0);
+  $('weakCount').textContent = list.length;
+  const badge = $('weakBadge');
+  if(list.length){ badge.style.display='inline-flex'; badge.textContent = list.length; }
+  else badge.style.display='none';
+  if(!weakOpen) return;
+
+  const body = $('weakBody');
+  if(!list.length){
+    body.innerHTML = `<div class="weak-empty">目前還沒有答錯的字 🎉<br>太厲害了！繼續保持～</div>`;
+    return;
+  }
+  const max = list[0][1];
+  const byWord = {}; QUESTIONS.forEach((q,i)=>byWord[q.word]=i);
+  let html = `<div class="weak-sub">總共答錯 <b>${total}</b> 次 · 點任一字可直接前往複習</div>`;
+  list.forEach(([word,c],rank)=>{
+    const q = QUESTIONS[byWord[word]];
+    const zh = (q.options.find(o=>o[0]===q.ans)||[])[2] || '';
+    const danger = c>=WRONG_ALERT;
+    const w = Math.max(12, Math.round(c/max*100));
+    html += `<button class="weak-item${danger?' danger':''}" data-word="${word}">
+        <span class="weak-rank">${rank+1}</span>
+        <span class="weak-main">
+          <span class="weak-word">${word}<span class="weak-zh">${zh}</span></span>
+          <span class="weak-bar"><span class="weak-fill" style="width:${w}%"></span></span>
+        </span>
+        <span class="weak-num">${c}<small>次</small></span>
+      </button>`;
+  });
+  body.innerHTML = html;
+  body.querySelectorAll('.weak-item').forEach(it=>{
+    it.addEventListener('click',()=>{
+      const word = it.dataset.word;
+      const oi = byWord[word];
+      const p = order.indexOf(oi);
+      if(p>=0){ pos=p; goto(); toggleWeak(false);
+        document.querySelector('.deck').scrollIntoView({behavior:'smooth',block:'start'}); }
+    });
+  });
+}
+function toggleWeak(force){
+  weakOpen = (typeof force==='boolean') ? force : !weakOpen;
+  $('weakPanel').classList.toggle('show', weakOpen);
+  $('weakToggle').classList.toggle('on', weakOpen);
+  if(weakOpen) renderWeak();
 }
 
 /* ===== grid ===== */
@@ -1207,14 +1427,32 @@ $('shuffleBtn').addEventListener('click',()=>{
   pos=0;goto();sayMascot('洗好牌囉！換個順序更能檢測實力 🔀');
 });
 $('resetBtn').addEventListener('click',()=>{
-  if(!confirm('確定要清除進度、重新開始嗎？')) return;
-  solved.clear();streak=0;order=QUESTIONS.map((_,i)=>i);pos=0;goto();
+  if(!confirm('確定要清除所有進度嗎？\n（包含答對紀錄與錯題累積，無法復原）')) return;
+  solved.clear();streak=0;order=QUESTIONS.map((_,i)=>i);pos=0;
+  clearProgress();
+  goto();
   sayMascot('全部歸零！我們重新挑戰一次 💪');
 });
 
+/* ===== 弱點面板 / 提醒 視窗 互動 ===== */
+$('weakToggle').addEventListener('click',()=>toggleWeak());
+$('weakClose').addEventListener('click',()=>toggleWeak(false));
+$('alertClose').addEventListener('click',closeAlert);
+$('alertGo').addEventListener('click',()=>{
+  const word = $('overlay').dataset.word;
+  const oi = QUESTIONS.findIndex(q=>q.word===word);
+  const p = order.indexOf(oi);
+  closeAlert();
+  if(p>=0){ pos=p; goto(); }
+});
+$('overlay').addEventListener('click',e=>{ if(e.target===$('overlay')) closeAlert(); });
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeAlert(); if(weakOpen) toggleWeak(false); } });
+
 /* ===== init ===== */
+loadProgress();                 // 先讀回 localStorage 裡的進度
 window.addEventListener('resize',()=>sizeFlip());
 goto();
+if(!storageOK){ setTimeout(()=>sayMascot('提醒：這個預覽環境不會保存進度；上傳到 GitHub 後就能長期記住囉 💾'),900); }
 setTimeout(sizeFlip,300); // after fonts settle
 </script>
 </body>
