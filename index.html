@@ -164,6 +164,25 @@ header.top{text-align:center;padding:14px 0 8px;position:relative}
 .flipbtn:active{transform:translateY(3px);box-shadow:0 2px 0 var(--grape-deep)}
 .flipbtn svg{width:18px;height:18px;animation:spin 4s linear infinite}
 
+/* ===== listen / speak buttons ===== */
+.sentrow{display:flex;align-items:flex-start;gap:10px;margin:4px 0 14px}
+.sentrow .sentence{margin:0;flex:1}
+.speakbtn{flex:0 0 auto;width:42px;height:42px;border:2.5px solid var(--sky);background:#eaf7fe;color:#2f9fd6;
+  border-radius:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 0 #b9e3f6;transition:transform .12s var(--pop),box-shadow .12s,background .2s;margin-top:2px}
+.speakbtn svg{width:22px;height:22px}
+.speakbtn:hover{transform:translateY(-2px);background:#d8f0fc}
+.speakbtn:active{transform:translateY(2px);box-shadow:0 2px 0 #b9e3f6}
+.speakbtn .wave{opacity:.9;transform-origin:11px 12px}
+.speakbtn.speaking{background:linear-gradient(180deg,#d6f6ee,#bff0e2);border-color:var(--mint-deep);color:var(--mint-deep);box-shadow:0 4px 0 var(--mint-deep);animation:speakpulse .7s ease-in-out infinite}
+@keyframes speakpulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+.speakbtn.speaking .w1{animation:wavemove .6s ease-in-out infinite}
+.speakbtn.speaking .w2{animation:wavemove .6s ease-in-out .15s infinite}
+@keyframes wavemove{0%,100%{opacity:.3}50%{opacity:1}}
+.speakbtn.small{width:34px;height:34px;border-radius:11px}
+.speakbtn.small svg{width:18px;height:18px}
+.bwordrow{display:inline-flex;align-items:center;gap:9px}
+
 /* back face : etymology */
 .backhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
 .bword{font-family:"Baloo 2";font-weight:800;font-size:30px;color:var(--grape-deep);line-height:1}
@@ -880,7 +899,12 @@ function renderFront(){
       sent += seg;
     }
   });
-  html += `<div class="sentence">${sent}</div>`;
+  html += `<div class="sentrow">
+      <button class="speakbtn" id="speakFront" title="聽整句英文" aria-label="聽整句英文">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path class="wave w1" d="M15.5 8.5a5 5 0 0 1 0 7"/><path class="wave w2" d="M18.5 6a9 9 0 0 1 0 12"/></svg>
+      </button>
+      <div class="sentence">${sent}</div>
+    </div>`;
 
   // options
   html += '<div class="opts" id="opts">';
@@ -916,6 +940,23 @@ function renderFront(){
 
   $('front').innerHTML = html;
 
+  // wire listen button (整句英文)
+  const sf = $('speakFront');
+  function speakCurrentSentence(){
+    const reveal = (mode==='study') || solved.has(order[pos]);
+    let text;
+    if(reveal){
+      text = fullSentence(q);
+    } else {
+      // replace the answer word with a spoken "blank" so we don't spoil it
+      text = q.sentence.map(seg=> seg===q.word ? ' blank ' : seg).join('');
+      text = text.replace(/\s+([,.;!?])/g,'$1').replace(/\s{2,}/g,' ').trim();
+    }
+    speak(text, 0.92, sf);
+  }
+  sf.addEventListener('click',speakCurrentSentence);
+  sf._speakFull = ()=>speak(fullSentence(q),0.92,sf); // used after a correct answer
+
   // wire options
   if(!showAnswer){
     $('opts').querySelectorAll('.opt').forEach(btn=>{
@@ -929,7 +970,13 @@ function renderFront(){
 function renderBack(){
   const q = QUESTIONS[order[pos]];
   let html = '<div class="backhead">';
-  html += `<div class="bword">${q.word}<small>第 ${q.n} 題 · 字根字首拆解</small></div>`;
+  html += `<div class="bword">
+      <span class="bwordrow">${q.word}
+        <button class="speakbtn small" id="speakWord" title="念這個單字" aria-label="念這個單字">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path class="wave w1" d="M15.5 8.5a5 5 0 0 1 0 7"/><path class="wave w2" d="M18.5 6a9 9 0 0 1 0 12"/></svg>
+        </button>
+      </span>
+      <small>第 ${q.n} 題 · 字根字首拆解</small></div>`;
   html += `<span class="dna">🧬 DNA</span></div>`;
 
   html += '<div class="morphs">';
@@ -956,6 +1003,8 @@ function renderBack(){
 
   $('back').innerHTML = html;
   $('toFront').addEventListener('click',()=>{flip.classList.remove('flipped');sizeFlip();});
+  const sw=$('speakWord');
+  if(sw) sw.addEventListener('click',()=>speak(q.word,0.85,sw));
 }
 
 /* ===== size flip container to visible face ===== */
@@ -967,6 +1016,49 @@ function sizeFlip(){
   flip.style.height = h + 'px';
 }
 const _ro = new ResizeObserver(()=>sizeFlip());
+
+/* ===== speech synthesis (念整句英文) ===== */
+const synth = window.speechSynthesis;
+let enVoice = null;
+function pickVoice(){
+  if(!synth) return;
+  const vs = synth.getVoices();
+  // prefer a natural English voice
+  const prefs = [
+    v=>/en-US/i.test(v.lang) && /(Samantha|Google US English|Microsoft Aria|Microsoft Jenny|Natural)/i.test(v.name),
+    v=>/en-GB/i.test(v.lang) && /(Google UK English Female|Microsoft|Natural)/i.test(v.name),
+    v=>/^en-US/i.test(v.lang),
+    v=>/^en-GB/i.test(v.lang),
+    v=>/^en/i.test(v.lang)
+  ];
+  for(const test of prefs){ const m=vs.find(test); if(m){enVoice=m;return;} }
+}
+if(synth){
+  pickVoice();
+  synth.onvoiceschanged = pickVoice;
+}
+let speakBtnActive = null;
+function fullSentence(q){
+  // join segments into a clean sentence (word is already one of the segments)
+  let s = q.sentence.join('');
+  // tidy spaces before punctuation
+  return s.replace(/\s+([,.;!?])/g,'$1').replace(/\s{2,}/g,' ').trim();
+}
+function speak(text, rate, btn){
+  if(!synth){ sayMascot('這個瀏覽器不支援發音 😢 換 Chrome 或 Safari 試試～'); return; }
+  synth.cancel();
+  if(speakBtnActive){ speakBtnActive.classList.remove('speaking'); }
+  const u = new SpeechSynthesisUtterance(text);
+  if(enVoice) u.voice = enVoice;
+  u.lang = enVoice ? enVoice.lang : 'en-US';
+  u.rate = rate || 0.92;
+  u.pitch = 1.05;
+  if(btn){
+    btn.classList.add('speaking'); speakBtnActive = btn;
+    u.onend = u.onerror = ()=>{ btn.classList.remove('speaking'); if(speakBtnActive===btn) speakBtnActive=null; };
+  }
+  synth.speak(u);
+}
 
 /* ===== answer handling ===== */
 function handleAnswer(btn,q){
@@ -983,6 +1075,8 @@ function handleAnswer(btn,q){
     $('blank').classList.add('filled');
     $('colloBox').classList.add('show');
     sizeFlip();
+    // 答對後自動念出完整句子
+    const sf=$('speakFront'); if(sf && sf._speakFull){ setTimeout(sf._speakFull,260); }
     const wasNew = !solved.has(order[pos]);
     solved.add(order[pos]);
     streak++;
@@ -1075,6 +1169,7 @@ function renderGrid(){
 
 /* ===== navigation ===== */
 function goto(){
+  if(synth) synth.cancel();
   flip.classList.remove('flipped');
   // brief delay so the flip resets before content swaps
   renderFront();
