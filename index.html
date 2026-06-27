@@ -518,6 +518,91 @@ footer{text-align:center;color:var(--ink-soft);font-size:12px;font-weight:600;ma
 .wp-item .wp-sp:active{transform:scale(.9)}
 .wp-item .wp-rm{border:none;background:#f5f0e8;color:var(--ink-soft);border-radius:9px;width:30px;height:30px;cursor:pointer;font-size:14px;flex:0 0 auto}
 
+/* ===== 段考總複習 ===== */
+.rsub{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
+.rsubbtn{font-family:"Baloo 2","Noto Sans TC";font-weight:800;border:2.5px solid var(--ink);background:#fff;color:var(--ink);
+  border-radius:14px;padding:9px 16px;font-size:15px;cursor:pointer;box-shadow:0 4px 0 rgba(66,52,42,.15);transition:transform .12s var(--pop),background .2s}
+.rsubbtn:hover{transform:translateY(-2px)}
+.rsubbtn:active{transform:translateY(2px)}
+.rsubbtn.on{background:linear-gradient(120deg,var(--grape),var(--bubble));color:#fff;border-color:var(--grape-deep);box-shadow:0 4px 0 var(--grape-deep)}
+
+/* 文法 lesson 標籤 */
+.rlessontabs{display:flex;gap:7px;justify-content:center;flex-wrap:wrap;margin-bottom:14px}
+.rltab{font-family:"Baloo 2","Noto Sans TC";font-weight:800;border:2.5px solid var(--ink);background:#fff;color:var(--ink-soft);
+  border-radius:12px;padding:7px 14px;font-size:14px;cursor:pointer;box-shadow:0 3px 0 rgba(66,52,42,.13);transition:transform .12s var(--pop),background .2s}
+.rltab:hover{transform:translateY(-2px)}
+.rltab.on{background:var(--sky);color:#fff;border-color:#2f9fd6;box-shadow:0 3px 0 #2f9fd6}
+
+/* 文法卡 */
+.rnotes{display:flex;flex-direction:column;gap:12px}
+.rnote{border:3px solid var(--ink);border-radius:20px;background:#fff;box-shadow:var(--card-shadow);overflow:hidden}
+.rnote-head{display:flex;align-items:center;gap:10px;padding:13px 16px;cursor:pointer;background:linear-gradient(120deg,#f3eeff,#ffe9f1);transition:background .2s}
+.rnote-head:hover{background:linear-gradient(120deg,#ece3ff,#ffdde9)}
+.rnote-num{font-family:"Baloo 2";font-weight:800;color:#fff;background:var(--grape);border:2.5px solid var(--grape-deep);border-radius:10px;
+  min-width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-size:14px;flex:0 0 auto;box-shadow:0 2px 0 var(--grape-deep)}
+.rnote-t{font-family:"Baloo 2","Noto Sans TC";font-weight:800;color:var(--ink);font-size:16px;flex:1;line-height:1.25}
+.rnote-arrow{font-size:14px;color:var(--ink-soft);transition:transform .3s var(--pop);flex:0 0 auto}
+.rnote.open .rnote-arrow{transform:rotate(180deg)}
+.rnote-body{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s}
+.rnote.open .rnote-body{max-height:700px;padding:4px 16px 16px}
+.rnote-rule{font-family:"Noto Sans TC";font-weight:500;color:var(--ink);font-size:14.5px;line-height:1.7;margin-bottom:10px}
+.rnote-eg{background:linear-gradient(170deg,#eef9ff,#e2f1fb);border:2px dashed var(--sky);border-radius:13px;padding:10px 13px;
+  font-family:"Nunito","Noto Sans TC";font-size:14px;line-height:1.7;color:var(--ink)}
+.rnote-eg .eglab{font-family:"Baloo 2";font-weight:800;color:#2f9fd6;font-size:12px;display:block;margin-bottom:3px}
+.rnote-eg u{text-decoration-color:var(--coral);text-decoration-thickness:2px;font-weight:700;color:var(--grape-deep)}
+.rnote-rule u{text-decoration-color:var(--coral);text-decoration-thickness:2px;font-weight:700}
+
+/* 單字填空 */
+.rfill-bar,.rcloze-bar{display:flex;align-items:center;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:14px}
+.rfill-score{font-family:"Baloo 2";font-weight:700;color:var(--ink);font-size:15px}
+.rfill-score b{color:var(--mint-deep);font-size:19px}
+.rfill-list{display:flex;flex-direction:column;gap:12px}
+.rfi{border:3px solid var(--ink);border-radius:18px;background:#fff;box-shadow:0 5px 0 rgba(110,81,196,.14);padding:14px 15px}
+.rfi-q{font-family:"Nunito","Noto Sans TC";font-weight:600;font-size:16px;line-height:1.7;color:var(--ink);margin-bottom:10px}
+.rfi-num{font-family:"Baloo 2";font-weight:800;color:var(--grape);margin-right:5px}
+.rfi-blankspot{display:inline-flex;align-items:baseline;gap:2px;border-bottom:3px dotted var(--grape);padding:0 4px;min-width:90px;justify-content:center}
+.rfi-hint{font-family:"Baloo 2";font-weight:800;color:var(--bubble-deep);font-size:16px}
+.rfi-ans{color:var(--mint-deep);font-weight:800;font-family:"Baloo 2";font-size:17px}
+.rfi-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.rfi-input{font-family:"Fredoka","Noto Sans TC";font-size:15px;border:2.5px solid var(--ink);border-radius:11px;padding:8px 12px;
+  flex:1;min-width:140px;outline:none;transition:border-color .2s,background .2s}
+.rfi-input:focus{border-color:var(--grape)}
+.rfi-input.ok{background:#e6fff6;border-color:var(--mint-deep);color:var(--mint-deep);font-weight:700}
+.rfi-input.no{background:#ffeef2;border-color:var(--bubble-deep);animation:shake .4s}
+.rfi-check{font-family:"Baloo 2";font-weight:800;border:2.5px solid var(--mint-deep);background:var(--mint);color:#fff;
+  border-radius:11px;padding:8px 14px;cursor:pointer;box-shadow:0 4px 0 var(--mint-deep);transition:transform .1s var(--pop);flex:0 0 auto}
+.rfi-check:active{transform:translateY(2px)}
+.rfi-sp{border:2.5px solid var(--sky);background:#eaf7fe;color:#2f9fd6;border-radius:11px;width:42px;height:40px;cursor:pointer;flex:0 0 auto;
+  box-shadow:0 4px 0 #b9e3f6;display:flex;align-items:center;justify-content:center}
+.rfi-sp svg{width:20px;height:20px}
+.rfi-sp.speaking{background:#d6f6ee;border-color:var(--mint-deep);color:var(--mint-deep);box-shadow:0 4px 0 var(--mint-deep);animation:speakpulse .7s infinite}
+.rfi-zh{font-family:"Noto Sans TC";font-weight:600;color:var(--ink-soft);font-size:13px;margin-top:8px;display:none}
+.rfi.done .rfi-zh{display:block}
+
+/* 綜合測驗 克漏字 */
+.rcloze-passage{border:3px solid var(--ink);border-radius:20px;background:#fff;box-shadow:var(--card-shadow);padding:18px 18px;
+  font-family:"Nunito","Noto Sans TC";font-weight:600;font-size:16px;line-height:2.2;color:var(--ink);margin-bottom:16px;white-space:pre-wrap}
+.cloze-blank{display:inline-flex;align-items:center;justify-content:center;min-width:46px;height:26px;border-bottom:3px solid var(--grape);
+  font-family:"Baloo 2";font-weight:800;color:var(--grape-deep);font-size:14px;margin:0 2px;transition:color .3s,border-color .3s;vertical-align:middle}
+.cloze-blank.filled{border-bottom-color:var(--mint-deep);color:var(--mint-deep)}
+.cloze-blank .bn{font-size:11px;color:var(--ink-soft);font-weight:700}
+.rcloze-qs{display:flex;flex-direction:column;gap:12px}
+.rcq{border:3px solid var(--ink);border-radius:18px;background:#fff;box-shadow:0 5px 0 rgba(110,81,196,.14);padding:13px 15px}
+.rcq-h{font-family:"Baloo 2";font-weight:800;color:var(--ink);font-size:15px;margin-bottom:9px}
+.rcq-h b{color:var(--grape);margin-right:4px}
+.rcq-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.rcq-opt{font-family:"Fredoka","Noto Sans TC";text-align:left;border:2.5px solid var(--ink);background:#fff;border-radius:12px;
+  padding:9px 11px;cursor:pointer;font-size:14.5px;font-weight:600;box-shadow:0 4px 0 rgba(66,52,42,.13);transition:transform .12s var(--pop),background .2s;display:flex;gap:6px;align-items:center}
+.rcq-opt .ol{font-family:"Baloo 2";font-weight:800;color:var(--grape)}
+.rcq-opt:hover:not(.locked){transform:translateY(-2px)}
+.rcq-opt.correct{background:linear-gradient(180deg,#e6fff6,#c6f6e6);border-color:var(--mint-deep);box-shadow:0 4px 0 var(--mint-deep)}
+.rcq-opt.correct .ol{color:var(--mint-deep)}
+.rcq-opt.wrong{background:linear-gradient(180deg,#ffeef2,#ffd9e3);border-color:var(--bubble-deep);box-shadow:0 4px 0 var(--bubble-deep);animation:shake .4s}
+.rcq-opt.fade{opacity:.45}
+.rcq-why{margin-top:9px;background:linear-gradient(170deg,#fff7e9,#ffeecb);border:2px dashed var(--sun-deep);border-radius:12px;
+  padding:9px 12px;font-family:"Noto Sans TC";font-weight:500;font-size:13.5px;line-height:1.6;color:var(--ink);display:none}
+.rcq.answered .rcq-why{display:block}
+
 @media (max-width:520px){
   .opts{grid-template-columns:1fr 1fr}
   .sentence{font-size:16.5px}
@@ -527,6 +612,8 @@ footer{text-align:center;color:var(--ink-soft);font-size:12px;font-weight:600;ma
   .topbtn{font-size:15px;padding:10px 14px}
   .groupgrid{grid-template-columns:1fr 1fr}
   .cflip{min-height:280px}
+  .rcq-opts{grid-template-columns:1fr 1fr}
+  .rcloze-passage{font-size:15px;line-height:2.1}
 }
 @media (prefers-reduced-motion:reduce){
   *{animation-duration:.001s!important;transition-duration:.05s!important}
@@ -570,10 +657,11 @@ footer{text-align:center;color:var(--ink-soft);font-size:12px;font-weight:600;ma
     <div class="speech" id="speech">嗨～點我會給你打氣！一起破關 50 個單字吧 🎈</div>
   </header>
 
-  <!-- 最上層：兩大模式切換 -->
+  <!-- 最上層：模式切換 -->
   <div class="topswitch">
     <button class="topbtn on" id="goQuiz">🎯 解題練習<small>LiveABC 50 題</small></button>
     <button class="topbtn" id="goCards">🃏 單字卡<small>依課程 · 含發音</small></button>
+    <button class="topbtn" id="goReview">📖 段考總複習<small>文法 · 克漏字</small></button>
   </div>
 
   <!-- ============ 區域 A：原本的 LiveABC 50 題 ============ -->
@@ -741,7 +829,44 @@ footer{text-align:center;color:var(--ink-soft);font-size:12px;font-weight:600;ma
 
   </div><!-- /#cardArea -->
 
-  <footer>Live ABC 考前衝刺複習精選 · 龍騰版 L7–R3 · LIVE 6月 單字卡 🦉</footer>
+  <!-- ============ 區域 C：段考總複習（文法 / 單字填空 / 綜合測驗） ============ -->
+  <div id="reviewArea" style="display:none">
+    <div class="cardintro">📖 飛哥英文 龍騰版 L7～R3 段考總複習 · Ringo &amp; Kelly 老師編授</div>
+
+    <div class="rsub">
+      <button class="rsubbtn on" id="rsubGrammar">📝 文法重點</button>
+      <button class="rsubbtn" id="rsubFill">✏️ 單字填空</button>
+      <button class="rsubbtn" id="rsubCloze">🧩 綜合測驗</button>
+    </div>
+
+    <!-- 文法重點 -->
+    <div id="rGrammar">
+      <div class="rlessontabs" id="rLessonTabs"></div>
+      <div class="rnotes" id="rNotes"></div>
+    </div>
+
+    <!-- 單字填空 -->
+    <div id="rFill" style="display:none">
+      <div class="rfill-bar">
+        <div class="rfill-score">✅ 答對 <b id="rfDone">0</b> / 10</div>
+        <button class="cmini" id="rfReveal">👁 顯示全部答案</button>
+        <button class="cmini" id="rfReset">↺ 重做</button>
+      </div>
+      <div class="rfill-list" id="rFillList"></div>
+    </div>
+
+    <!-- 綜合測驗（克漏字） -->
+    <div id="rCloze" style="display:none">
+      <div class="rcloze-passage" id="rClozePassage"></div>
+      <div class="rcloze-bar">
+        <div class="rfill-score">✅ 答對 <b id="rcDone">0</b> / 10</div>
+        <button class="cmini" id="rcReset">↺ 重做</button>
+      </div>
+      <div class="rcloze-qs" id="rClozeQs"></div>
+    </div>
+  </div><!-- /#reviewArea -->
+
+  <footer>Live ABC 考前衝刺複習精選 · 龍騰版 L7–R3 · LIVE 5–6月 單字卡 🦉</footer>
 </div>
 
 <!-- 錯滿 5 次的提醒視窗 -->
@@ -765,8 +890,202 @@ footer{text-align:center;color:var(--ink-soft);font-size:12px;font-weight:600;ma
 
 <script>
 const CARD_SOURCES = [{"sheet":"龍騰版 L7-R3","label":"龍騰版","icon":"📕","groups":[{"id":"g1","title":"Lesson 7 · I. 必考單字","raw":"Lesson 7 — I. Vocabulary to Use","cards":[{"en":"audience","pos":"n.[C]","zh":"觀眾；聽眾"},{"en":"broad","pos":"adj.","zh":"廣泛的；寬闊的"},{"en":"broaden","pos":"v.[T]","zh":"拓展"},{"en":"celebrity","pos":"n.[C]","zh":"名人"},{"en":"collect","pos":"v.[T]","zh":"收集；收取"},{"en":"collection","pos":"n.[C]","zh":"一堆；群；批；收藏品"},{"en":"conference","pos":"n.[C]","zh":"會議；研討會"},{"en":"discuss","pos":"v.[T]","zh":"探討；闡述；討論"},{"en":"discussion","pos":"n.[C,U]","zh":"討論"},{"en":"fascinate","pos":"v.[T]","zh":"使人著迷；吸引"},{"en":"fascination","pos":"n.[U]","zh":"著迷；吸引力"},{"en":"fiction","pos":"n.[U]","zh":"小說"},{"en":"field","pos":"n.[C]","zh":"領域"},{"en":"found","pos":"v.[T]","zh":"創立;建設"},{"en":"foundation","pos":"n.[C]","zh":"基金會；基礎"},{"en":"increase","pos":"n.[C,U]","zh":"增加"},{"en":"increase","pos":"v.[T,I]","zh":"增加"},{"en":"increasingly","pos":"adv.","zh":"愈來愈…"},{"en":"launch","pos":"v.[T]","zh":"發行；發起；開始從事"},{"en":"method","pos":"n.[C]","zh":"方式"},{"en":"numerous","pos":"adj.","zh":"許多的"},{"en":"organization","pos":"n.[C]","zh":"組織者；機構"},{"en":"organize","pos":"v.[T]","zh":"組織；籌辦"},{"en":"organizer","pos":"n.[C]","zh":"組織者；籌辦者"},{"en":"philosophy","pos":"n.[U]","zh":"哲學"},{"en":"range","pos":"n.[C]","zh":"種類；系列；範圍"},{"en":"range","pos":"v.[I]","zh":"範圍包括…"},{"en":"seek","pos":"v.[T]","zh":"尋求；尋找"},{"en":"series","pos":"n.[C]","zh":"系列"},{"en":"technological","pos":"adj.","zh":"科技的"},{"en":"technology","pos":"n.[C,U]","zh":"科技"},{"en":"worth","pos":"adj.","zh":"值得…的；價值…的"},{"en":"worth","pos":"n.[U]","zh":"價值；意義"},{"en":"worthy","pos":"adj.","zh":"值得…的"}]},{"id":"g2","title":"Lesson 7 · II. 延伸單字","raw":"Lesson 7 — II. Vocabulary to Know","cards":[{"en":"Aliens","pos":"n.","zh":"<異形2>"},{"en":"Avatar","pos":"n.","zh":"<阿凡達>"},{"en":"Bill Gates","pos":"n.","zh":"比爾·蓋茲"},{"en":"blockbuster","pos":"n.[C]","zh":"賣座鉅片"},{"en":"chef","pos":"n.[C]","zh":"主廚"},{"en":"co-founder","pos":"n.[C]","zh":"共同創辦人"},{"en":"Ebola","pos":"n.","zh":"伊波拉"},{"en":"insight","pos":"n.[C]","zh":"見解"},{"en":"James Cameron","pos":"n.","zh":"詹姆斯·卡麥隆"},{"en":"Jamie Oliver","pos":"n.","zh":"傑米·奧利弗"},{"en":"Microsoft","pos":"n.","zh":"微軟"},{"en":"platform","pos":"n.","zh":"(公開表達看法的)機會"},{"en":"slogan","pos":"n.[C]","zh":"口號；標語"},{"en":"social networking site","pos":"n.[C]","zh":"社交網站"},{"en":"TED Talks","pos":"n.","zh":"TED演講"},{"en":"upload","pos":"v.[T]","zh":"上傳"}]},{"id":"g3","title":"Lesson 7 · III. 片語","raw":"Lesson 7 — III. Idioms And Phrases","cards":[{"en":"as well as","pos":"phr.","zh":"和；除了…之外"},{"en":"at present","pos":"phr.","zh":"目前；現任"},{"en":"broaden one's horizons","pos":"phr.","zh":"拓展(某人的)視野"},{"en":"for free","pos":"phr.","zh":"免費"},{"en":"give...a try","pos":"phr.","zh":"嘗試…"}]},{"id":"g4","title":"Lesson 8 · I. 必考單字","raw":"Lesson 8 — I. Vocabulary to Use","cards":[{"en":"arrange","pos":"v.[T,I]","zh":"安排"},{"en":"arrangement","pos":"n.[C]","zh":"安排"},{"en":"assist","pos":"v.[T,I]","zh":"幫助"},{"en":"assistance","pos":"n.[U]","zh":"幫助"},{"en":"assistant","pos":"n.[C]","zh":"助手；助理"},{"en":"aspect","pos":"n.[C]","zh":"方面"},{"en":"contain","pos":"v.[T]","zh":"包含"},{"en":"container","pos":"n.[C]","zh":"容器"},{"en":"cooperate","pos":"v.[I]","zh":"合作"},{"en":"cooperation","pos":"n.[U]","zh":"合作"},{"en":"curious","pos":"adj.","zh":"好奇的"},{"en":"curiosity","pos":"n.[U]","zh":"好奇心"},{"en":"elder","pos":"adj.","zh":"(家庭成員)較為年長的"},{"en":"elder","pos":"n.[C]","zh":"長輩"},{"en":"elderly","pos":"adj.","zh":"年紀大的"},{"en":"event","pos":"n.[C]","zh":"事件"},{"en":"exchange","pos":"n.[C,U]","zh":"交換"},{"en":"exchange","pos":"n.[C]","zh":"(不同國家人民的)交流；交換(計畫)"},{"en":"exchange","pos":"v.[T]","zh":"交換"},{"en":"expect","pos":"v.[T]","zh":"預期"},{"en":"expectation","pos":"n.[C,U]","zh":"期望；預期"},{"en":"fierce","pos":"adj.","zh":"(天氣狀況)強烈的；(動作或情感)激烈的"},{"en":"neighborhood","pos":"n.[C]","zh":"鄰近地區"},{"en":"occupation","pos":"n.[C]","zh":"職業"},{"en":"occupy","pos":"v.[T]","zh":"佔據(時間或空間)；佔領"},{"en":"origin","pos":"n.[C,U]","zh":"起源"},{"en":"original","pos":"adj.","zh":"原本的"},{"en":"originate","pos":"v.[I]","zh":"起源"},{"en":"relax","pos":"v.[I]","zh":"放鬆"},{"en":"shelter","pos":"n.[C]","zh":"庇護處"},{"en":"shelter","pos":"n.[U]","zh":"遮蔽"},{"en":"shelter","pos":"v.[T]","zh":"遮蔽"},{"en":"spiritual","pos":"adj.","zh":"精神上的"},{"en":"spirit","pos":"n.[sing.]","zh":"基本精神；本質"},{"en":"spirit","pos":"n.[U]","zh":"精神；心靈"},{"en":"stroll","pos":"n.[C]","zh":"散步"},{"en":"stroll","pos":"v.[I]","zh":"散步"},{"en":"temporary","pos":"adj.","zh":"臨時的；暫時的"},{"en":"vehicle","pos":"n.[C]","zh":"車輛；交通工具"}]},{"id":"g5","title":"Lesson 8 · II. 延伸單字","raw":"Lesson 8 — II. Vocabulary to Know","cards":[{"en":"authentic","pos":"adj.","zh":"道地的；真正的"},{"en":"ban-doh","pos":"n.[C]","zh":"(台語)辦桌"},{"en":"banquet","pos":"n.[C]","zh":"宴會"},{"en":"folks","pos":"n.[pl.]","zh":"人們"},{"en":"leftovers","pos":"n.[pl.]","zh":"剩菜"},{"en":"platter","pos":"n.[C]","zh":"大淺盤"},{"en":"tent","pos":"n.[C]","zh":"帳篷"},{"en":"utensil","pos":"n.[C]","zh":"(廚房或用餐的)器具"}]},{"id":"g6","title":"Lesson 8 · III. 片語","raw":"Lesson 8 — III. Idioms And Phrases","cards":[{"en":"come about","pos":"phr.","zh":"發生"},{"en":"hand out","pos":"phr.","zh":"發放"},{"en":"help(...)out","pos":"phr.","zh":"幫忙"},{"en":"take part in","pos":"phr.","zh":"參加"},{"en":"take place","pos":"phr.","zh":"舉行；發生"}]},{"id":"g7","title":"Lesson 9 · I. 必考單字","raw":"Lesson 9 — I. Vocabulary to Use","cards":[{"en":"alternative","pos":"adj.","zh":"另類的；非傳統的；替代的"},{"en":"alternative","pos":"n.[C]","zh":"選擇；替代方案"},{"en":"brand","pos":"n.[C]","zh":"品牌"},{"en":"chase","pos":"n.[C]","zh":"追逐"},{"en":"chase","pos":"v.[I,T]","zh":"追逐"},{"en":"combination","pos":"n.[C,U]","zh":"結合"},{"en":"combine","pos":"v.[I,T]","zh":"結合"},{"en":"constant","pos":"adj.","zh":"持續的"},{"en":"constantly","pos":"adv.","zh":"持續地"},{"en":"derive","pos":"v.[T]","zh":"得到；獲得"},{"en":"digital","pos":"adj.","zh":"數位的"},{"en":"digitally","pos":"adv.","zh":"數位地"},{"en":"edit","pos":"v.[T]","zh":"編輯"},{"en":"edition","pos":"n.[C]","zh":"版本"},{"en":"exist","pos":"v.[I]","zh":"存在"},{"en":"existence","pos":"n.[U]","zh":"存在"},{"en":"existing","pos":"adj.","zh":"現有的；現存的"},{"en":"feature","pos":"n.[C]","zh":"特色；特點"},{"en":"feature","pos":"v.[T]","zh":"以…為特色"},{"en":"general","pos":"adj.","zh":"一般的；非專門的；普遍的"},{"en":"gossip","pos":"n.[U]","zh":"流言；八卦"},{"en":"gossip","pos":"v.[I]","zh":"散播流言；說八卦"},{"en":"image","pos":"n.[C]","zh":"影像；形象"},{"en":"modification","pos":"n.[C,U]","zh":"修改"},{"en":"modify","pos":"v.[T]","zh":"修改"},{"en":"release","pos":"n.[U]","zh":"公開發行；釋放；排放"},{"en":"release","pos":"v.[T]","zh":"公開發行；釋放"},{"en":"reveal","pos":"v.[T]","zh":"洩漏；透漏"},{"en":"standard","pos":"adj.","zh":"標準的"},{"en":"standard","pos":"n.[C,U]","zh":"標準"},{"en":"usage","pos":"n.[U]","zh":"(語彙的)用法"},{"en":"widespread","pos":"adj.","zh":"廣泛的"}]},{"id":"g8","title":"Lesson 9 · II. 延伸單字","raw":"Lesson 9 — II. Vocabulary to Know","cards":[{"en":"Adobe Inc.","pos":"n.","zh":"美國跨國電腦軟體公司"},{"en":"eponym","pos":"n.[C]","zh":"借名成字"},{"en":"Federico Fellini","pos":"n.","zh":"費德里柯·費里尼"},{"en":"Italian","pos":"n.[C]","zh":"義大利人"},{"en":"La Dolce Vita","pos":"n.","zh":"《甜蜜的生活》"},{"en":"paparazzi","pos":"n.[Pl.]","zh":"狗仔隊"},{"en":"Paparazzo","pos":"n.","zh":"義大利名"},{"en":"Photoshop","pos":"n.","zh":"Adobe開發發行影像處理軟體"},{"en":"plural","pos":"n.[C]","zh":"複數"},{"en":"software","pos":"n.[U]","zh":"軟體"},{"en":"verb","pos":"n.[C]","zh":"動詞"}]},{"id":"g9","title":"Review 3 · I. 必考單字","raw":"Review 3 — I. Vocabulary to Use","cards":[{"en":"astronaut","pos":"n.[C]","zh":"太空人"},{"en":"bump","pos":"v.[I]","zh":"碰撞"},{"en":"circulation","pos":"n.[U]","zh":"血液循環"},{"en":"decrease","pos":"v.[I]","zh":"減少"},{"en":"gather","pos":"v.[I]","zh":"聚集"},{"en":"gravity","pos":"n.[U]","zh":"重力"},{"en":"ISS","pos":"abbrev.","zh":"國際太空站"},{"en":"limit","pos":"v.[T]","zh":"限制"},{"en":"liquid","pos":"adj.","zh":"液體的"},{"en":"maintain","pos":"v.[T]","zh":"維持"},{"en":"otherwise","pos":"adv.","zh":"否則"},{"en":"physical","pos":"adj.","zh":"生理上的"},{"en":"powdered","pos":"adj.","zh":"製成粉的；粉狀的"},{"en":"regularly","pos":"adv.","zh":"規律地"},{"en":"sacrifice","pos":"n.[C]","zh":"犧牲"},{"en":"sweat","pos":"n.[U]","zh":"汗水"},{"en":"tend","pos":"v.[I]","zh":"往往會"},{"en":"vision","pos":"n.[U]","zh":"視力"}]},{"id":"g10","title":"Review 3 · II. 片語","raw":"Review 3 — II. Idioms And Phrases","cards":[{"en":"have a lie-down","pos":"phr.","zh":"躺下休息"},{"en":"out of this world","pos":"phr.","zh":"極好的"},{"en":"work out","pos":"phr.","zh":"體能訓練"},{"en":"work up a sweat","pos":"phr.","zh":"流汗"},{"en":"in the beginning","pos":"phr.","zh":"起初"},{"en":"later on","pos":"phr.","zh":"之後"},{"en":"play a/an...role(in)","pos":"phr.","zh":"扮演…的角色"},{"en":"take on","pos":"phr.","zh":"開始具有"},{"en":"think up","pos":"phr.","zh":"想出"},{"en":"too...to...","pos":"phr.","zh":"太…而無法…"}]}],"total":178},{"sheet":"LIVE June 1-15","label":"LIVE 6/1–15","icon":"🗞️","groups":[{"id":"g11","title":"June 1~2","raw":"June 1~2","cards":[{"en":"warn","pos":"v.[I,T]","zh":"警告、提醒、告誡"},{"en":"dare","pos":"v.[I]","zh":"膽敢"},{"en":"twin","pos":"n.[C]","zh":"雙胞胎"},{"en":"groan","pos":"v.[I]","zh":"呻吟"},{"en":"indifference","pos":"n.[U]","zh":"漠不關心、無動於衷"},{"en":"guilty","pos":"adj.","zh":"內疚的、充滿罪惡感的；有罪的"},{"en":"rest","pos":"v.[I]","zh":"安息、長眠"},{"en":"jewel","pos":"n.[C]","zh":"寶石、珠寶；珍貴的人或事物"},{"en":"bury","pos":"v.[T]","zh":"埋葬、埋藏"},{"en":"troubled","pos":"adj.","zh":"飽受煎熬的、不得安寧的"},{"en":"keep V-ing","pos":"v.phr.","zh":"一直、不斷…"},{"en":"English","pos":"adj.","zh":"英格蘭的"},{"en":"nonsense","pos":"n.[U,C]","zh":"無稽之談；謬論；胡扯"},{"en":"murder","pos":"v.[T]","zh":"謀殺、殺害"},{"en":"scream","pos":"v.[I]","zh":"尖叫、驚呼"},{"en":"mansion","pos":"n.[C]","zh":"豪宅；富麗堂皇的住宅"},{"en":"suffering","pos":"n.[U,C]","zh":"痛苦、折磨"},{"en":"skeleton","pos":"n.[C]","zh":"骸骨、骨架"},{"en":"churchyard","pos":"n.[C]","zh":"教堂墓地"},{"en":"wicked","pos":"adj.","zh":"邪惡的；壞的"},{"en":"wealthy","pos":"adj.","zh":"富有的、有錢的"},{"en":"in terror","pos":"adv.phr.","zh":"驚恐地"},{"en":"chase","pos":"n.[C]","zh":"大片的狩獵地、林地、莊園周圍的獵場"},{"en":"haunt","pos":"v.[T]","zh":"(鬼魂)出沒、作祟、盤踞；(想法等)揮之不去"},{"en":"miserable","pos":"adj.","zh":"痛苦的；悲慘的；可憐的"},{"en":"Canterville Chase","pos":"n.phr.","zh":"坎特維爾莊園"},{"en":"warn sb. about sth.","pos":"v.phr.","zh":"警告某人小心某事物"},{"en":"believe in sth.","pos":"v.phr.","zh":"相信某事是真的"},{"en":"at all","pos":"adv.phr.","zh":"一點也不"},{"en":"S. be said to V.","pos":"v.phr.","zh":"據說…"},{"en":"keep coming back","pos":"v.phr.","zh":"一再出現"},{"en":"make one's appearance","pos":"v.phr.","zh":"出現、現身"},{"en":"play a trick on...","pos":"v.phr.","zh":"捉弄…；對…惡作劇"},{"en":"laugh at sth.","pos":"v.phr.","zh":"嘲笑、取笑…"},{"en":"be at peace","pos":"v.phr.","zh":"感到平靜、安寧"},{"en":"starve to death","pos":"v.phr.","zh":"餓死"},{"en":"feel sorry for sb.","pos":"v.phr.","zh":"為某人感到難過、遺憾"},{"en":"at rest","pos":"adv.phr.","zh":"休眠、靜止不動"},{"en":"from that day on","pos":"adv.phr.","zh":"自那天起、從那天開始"}]},{"id":"g12","title":"June 3~4","raw":"June 3~4","cards":[{"en":"disaster","pos":"n.[U,C]","zh":"災難、災禍"},{"en":"mine","pos":"n.[C]","zh":"地雷、水雷"},{"en":"echolocation","pos":"n.[U]","zh":"回聲定位"},{"en":"struggle","pos":"v.[I]","zh":"有失敗的危險、苦苦掙扎"},{"en":"dive","pos":"v.[I]","zh":"潛水"},{"en":"scent","pos":"n.[C]","zh":"氣味；香味、芳香"},{"en":"visibility","pos":"n.[U]","zh":"能見度；曝光度"},{"en":"cyborg","pos":"n.[C]","zh":"半機器生物；生化人"},{"en":"sensor","pos":"n.[C]","zh":"感測器、感應裝置"},{"en":"handle","pos":"v.[T]","zh":"處理、操縱"},{"en":"attach","pos":"v.[T]","zh":"附上、固定；連接"},{"en":"potential","pos":"n.[U]","zh":"可能性；潛力、潛能"},{"en":"beetle","pos":"n.[C]","zh":"甲蟲"},{"en":"disaster zone","pos":"n.phr.","zh":"災區"},{"en":"tennis court","pos":"n.phr.","zh":"網球場"},{"en":"mission","pos":"n.[C]","zh":"(重要、特定的)任務、使命"},{"en":"equipment","pos":"n.[U]","zh":"裝備、設備"},{"en":"diver","pos":"n.[C]","zh":"潛水員"},{"en":"assistance","pos":"n.[U]","zh":"協助；幫忙、援助"},{"en":"remain","pos":"v.[I]","zh":"維持(某狀態)、依然是…"},{"en":"bubble","pos":"n.[C]","zh":"泡泡、氣泡"},{"en":"assist","pos":"v.[I,T]","zh":"幫助、協助"},{"en":"rodent","pos":"n.[C]","zh":"嚙齒動物"},{"en":"battery","pos":"n.[C]","zh":"電池"},{"en":"handler","pos":"n.[C]","zh":"操控人員"},{"en":"rubble","pos":"n.[U]","zh":"瓦礫、碎石"},{"en":"refine","pos":"v.[T]","zh":"改進、使完善；提煉"},{"en":"capable","pos":"adj.","zh":"有…能力的；勝任的"},{"en":"US Navy","pos":"n.phr.","zh":"美國海軍"},{"en":"heat sensor","pos":"n.phr.","zh":"熱感測器"},{"en":"search-and-rescue","pos":"adj.","zh":"搜救(相關)的"},{"en":"forensic","pos":"adj.","zh":"鑑識的、法醫的；用於法庭的"},{"en":"creative","pos":"adj.","zh":"創新的、有創意的；有創造力的"},{"en":"search and rescue","pos":"v.phr.","zh":"搜救"},{"en":"come to mind","pos":"v.phr.","zh":"忽然想起、想到"}]},{"id":"g13","title":"June 5 (續 June 3~4 片語)","raw":"June 5 (續 June 3~4 片語)","cards":[{"en":"thanks to N./V-ing","pos":"prep.phr.","zh":"由於；多虧；憑藉"},{"en":"date back to...","pos":"v.phr.","zh":"追溯至…"},{"en":"the Cold War","pos":"n.phr.","zh":"冷戰時期"},{"en":"underwater/naval mine","pos":"n.phr.","zh":"水雷"},{"en":"land mine","pos":"n.phr.","zh":"地雷"},{"en":"bottlenose dolphin","pos":"n.phr.","zh":"瓶鼻海豚"},{"en":"California sea lion","pos":"n.phr.","zh":"加州海獅"},{"en":"Asian small-clawed otter","pos":"n.phr.","zh":"(亞洲)小爪水獺"},{"en":"human's/sb's remains","pos":"n.phr.","zh":"遺體、遺骸"},{"en":"difficult to match","pos":"adj.phr.","zh":"難以匹敵、難以媲美"},{"en":"take on","pos":"v.phr.","zh":"承擔、接下(角色、任務等)"},{"en":"check for sth.","pos":"v.phr.","zh":"檢查、偵測是否有…(存在)"},{"en":"be capable of N./V-ing","pos":"adj.phr.","zh":"有能力做…的"},{"en":"set off","pos":"v.phr.","zh":"引爆(炸彈、地雷等)；觸發(警報等)"},{"en":"science fiction","pos":"n.phr.","zh":"科幻小說"},{"en":"in the form of sth.","pos":"prep.phr.","zh":"以…的形式"},{"en":"fit A with B","pos":"v.phr.","zh":"為A安裝B；把B安裝到A上"},{"en":"attach A to B","pos":"v.phr.","zh":"把A固定、連接到B上"},{"en":"African giant pouched rat","pos":"n.phr.","zh":"非洲巨鼠；非洲巨頰囊鼠"}]},{"id":"g14","title":"June 5","raw":"June 5","cards":[{"en":"apology","pos":"n.[U,C]","zh":"道歉、認錯"},{"en":"acknowledge","pos":"v.[T]","zh":"承認；認可…屬實"},{"en":"remorse","pos":"n.[U]","zh":"懊悔；自責"},{"en":"outline","pos":"v.[T]","zh":"略述、概括；畫出…的輪廓"},{"en":"apologize","pos":"v.[I]","zh":"道歉、認錯"},{"en":"regret","pos":"n.[U,C]","zh":"懊悔；遺憾"},{"en":"regret","pos":"v.[T]","zh":"對…感到遺憾、懊悔"},{"en":"impact","pos":"n.[C]","zh":"影響；衝擊(力)"},{"en":"respectful","pos":"adj.","zh":"恭敬有禮的；尊重的"},{"en":"forgetfulness","pos":"n.[U]","zh":"健忘"},{"en":"make amends","pos":"v.phr.","zh":"做出補償；賠禮道歉"},{"en":"go wrong","pos":"v.phr.","zh":"(事情、計畫、情況等)出問題、出差錯、失敗"},{"en":"You can't go wrong with sth.","pos":"v.phr.","zh":"選…準沒錯"},{"en":"on a(n) Adj. note","pos":"adv.phr.","zh":"以…的語氣、氣氛或方式"},{"en":"make it up to sb.","pos":"v.phr.","zh":"補償某人、彌補過失"},{"en":"take sb. out for N.","pos":"v.phr.","zh":"帶某人去吃、喝…"},{"en":"take sb. out to N.","pos":"v.phr.","zh":"帶某人去某地"}]},{"id":"g15","title":"June 8","raw":"June 8","cards":[{"en":"deadly","pos":"adj.","zh":"致命的、致死的"},{"en":"almendro","pos":"n.[C]","zh":"油豆樹"},{"en":"channel","pos":"v.[T]","zh":"引導(能量、液體)流動"},{"en":"otherwise","pos":"adv.","zh":"否則、不然；在其他情況下"},{"en":"lifespan","pos":"n.[C]","zh":"生命週期；壽命"},{"en":"conductive","pos":"adj.","zh":"具傳導性的(導電或導熱的)"},{"en":"surroundings","pos":"n.pl.","zh":"周圍環境"},{"en":"Panama","pos":"n.","zh":"巴拿馬"},{"en":"strike","pos":"v.[T]","zh":"擊中、打擊"},{"en":"vine","pos":"n.[C]","zh":"藤蔓植物、藤本植物"},{"en":"prime","pos":"adj.","zh":"主要的；最佳的"},{"en":"pattern","pos":"n.[C]","zh":"規律、模式；反覆出現的現象"},{"en":"nutrient","pos":"n.[C]","zh":"養分；營養物質"},{"en":"lightning","pos":"n.[U]","zh":"閃電"},{"en":"secure","pos":"v.[T]","zh":"確保獲得；取得並穩固保有；使安全、牢固"},{"en":"competitive","pos":"adj.","zh":"競爭的、具有競爭力的；好勝的"},{"en":"electric power","pos":"n.phr.","zh":"電力"},{"en":"lightning strike","pos":"n.phr.","zh":"雷擊"},{"en":"competitive edge","pos":"n.phr.","zh":"競爭優勢"},{"en":"kill off","pos":"v.phr.","zh":"把…全部殺死、消滅殆盡"},{"en":"take advantage of sth.","pos":"v.phr.","zh":"善加利用(機會、情況)"},{"en":"tower over sth.","pos":"v.phr.","zh":"比…高很多；高聳於…之上"},{"en":"lightning rod","pos":"n.phr.","zh":"避雷針"},{"en":"electrical surge","pos":"n.phr.","zh":"電湧；瞬間強大電流"}]},{"id":"g16","title":"June 9~10","raw":"June 9~10","cards":[{"en":"vital","pos":"adj.","zh":"至關重要的"},{"en":"repair","pos":"v.[T]","zh":"修復；修補"},{"en":"benefit","pos":"n.[U,C]","zh":"好處；益處"},{"en":"benefit","pos":"v.[I,T]","zh":"對…有益"},{"en":"airway","pos":"n.[C]","zh":"呼吸道；氣道"},{"en":"issue","pos":"n.[C]","zh":"問題；議題"},{"en":"worsen","pos":"v.[I,T]","zh":"惡化；變糟"},{"en":"partially","pos":"adv.","zh":"部分地；不完全地"},{"en":"suitable","pos":"adj.","zh":"適宜的、合適的"},{"en":"extended","pos":"adj.","zh":"長時間的；延長的"},{"en":"discomfort","pos":"n.[U]","zh":"不適；不舒適；不安"},{"en":"promote","pos":"v.[T]","zh":"促進、助長；提升"},{"en":"advise","pos":"v.[T]","zh":"建議；勸告、忠告"},{"en":"kidney","pos":"n.[C]","zh":"腎、腎臟"},{"en":"lessen","pos":"v.[I,T]","zh":"減少；減輕"},{"en":"condition","pos":"n.[C]","zh":"健康狀況、疾病"},{"en":"heartburn","pos":"n.[U]","zh":"胃灼熱、火燒心"},{"en":"come with","pos":"v.phr.","zh":"伴隨；附帶"},{"en":"conserve","pos":"v.[T]","zh":"保存、節約(能量)"},{"en":"maximize","pos":"v.[T]","zh":"使…最大化；發揮…的最大效益"},{"en":"snore","pos":"v.[I]","zh":"打呼、打鼾"},{"en":"snore","pos":"n.[C]","zh":"鼾聲"},{"en":"disadvantage","pos":"n.[U,C]","zh":"缺點；不利條件"},{"en":"gravity","pos":"n.[U]","zh":"重力、地心引力"},{"en":"collapse","pos":"v.[I]","zh":"塌下；倒塌；瓦解"},{"en":"spine","pos":"n.[C]","zh":"脊椎"},{"en":"restricted","pos":"adj.","zh":"受限制的、受阻的"},{"en":"settle","pos":"v.[I,T]","zh":"採取、固定於(某種姿勢或位置)"},{"en":"well-being","pos":"n.[U]","zh":"健康；安樂；幸福"},{"en":"associate","pos":"v.[T]","zh":"把…聯想、聯繫在一起"},{"en":"esophagus","pos":"n.[C]","zh":"食道"},{"en":"pregnant","pos":"adj.","zh":"懷孕的"},{"en":"swelling","pos":"n.[U]","zh":"水腫、腫脹"},{"en":"consult","pos":"v.[T]","zh":"諮詢、請教"},{"en":"adjustment","pos":"n.[C]","zh":"調整、微調；調節"},{"en":"depend on","pos":"v.phr.","zh":"取決於…、依賴…"},{"en":"allow O. to V.","pos":"v.phr.","zh":"使…能夠做某事；允許…做某事"},{"en":"back sleeping / sleeping on one's back","pos":"n.phr.","zh":"仰睡"},{"en":"joint pressure","pos":"n.phr.","zh":"關節壓力"},{"en":"spinal alignment","pos":"n.phr.","zh":"脊椎正確排列、脊椎對齊"},{"en":"sleep apnea","pos":"n.phr.","zh":"睡眠呼吸中止症"},{"en":"stomach sleeping / sleeping on one's stomach","pos":"n.phr.","zh":"趴睡"},{"en":"S. be believed to V.","pos":"v.phr.","zh":"據信…；一般認為…"},{"en":"in certain individuals","pos":"adv.phr.","zh":"在某些人身上、對某些人而言"},{"en":"A be associated with B","pos":"v.phr.","zh":"A與B有關"},{"en":"whether A or B","pos":"conj.phr.","zh":"是A還是B"},{"en":"acid reflux","pos":"n.phr.","zh":"胃酸逆流、胃酸倒流"},{"en":"lymphatic drainage","pos":"n.phr.","zh":"淋巴引流"},{"en":"pay attention to sb./sth.","pos":"v.phr.","zh":"留意(某人說的話)；注意(某事)"},{"en":"draw attention to sb./sth.","pos":"v.phr.","zh":"引起對…的關注；吸引注意"},{"en":"in the long run","pos":"adv.phr.","zh":"從長遠來看、長期而言"}]},{"id":"g17","title":"June 11","raw":"June 11","cards":[{"en":"pepper","pos":"n.[C]","zh":"辣椒；甜椒；胡椒"},{"en":"stream","pos":"v.[I]","zh":"流出、湧出"},{"en":"cramp","pos":"n.[C]","zh":"抽筋；痙攣"},{"en":"average","pos":"n.[C]","zh":"平均數、平均"},{"en":"average","pos":"v.[I]","zh":"平均為…"},{"en":"spiciness","pos":"n.[U]","zh":"辣味；辣度"},{"en":"capsaicin","pos":"n.[U]","zh":"辣椒素"},{"en":"cheek","pos":"n.[C]","zh":"臉頰"},{"en":"sweat","pos":"v.[I]","zh":"流汗、出汗"},{"en":"spicy","pos":"adj.","zh":"辛辣的；加很多香料的"},{"en":"contain","pos":"v.[T]","zh":"包含"},{"en":"comparison","pos":"n.[U]","zh":"比較；對照"},{"en":"cuisine","pos":"n.[C]","zh":"(具地方特色的)料理；烹飪"},{"en":"substance","pos":"n.[C]","zh":"物質"},{"en":"crossbreed","pos":"v.[I,T]","zh":"(使)雜交培育"},{"en":"chili","pos":"n.[C]","zh":"辣椒"},{"en":"horrible","pos":"adj.","zh":"很糟糕的、令人不快的；可怕的；恐怖的"},{"en":"on earth","pos":"adv.phr.","zh":"到底；究竟"},{"en":"Scoville heat unit (SHU)","pos":"n.phr.","zh":"史高維爾辣度單位"},{"en":"Carolina Reaper","pos":"n.phr.","zh":"卡羅來納死神椒"},{"en":"blame sb. for sth.","pos":"v.phr.","zh":"因某事責怪某人；把某事怪罪在某人身上"},{"en":"bird's eye chili","pos":"n.phr.","zh":"鳥眼辣椒"}]},{"id":"g18","title":"June 12","raw":"June 12","cards":[{"en":"position","pos":"n.[C]","zh":"球員位置"},{"en":"backboard","pos":"n.[C]","zh":"籃板"},{"en":"net","pos":"n.[C]","zh":"籃網"},{"en":"scoreboard","pos":"n.[C]","zh":"計分板"},{"en":"referee","pos":"n.[C]","zh":"裁判"},{"en":"key","pos":"n.[C]","zh":"禁區"},{"en":"dunk","pos":"v.[I,T]","zh":"灌籃"},{"en":"catch","pos":"v.[I,T]","zh":"接球"},{"en":"dribble","pos":"v.[I,T]","zh":"運球"},{"en":"foul","pos":"v.[T]","zh":"犯規"},{"en":"shoot","pos":"v.[I,T]","zh":"投籃"},{"en":"pass","pos":"v.[I,T]","zh":"傳球"},{"en":"score","pos":"n.[C]","zh":"得分方式"},{"en":"defense","pos":"n.[U,C]","zh":"防守；防禦"},{"en":"calm","pos":"adj.","zh":"冷靜的"},{"en":"session","pos":"n.[C]","zh":"(訓練)時段；課程；場次"},{"en":"offense","pos":"n.[U,C]","zh":"進攻"},{"en":"bench player","pos":"n.phr.","zh":"板凳球員"},{"en":"end line","pos":"n.phr.","zh":"底線"},{"en":"halfway","pos":"adv.","zh":"中途；進行到一半"},{"en":"center","pos":"n.[C]","zh":"中鋒"},{"en":"hoop","pos":"n.[C]","zh":"籃框"},{"en":"coach","pos":"n.[C]","zh":"教練"},{"en":"cheerleader","pos":"n.[C]","zh":"啦啦隊隊員"},{"en":"centerline","pos":"n.[C]","zh":"中線"},{"en":"sideline","pos":"n.[C]","zh":"邊線"},{"en":"rebound","pos":"n.[C]","zh":"籃板球"},{"en":"endurance","pos":"n.[U]","zh":"耐力、持久力"},{"en":"block","pos":"v.[T]","zh":"封阻、蓋火鍋"},{"en":"steal","pos":"v.[T]","zh":"抄截"},{"en":"midrange","pos":"n.[U]","zh":"中距離"},{"en":"layup","pos":"n.[C]","zh":"上籃"},{"en":"intense","pos":"adj.","zh":"(比賽)激烈的、緊張刺激的"},{"en":"shooter","pos":"n.[C]","zh":"射手"},{"en":"championship","pos":"n.[C]","zh":"冠軍賽；冠軍頭銜、地位"},{"en":"analyze","pos":"v.[T]","zh":"分析"},{"en":"competitive","pos":"adj.","zh":"競爭的"},{"en":"center circle","pos":"n.phr.","zh":"跳球圈"},{"en":"pay off","pos":"v.phr.","zh":"見效；獲得回報"},{"en":"footage","pos":"n.[U]","zh":"影片畫面、影像資料；鏡頭、片段"},{"en":"basketball court","pos":"n.phr.","zh":"籃球場"},{"en":"point guard (PG)","pos":"n.phr.","zh":"控球後衛"},{"en":"small forward (SF)","pos":"n.phr.","zh":"小前鋒"},{"en":"shooting guard (SG)","pos":"n.phr.","zh":"得分後衛"},{"en":"power forward (PF)","pos":"n.phr.","zh":"大前鋒"},{"en":"three-point line","pos":"n.phr.","zh":"三分線"},{"en":"free-throw line","pos":"n.phr.","zh":"罰球線"},{"en":"basketball moves","pos":"n.phr.","zh":"籃球動作"},{"en":"three-point shot","pos":"n.phr.","zh":"三分球"},{"en":"not + V. + for anything","pos":"v.phr.","zh":"說什麼也不…、無論如何都不會…"},{"en":"work on + N./V-ing","pos":"v.phr.","zh":"致力於、努力改進或加強…"},{"en":"used to + V.","pos":"v.phr.","zh":"過去曾經或常常…(但現在不再如此)"}]},{"id":"g19","title":"June 15","raw":"June 15","cards":[{"en":"achieve","pos":"v.[T]","zh":"完成；達到；實現"},{"en":"reach","pos":"v.[T]","zh":"達到、發展到"},{"en":"community","pos":"n.[C]","zh":"群體；社區"},{"en":"teammate","pos":"n.[C]","zh":"隊友"},{"en":"strategy","pos":"n.[C]","zh":"策略"},{"en":"committed","pos":"adj.","zh":"堅定的；忠誠的"},{"en":"accomplish","pos":"v.[T]","zh":"完成；實現；達到；做到"},{"en":"realize","pos":"v.[T]","zh":"實現；使變為現實；使發生"},{"en":"society","pos":"n.[U,C]","zh":"社會"},{"en":"coach","pos":"n.[C]","zh":"教練"},{"en":"determined","pos":"adj.","zh":"下定決心的、堅決的"},{"en":"athlete","pos":"n.[C]","zh":"運動員"},{"en":"in volunteer work/activities","pos":"adv.phr.","zh":"在志工活動中"},{"en":"cooperate with sb.","pos":"v.phr.","zh":"與…合作"},{"en":"serve the community","pos":"v.phr.","zh":"服務社會"},{"en":"avoid + N./V-ing","pos":"v.phr.","zh":"避免…"},{"en":"based on sth.","pos":"prep.phr.","zh":"根據…"},{"en":"learn sth. from sb.","pos":"v.phr.","zh":"向某人學習某事"},{"en":"only by + V-ing","pos":"prep.phr.","zh":"唯有…"},{"en":"stay/keep focused and determined/committed","pos":"v.phr.","zh":"保持專注與決心"},{"en":"help sb. with N./V-ing","pos":"v.phr.","zh":"幫助某人做某事"}]}],"total":280},{"sheet":"LIVE June 16-30","label":"LIVE 6/16–30","icon":"🗞️","groups":[{"id":"g20","title":"June 16~17","raw":"June 16~17","cards":[{"en":"recognize","pos":"v.[T]","zh":"認出；識別"},{"en":"audience","pos":"n.[C]","zh":"觀眾；聽眾"},{"en":"Washington","pos":"n.","zh":"美國華盛頓州"},{"en":"participate","pos":"v.[I]","zh":"參與、參加"},{"en":"consider","pos":"v.[T]","zh":"將…視為；認為"},{"en":"independent","pos":"adj.","zh":"獨立的"},{"en":"steadily","pos":"adv.","zh":"穩步地；持續地"},{"en":"eventually","pos":"adv.","zh":"最終；最後"},{"en":"part","pos":"n.[C]","zh":"角色；表演"},{"en":"reputation","pos":"n.[C]","zh":"名聲；聲望"},{"en":"involvement","pos":"n.[U]","zh":"參與；牽連、涉及"},{"en":"demanding","pos":"adj.","zh":"要求高的；費時費力的"},{"en":"passion","pos":"n.[U,C]","zh":"熱情；熱愛"},{"en":"vintage","pos":"adj.","zh":"老式的、年代久遠的"},{"en":"mustang","pos":"n.[C]","zh":"(美洲)野馬"},{"en":"transmission","pos":"n.[C]","zh":"變速箱、傳動裝置；傳播"},{"en":"Spokane","pos":"n.","zh":"斯波坎"},{"en":"passionate","pos":"adj.","zh":"熱情的；熱烈的"},{"en":"skiing","pos":"n.[U]","zh":"滑雪、滑雪運動"},{"en":"extra","pos":"n.[C]","zh":"(戲劇中的)臨時演員"},{"en":"résumé","pos":"n.[C]","zh":"履歷"},{"en":"land","pos":"v.[T]","zh":"獲得、得到"},{"en":"nomination","pos":"n.[C]","zh":"提名"},{"en":"found","pos":"v.[T]","zh":"創立；建立"},{"en":"professional","pos":"adj.","zh":"職業的；專業的"},{"en":"restore","pos":"v.[T]","zh":"修復；恢復"},{"en":"bronco","pos":"n.[C]","zh":"北美野馬"},{"en":"tune","pos":"v.[T]","zh":"把(引擎)調到最佳運轉狀態"},{"en":"sought-after","pos":"adj.","zh":"炙手可熱的、廣受歡迎的"},{"en":"engine","pos":"n.[C]","zh":"引擎；發動機"},{"en":"recognized","pos":"adj.","zh":"廣為人知的、著名的；公認的、被認可的"},{"en":"ambitious","pos":"adj.","zh":"有野心的、有企圖心的；有抱負的"},{"en":"cast","pos":"v.[T]","zh":"使…演出(某角色)、為…選派演員"},{"en":"entertaining","pos":"adj.","zh":"有娛樂性的、有趣的；令人愉快的"},{"en":"tae kwon do","pos":"n.phr.","zh":"跆拳道"},{"en":"be/become involved in + N./V-ing","pos":"v.phr.","zh":"參與、投入…"},{"en":"mixed martial arts","pos":"n.phr.","zh":"綜合格鬥"},{"en":"balance A with/and B","pos":"v.phr.","zh":"在A和B之間取得平衡、均衡"},{"en":"land a bigger role","pos":"v.phr.","zh":"獲得更重要的角色"},{"en":"introduce A to B","pos":"v.phr.","zh":"向B介紹A；將A介紹給B認識"},{"en":"romantic comedy","pos":"n.phr.","zh":"浪漫喜劇"},{"en":"acting range","pos":"n.phr.","zh":"戲路(廣度)"},{"en":"set N. apart","pos":"v.phr.","zh":"使…突出、與眾不同"},{"en":"a passion for sth.","pos":"n.phr.","zh":"熱愛…"},{"en":"take to","pos":"v.phr.","zh":"開始使用或投入(平台、媒介)"}]},{"id":"g21","title":"June 18~19","raw":"June 18~19","cards":[{"en":"variety","pos":"n.[C]","zh":"種類、品種；變化；多樣化"},{"en":"creamy","pos":"adj.","zh":"口感滑順濃郁的；奶油般的"},{"en":"vanilla","pos":"n.[U]","zh":"香草"},{"en":"concentration","pos":"n.[C]","zh":"濃度"},{"en":"delightfully","pos":"adv.","zh":"令人愉快地、令人高興地"},{"en":"largely","pos":"adv.","zh":"主要地、大部分地"},{"en":"polyphenol","pos":"n.[U,C]","zh":"多酚"},{"en":"temporary","pos":"adj.","zh":"短暫的；臨時的"},{"en":"overall","pos":"adv.","zh":"總的來說、整體而言"},{"en":"diabetes","pos":"n.[U]","zh":"糖尿病"},{"en":"rich","pos":"adj.","zh":"(顏色或味道)濃郁的、濃烈的"},{"en":"nutritious","pos":"adj.","zh":"營養價值高的、營養豐富的"},{"en":"content","pos":"n.[U,sing.]","zh":"含量、內容；內容物"},{"en":"texture","pos":"n.[U,C]","zh":"質感、口感"},{"en":"milk","pos":"n.[U]","zh":"乳製成分"},{"en":"consist","pos":"v.[I]","zh":"由…組成；包含…"},{"en":"compound","pos":"n.[C]","zh":"化合物；混合物"},{"en":"caffeine","pos":"n.[U]","zh":"咖啡因"},{"en":"contribute","pos":"v.[I]","zh":"導致、造成"},{"en":"tasty","pos":"adj.","zh":"美味的、好吃的"},{"en":"belly","pos":"n.[C]","zh":"腹部、胃"},{"en":"excellent","pos":"adj.","zh":"極好的；優秀的"},{"en":"starting with N.","pos":"prep.phr.","zh":"從…開始談起；首先來看…"},{"en":"milk solids","pos":"n.phr.","zh":"乳固形物"},{"en":"milk powder","pos":"n.phr.","zh":"奶粉"},{"en":"consist of...","pos":"v.phr.","zh":"由…所組成"},{"en":"cocoa solids","pos":"n.phr.","zh":"可可固形物"},{"en":"as well as","pos":"prep.phr.","zh":"除了…之外(也)"},{"en":"cocoa butter","pos":"n.phr.","zh":"可可脂"},{"en":"in general","pos":"adv.phr.","zh":"一般來說、通常"},{"en":"link A to B","pos":"v.phr.","zh":"把A和B聯繫起來"},{"en":"be high in sth.","pos":"v.phr.","zh":"…含量高的"},{"en":"plenty of","pos":"adj.phr.","zh":"充足的…；大量的…"}]},{"id":"g22","title":"June 22~23","raw":"June 22~23","cards":[{"en":"Cuzco","pos":"n.","zh":"庫斯科"},{"en":"Peru","pos":"n.","zh":"祕魯"},{"en":"empire","pos":"n.[C]","zh":"帝國"},{"en":"district","pos":"n.[C]","zh":"(城市或國家的)地區、區域"},{"en":"sacred","pos":"adj.","zh":"神聖的"},{"en":"overlook","pos":"v.[T]","zh":"俯瞰、眺望；忽略"},{"en":"distinct","pos":"adj.","zh":"明顯不同的；顯著的"},{"en":"essential","pos":"adj.","zh":"不可或缺的、極其重要的"},{"en":"solstice","pos":"n.[C]","zh":"至、至日"},{"en":"plentiful","pos":"adj.","zh":"豐富的；充足的"},{"en":"reenactment","pos":"n.[C]","zh":"重演、再現(歷史事件或情景)"},{"en":"Peruvian","pos":"adj.","zh":"祕魯(人、語)的"},{"en":"uncovered","pos":"adj.","zh":"被揭露的；被深入介紹的"},{"en":"Inca","pos":"n.[C]","zh":"印加人"},{"en":"Inca","pos":"adj.","zh":"印加的"},{"en":"invasion","pos":"n.[U,C]","zh":"侵略、入侵；大批湧入"},{"en":"fortress","pos":"n.[C]","zh":"要塞；堡壘"},{"en":"mortar","pos":"n.[U]","zh":"(砌牆用的)灰泥、砂漿"},{"en":"celebration","pos":"n.[C]","zh":"慶典、慶祝活動；慶祝"},{"en":"hemisphere","pos":"n.[C]","zh":"(地球的)半球"},{"en":"evidently","pos":"adv.","zh":"顯然地"},{"en":"globe","pos":"n.[C]","zh":"地球；球狀物；地球儀"},{"en":"ahead","pos":"adv.","zh":"將來、未來、今後"},{"en":"offering","pos":"n.[C]","zh":"供品、祭品；可供使用或販售的物品"},{"en":"ritual","pos":"n.[U,C]","zh":"(通常指紀念重要宗教或社會事件的)儀式；例行公事"},{"en":"colonial","pos":"adj.","zh":"殖民(地)的；具有殖民地風格的"},{"en":"Andes Mountains","pos":"n.phr.","zh":"安地斯山脈"},{"en":"Plaza de Armas","pos":"n.phr.","zh":"兵器廣場"},{"en":"make up","pos":"v.phr.","zh":"組成、構成"},{"en":"the Andes","pos":"n.phr.","zh":"南美洲安地斯山區"},{"en":"owing to","pos":"prep.phr.","zh":"由於、因為"},{"en":"stand out","pos":"v.phr.","zh":"突出、顯著、醒目"},{"en":"stand out as + N./Adj.","pos":"v.phr.","zh":"以…身分或特質脫穎而出"},{"en":"stand out against/from/in + N.","pos":"v.phr.","zh":"在…中引人注目；從…中脫穎而出"},{"en":"stand out for + N.","pos":"v.phr.","zh":"因…而顯眼、出眾"},{"en":"guinea pig","pos":"n.phr.","zh":"天竺鼠"},{"en":"burst into sth.","pos":"v.phr.","zh":"突然開始(笑、哭、唱等)"},{"en":"burst into energy","pos":"v.phr.","zh":"突然充滿活力"},{"en":"winter solstice","pos":"n.phr.","zh":"冬至"},{"en":"southern hemisphere","pos":"n.phr.","zh":"南半球"},{"en":"around the globe","pos":"adv.phr.","zh":"全球各地"}]},{"id":"g23","title":"June 24~25","raw":"June 24~25","cards":[{"en":"hoodie","pos":"n.[C]","zh":"帽T"},{"en":"vocals","pos":"n.pl.","zh":"人聲演唱部分或聲線"},{"en":"concert","pos":"n.[C]","zh":"演唱會；音樂會"},{"en":"choreography","pos":"n.[U]","zh":"編舞藝術、舞蹈設計"},{"en":"delighted","pos":"adj.","zh":"非常高興的、愉快的"},{"en":"definitely","pos":"adv.","zh":"肯定、當然；確實"},{"en":"combination","pos":"n.[U,C]","zh":"結合、組合、聯合"},{"en":"disappoint","pos":"v.[I,T]","zh":"(使)失望、沮喪"},{"en":"delivery","pos":"n.[U]","zh":"演唱或歌曲的詮釋方式；唱腔"},{"en":"satisfying","pos":"adj.","zh":"令人滿意的"},{"en":"onstage","pos":"adv.","zh":"在舞台上、上台"},{"en":"fantastic","pos":"adj.","zh":"極好的、了不起的；奇妙的"},{"en":"empty-handed","pos":"adj.","zh":"空手的；一無所獲的"},{"en":"episode","pos":"n.[C]","zh":"(電視、連續劇等的)一集"},{"en":"cinema","pos":"n.[C]","zh":"電影院；電影；電影業"},{"en":"highlight","pos":"v.[T]","zh":"使突顯；強調"},{"en":"hooked","pos":"adj.","zh":"非常感興趣的；入迷的、上癮的"},{"en":"collaboration","pos":"n.[U,C]","zh":"合作；合作成果、合作作品"},{"en":"insane","pos":"adj.","zh":"瘋狂的；極其誇張、不可思議的"},{"en":"stage presence","pos":"n.phr.","zh":"舞台魅力；台風"},{"en":"look forward to N./V-ing","pos":"v.phr.","zh":"期待…"}]},{"id":"g24","title":"June 26","raw":"June 26","cards":[{"en":"subtitles","pos":"n.pl.","zh":"字幕"},{"en":"live","pos":"adj.","zh":"即時的"},{"en":"microphone","pos":"n.[C]","zh":"麥克風；話筒"},{"en":"constantly","pos":"adv.","zh":"時常地；不斷地"},{"en":"translate","pos":"v.[I,T]","zh":"翻譯"},{"en":"educate","pos":"v.[T]","zh":"教育、教導"},{"en":"multiple","pos":"adj.","zh":"多個的；多種的"},{"en":"restore","pos":"v.[T]","zh":"使恢復；使復原"},{"en":"caption","pos":"n.[C]","zh":"說明字幕"},{"en":"communication","pos":"n.[U]","zh":"溝通、交流；通訊、傳播"},{"en":"wearer","pos":"n.[C]","zh":"穿戴者"},{"en":"distinguish","pos":"v.[I,T]","zh":"區分、辨別"},{"en":"illustrate","pos":"v.[T]","zh":"給…畫插圖；(用圖)說明"},{"en":"classify","pos":"v.[T]","zh":"將…分類；把…分級"},{"en":"content","pos":"adj.","zh":"滿足的、滿意的"},{"en":"independence","pos":"n.[U]","zh":"自主、自立、獨立"},{"en":"hard-of-hearing","pos":"adj.","zh":"重聽的"},{"en":"accessible","pos":"adj.","zh":"易懂的、易理解的；可使用的、可取得的；可進入的"},{"en":"participate in","pos":"v.phr.","zh":"參與"},{"en":"bring forward","pos":"v.phr.","zh":"提出；呈現"},{"en":"wrap up","pos":"v.phr.","zh":"完成、結束"},{"en":"call off","pos":"v.phr.","zh":"取消；中止"},{"en":"repeat themselves","pos":"v.phr.","zh":"重複說過的話"},{"en":"introduce themselves","pos":"v.phr.","zh":"介紹自己"},{"en":"distinguish themselves","pos":"v.phr.","zh":"脫穎而出；表現突出"},{"en":"blame themselves","pos":"v.phr.","zh":"自責"},{"en":"in real time","pos":"adv.phr.","zh":"即時"},{"en":"anxious about","pos":"prep.phr.","zh":"對…感到焦慮"},{"en":"sure of","pos":"prep.phr.","zh":"確定…"},{"en":"bored by","pos":"prep.phr.","zh":"覺得…很無聊"},{"en":"content with","pos":"prep.phr.","zh":"對…感到滿足"}]},{"id":"g25","title":"June 29~30","raw":"June 29~30","cards":[{"en":"bumpy","pos":"adj.","zh":"凹凸不平的；崎嶇的"},{"en":"disc","pos":"n.[C]","zh":"圓盤、盤狀物"},{"en":"criminal","pos":"n.[C]","zh":"罪犯、犯罪者"},{"en":"circular","pos":"adj.","zh":"圓形的"},{"en":"detect","pos":"v.[T]","zh":"察覺、發現；偵測、檢測"},{"en":"shave","pos":"v.[T]","zh":"削、切成薄片；刮(鬍子)"},{"en":"triangular","pos":"adj.","zh":"三角形的"},{"en":"punch","pos":"v.[T]","zh":"在…上打洞；猛擊、敲擊"},{"en":"Roman","pos":"adj.","zh":"羅馬的"},{"en":"Roman","pos":"n.[C]","zh":"(古)羅馬人"},{"en":"portrait","pos":"n.[C]","zh":"肖像"},{"en":"flipped","pos":"adj.","zh":"已拋起、翻轉的"},{"en":"Niue","pos":"n.","zh":"紐埃"},{"en":"Canada","pos":"n.","zh":"加拿大"},{"en":"glowing","pos":"adj.","zh":"發光的"},{"en":"collector","pos":"n.[C]","zh":"收集者、收藏家"},{"en":"metal","pos":"n.[U,C]","zh":"金屬；合金"},{"en":"outsmart","pos":"v.[T]","zh":"以智取勝、智勝"},{"en":"currency","pos":"n.[U,C]","zh":"貨幣"},{"en":"clip","pos":"v.[T]","zh":"剪下、修剪；削減"},{"en":"ridge","pos":"n.[C]","zh":"隆起；狹長的隆起部分"},{"en":"obvious","pos":"adj.","zh":"清楚的；明顯的"},{"en":"seven-sided","pos":"adj.","zh":"有七個邊的；七邊形的"},{"en":"thread","pos":"v.[T]","zh":"(用線)穿成串、穿過"},{"en":"flip","pos":"v.[I,T]","zh":"迅速翻動；(使)輕拋翻轉"},{"en":"flip","pos":"n.[C]","zh":"輕拋、輕擲"},{"en":"superstitious","pos":"adj.","zh":"迷信的"},{"en":"tendency","pos":"n.[C]","zh":"傾向；趨勢"},{"en":"meteorite","pos":"n.[C]","zh":"隕石"},{"en":"reveal","pos":"v.[T]","zh":"顯示、展現；揭露、透露"},{"en":"skeleton","pos":"n.[C]","zh":"骨骼"},{"en":"Palau","pos":"n.","zh":"帛琉"},{"en":"scented","pos":"adj.","zh":"有香味的"},{"en":"digital","pos":"adj.","zh":"數位的"},{"en":"physical","pos":"adj.","zh":"實體的；身體的"},{"en":"penny","pos":"n.[C]","zh":"一分錢(硬幣)"},{"en":"consumer","pos":"n.[C]","zh":"消費者、顧客"},{"en":"glow-in-the-dark","pos":"adj.","zh":"在黑暗中發光的"},{"en":"result in","pos":"v.phr.","zh":"導致；產生…結果"},{"en":"clip off sth.","pos":"v.phr.","zh":"剪下某物"},{"en":"shave sth. off","pos":"v.phr.","zh":"削去薄薄一層；刮掉"},{"en":"Cook Islands","pos":"n.phr.","zh":"庫克群島"},{"en":"thread coins together on strings","pos":"v.phr.","zh":"把硬幣串在繩子上"},{"en":"BCE (before the Common Era)","pos":"adv.phr.","zh":"公元前"},{"en":"BC (before Christ)","pos":"adv.phr.","zh":"西元前"},{"en":"flipping a coin","pos":"n.phr.","zh":"擲硬幣"},{"en":"50/50 split","pos":"n.phr.","zh":"五五開、五五對半"},{"en":"have a tendency to V.","pos":"v.phr.","zh":"有做…的傾向；有…特性"},{"en":"face value","pos":"n.phr.","zh":"面額"},{"en":"have + O. + p.p.","pos":"v.phr.","zh":"請別人做…"}]},{"id":"g26","title":"June 16~30 補充片語","raw":"June 16~30 補充片語","cards":[{"en":"photo card","pos":"n.phr.","zh":"照片小卡"},{"en":"tote bag","pos":"n.phr.","zh":"托特包"},{"en":"speaking of N./V-ing","pos":"prep.phr.","zh":"提到、說到…"},{"en":"count down","pos":"v.phr.","zh":"倒數計時"},{"en":"in person","pos":"adv.phr.","zh":"本人；親自"},{"en":"end up","pos":"v.phr.","zh":"結果、最後…"},{"en":"in a row","pos":"adv.phr.","zh":"連續地；接連地"},{"en":"bring sth. to the table","pos":"v.phr.","zh":"能提供某種價值或優勢"}]}],"total":229}];
+CARD_SOURCES.push({"sheet":"LIVE May 18-29","label":"LIVE 5/18–29","icon":"🗞️","groups":[{"title":"May 18","cards":[{"en":"beauty","pos":"n.[U]","zh":"美麗；美麗的特質"},{"en":"view","pos":"n.[C]","zh":"景色、視野"},{"en":"congestion","pos":"n.[U]","zh":"擁擠、堵塞"},{"en":"stress","pos":"n.[U,C]","zh":"緊張、壓力；造成緊張的因素"},{"en":"worry","pos":"v.[I]","zh":"擔心、憂慮"},{"en":"concerned","pos":"adj.","zh":"擔心的；憂慮的；掛念的"},{"en":"therefore","pos":"adv.","zh":"因此、因而、所以"},{"en":"career","pos":"n.[C]","zh":"職業、事業"},{"en":"demand","pos":"v.[T]","zh":"需要、要求"},{"en":"appreciate","pos":"v.[T]","zh":"欣賞"},{"en":"scenery","pos":"n.[U]","zh":"風景、景色"},{"en":"find","pos":"v.[T]","zh":"找到、尋得"},{"en":"pressure","pos":"n.[U]","zh":"壓力"},{"en":"fear","pos":"v.[I,T]","zh":"害怕、畏懼"},{"en":"basic","pos":"adj.","zh":"基本的、基層的"},{"en":"consequently","pos":"adv.","zh":"因此；所以"},{"en":"require","pos":"v.[T]","zh":"需要"},{"en":"interaction","pos":"n.[U,C]","zh":"互動、交流"},{"en":"as a result","pos":"adv.phr.","zh":"因此"},{"en":"for this reason","pos":"adv.phr.","zh":"因此"},{"en":"travel by + 交通工具","pos":"v.phr.","zh":"搭(交通工具)"},{"en":"without N./V-ing","pos":"prep.phr.","zh":"不必承受…"},{"en":"traffic jams/congestion","pos":"n.phr.","zh":"塞車"},{"en":"look/search for","pos":"v.phr.","zh":"尋找"},{"en":"artificial intelligence","pos":"n.phr.","zh":"人工智慧"},{"en":"basic office roles","pos":"n.phr.","zh":"基層的辦公室職位"},{"en":"turn/move/shift toward N.","pos":"v.phr.","zh":"轉向…"},{"en":"careers that require human interaction","pos":"n.phr.","zh":"需要人際互動的職業"},{"en":"call for","pos":"v.phr.","zh":"需要"}],"id":"g27","raw":"May 18"},{"title":"May 19~20","cards":[{"en":"Greek","pos":"adj.","zh":"希臘的"},{"en":"mythology","pos":"n.[U,C]","zh":"神話"},{"en":"Minos","pos":"n.","zh":"克里特國王米諾斯"},{"en":"Minotaur","pos":"n.","zh":"牛頭怪"},{"en":"diverse","pos":"adj.","zh":"多樣的；多元的"},{"en":"Greece","pos":"n.","zh":"希臘"},{"en":"Samaria","pos":"n.","zh":"薩馬利亞"},{"en":"Knossos","pos":"n.","zh":"克諾索斯"},{"en":"jewelry","pos":"n.[U]","zh":"(總稱)珠寶、首飾"},{"en":"besides","pos":"prep.","zh":"除了…之外"},{"en":"admire","pos":"v.[T]","zh":"欣賞；欽佩、仰慕"},{"en":"Elafonissi","pos":"n.","zh":"埃拉佛尼西"},{"en":"Heraklion","pos":"n.","zh":"伊拉克利翁"},{"en":"Crete","pos":"n.","zh":"克里特島"},{"en":"canyon","pos":"n.[C]","zh":"峽谷、深谷"},{"en":"terrain","pos":"n.[U,C]","zh":"地形、地勢"},{"en":"unforgettable","pos":"adj.","zh":"難忘的"},{"en":"risk","pos":"n.[U,C]","zh":"風險、危險"},{"en":"Odyssey","pos":"n.","zh":"荷馬史詩《奧德賽》"},{"en":"legend","pos":"n.[U,C]","zh":"傳說、傳奇故事"},{"en":"labyrinth","pos":"n.[C]","zh":"迷宮"},{"en":"archaeological","pos":"adj.","zh":"考古學的；與考古相關的"},{"en":"fresco","pos":"n.[C]","zh":"濕壁畫"},{"en":"significant","pos":"adj.","zh":"重要的、有意義的；顯著的"},{"en":"recognize","pos":"v.[T]","zh":"正式承認、認可；辨識、認出"},{"en":"political","pos":"adj.","zh":"政治的；與政治相關的"},{"en":"rugged","pos":"adj.","zh":"崎嶇不平的；粗獷的"},{"en":"untouched","pos":"adj.","zh":"未受破壞的；未觸碰的"},{"en":"contrast","pos":"n.[U,C]","zh":"對比；差異"},{"en":"undeveloped","pos":"adj.","zh":"未開發的"},{"en":"scenery","pos":"n.[U]","zh":"風景、景色"},{"en":"gem","pos":"n.[C]","zh":"寶石;珍貴的人或事物"},{"en":"undoubtedly","pos":"adv.","zh":"無疑地"},{"en":"encounter","pos":"v.[T]","zh":"遭遇；(偶然或未預期的)遇到"},{"en":"snorkeling","pos":"n.[U]","zh":"浮潛(運動)"},{"en":"captivate","pos":"v.[T]","zh":"使著迷；迷住;吸引"},{"en":"access","pos":"v.[T]","zh":"進入、到達；使用、存取(資訊或資源)"},{"en":"stunning","pos":"adj.","zh":"極其漂亮的、令人驚豔的；令人震驚的"},{"en":"landscape","pos":"n.[C]","zh":"(尤指陸地上的)風景、地貌；景觀"},{"en":"significance","pos":"n.[U,sing.]","zh":"重要性；重大意義"},{"en":"legend has it that S. + V.","pos":"v.phr.","zh":"傳說…；據說…"},{"en":"archaeological site","pos":"n.phr.","zh":"考古遺址"},{"en":"Minoan civilization","pos":"n.phr.","zh":"邁諾安文明"},{"en":"sb./sth. be considered (+to be) + N./Adj.","pos":"v.phr.","zh":"被視為…"},{"en":"Mediterranean Sea","pos":"n.phr.","zh":"地中海"},{"en":"in contrast","pos":"adv.phr.","zh":"相較之下；對比之下"},{"en":"be known for sth.","pos":"v.phr.","zh":"以某事物聞名"},{"en":"be home to…","pos":"v.phr.","zh":"(某地)擁有…；是…的所在地"},{"en":"a number of N.","pos":"n.phr.","zh":"一些、若干"},{"en":"be rich in…","pos":"v.phr.","zh":"富含…；擁有大量…"},{"en":"run the risk of + N./V-ing","pos":"v.phr.","zh":"有…的危險；冒著…的風險"},{"en":"take a risk","pos":"v.phr.","zh":"冒險一試"},{"en":"a sense of adventure","pos":"n.phr.","zh":"冒險精神；對探險的渴望"}],"id":"g28","raw":"May 19~20"},{"title":"May 21~22","cards":[{"en":"found","pos":"v.[T]","zh":"創立"},{"en":"minimal","pos":"adj.","zh":"極簡的；最少的"},{"en":"connect","pos":"v.[T]","zh":"建立連結；產生共鳴"},{"en":"rebellious","pos":"adj.","zh":"叛逆的；反叛傳統或規範的"},{"en":"possess","pos":"v.[T]","zh":"擁有、具備(特質、能力、性格)"},{"en":"update","pos":"n.[C]","zh":"更新"},{"en":"annual","pos":"adj.","zh":"每年的；一年一次的"},{"en":"ensure","pos":"v.[T]","zh":"保證、確保"},{"en":"adorable","pos":"adj.","zh":"可愛的；討人喜歡的"},{"en":"stem","pos":"v.[T]","zh":"源自、起因於"},{"en":"convey","pos":"v.[T]","zh":"傳達、表達"},{"en":"connection","pos":"n.[C]","zh":"關聯、聯繫"},{"en":"pup","pos":"n.[C]","zh":"小狗"},{"en":"beret","pos":"n.[C]","zh":"貝雷帽"},{"en":"merchandise","pos":"n.[U]","zh":"商品；貨物"},{"en":"strategy","pos":"n.[C]","zh":"策略、戰略、行動計畫"},{"en":"pudding-loving","pos":"adj.","zh":"愛吃布丁的"},{"en":"fade","pos":"v.[I]","zh":"逐漸消失；(人氣、影響力)隨時間漸弱"},{"en":"drama","pos":"n.[U,C]","zh":"戲劇化的紛爭;充滿對立的情節或事件"},{"en":"outgrow","pos":"v.[T]","zh":"隨著成長而不再喜歡或需要(某事物);因長大而穿不下(原來的衣物)"},{"en":"deepen","pos":"v.[I,T]","zh":"加深(情感、關係);(使)變強烈、加劇"},{"en":"relevant","pos":"adj.","zh":"切合當下或現況的;有意義的;有影響力的;相關的"},{"en":"not…until","pos":"prep.phr.","zh":"直到…才開始"},{"en":"relate to","pos":"v.phr.","zh":"理解;認同、對…產生共鳴"},{"en":"aside from","pos":"prep.phr.","zh":"除了…之外(還有)"},{"en":"take in","pos":"v.phr.","zh":"收容、收留(動物、人等)"},{"en":"keep + O. + O.C.","pos":"v.phr.","zh":"使…保持、處於(某狀態)"},{"en":"golden retriever","pos":"n.phr.","zh":"黃金獵犬"}],"id":"g29","raw":"May 21~22"},{"title":"May 25","cards":[{"en":"mascara","pos":"n.[U]","zh":"睫毛膏"},{"en":"foundation","pos":"n.[U]","zh":"粉底"},{"en":"lipstick","pos":"n.[U,C]","zh":"口紅"},{"en":"sunscreen","pos":"n.[U,C]","zh":"防曬乳"},{"en":"shampoo","pos":"n.[U,C]","zh":"洗髮精"},{"en":"toner","pos":"n.[U]","zh":"化妝水"},{"en":"cheek","pos":"n.[C]","zh":"臉頰"},{"en":"prone","pos":"adj.","zh":"易於…的；傾向…的"},{"en":"bright","pos":"adj.","zh":"明亮的"},{"en":"reasonable","pos":"adj.","zh":"合理的、公道的；合情理的"},{"en":"drugstore","pos":"n.[C]","zh":"藥妝店"},{"en":"perfume","pos":"n.[U,C]","zh":"香水"},{"en":"blush","pos":"n.[C]","zh":"腮紅"},{"en":"moisturize","pos":"v.[I,T]","zh":"保濕"},{"en":"deodorant","pos":"n.[U,C]","zh":"體香劑、除臭劑"},{"en":"conditioner","pos":"n.[U,C]","zh":"潤髮乳"},{"en":"skincare","pos":"n.[U]","zh":"護膚；保養品"},{"en":"acne","pos":"n.[U]","zh":"粉刺、面皰"},{"en":"acne-prone","pos":"adj.","zh":"容易長痘痘的"},{"en":"relief","pos":"n.[U,sing.]","zh":"鬆一口氣、寬慰、解脫"},{"en":"oily","pos":"adj.","zh":"油性的"},{"en":"recommend","pos":"v.[T]","zh":"推薦；建議"},{"en":"breakout","pos":"n.[C]","zh":"(皮膚上的)痘痘爆發、突然長痘"},{"en":"beauty products","pos":"n.phr.","zh":"美妝產品"},{"en":"eyelash curler","pos":"n.phr.","zh":"睫毛夾"},{"en":"nail polish","pos":"n.phr.","zh":"指甲油"},{"en":"beauty blender","pos":"n.phr.","zh":"美妝蛋"},{"en":"cotton pad","pos":"n.phr.","zh":"化妝棉"},{"en":"eye shadow","pos":"n.phr.","zh":"眼影"},{"en":"beauty bag","pos":"n.phr.","zh":"美妝包"},{"en":"liquid eyeliner","pos":"n.phr.","zh":"眼線液"},{"en":"blush brush","pos":"n.phr.","zh":"腮紅刷"},{"en":"liquid foundation","pos":"n.phr.","zh":"粉底液"},{"en":"highlighter compact","pos":"n.phr.","zh":"打亮餅"},{"en":"foundation brush","pos":"n.phr.","zh":"粉底刷"},{"en":"eye shadow brush","pos":"n.phr.","zh":"眼影刷"},{"en":"self-care items","pos":"n.phr.","zh":"保養品"},{"en":"lip balm","pos":"n.phr.","zh":"護唇膏"},{"en":"oil blotting paper","pos":"n.phr.","zh":"吸油面紙"},{"en":"hand cream","pos":"n.phr.","zh":"護手霜"},{"en":"nail clippers","pos":"n.phr.","zh":"指甲剪"},{"en":"face mask","pos":"n.phr.","zh":"面膜"},{"en":"whitening face mask","pos":"n.phr.","zh":"美白面膜"},{"en":"moisturizing face mask","pos":"n.phr.","zh":"保濕面膜"},{"en":"gentle facial cleanser","pos":"n.phr.","zh":"溫和洗面乳"},{"en":"nail file","pos":"n.phr.","zh":"指甲銼刀"},{"en":"nail scissors","pos":"n.phr.","zh":"指甲剪刀"},{"en":"face roller","pos":"n.phr.","zh":"臉部按摩滾輪"},{"en":"bodywash / shower gel","pos":"n.phr.","zh":"沐浴乳"},{"en":"body lotion","pos":"n.phr.","zh":"身體乳液"},{"en":"break out","pos":"v.phr.","zh":"突然開始出現(青春痘、粉刺、紅疹等)"},{"en":"dry sth. out","pos":"v.phr.","zh":"使…變乾;使…完全乾燥"},{"en":"work well","pos":"v.phr.","zh":"效果良好"}],"id":"g30","raw":"May 25"},{"title":"May 26","cards":[{"en":"Brazzaville","pos":"n.","zh":"布拉薩"},{"en":"exotic","pos":"adj.","zh":"異國風情的；奇特的"},{"en":"rainforest","pos":"n.[C]","zh":"熱帶雨林"},{"en":"capital","pos":"n.[C]","zh":"首都；首府"},{"en":"whereas","pos":"conj.","zh":"然而、卻、儘管"},{"en":"Belgium","pos":"n.","zh":"比利時"},{"en":"argue","pos":"v.[I,T]","zh":"主張、認為"},{"en":"Kinshasa","pos":"n.","zh":"金夏沙"},{"en":"wild","pos":"adj.","zh":"野生的"},{"en":"democratic","pos":"adj.","zh":"民主的、民主政治的"},{"en":"opposite","pos":"adj.","zh":"對面的、另一邊的；相反的"},{"en":"occupy","pos":"v.[T]","zh":"占領、占據；占用(時間、空間)"},{"en":"enormous","pos":"adj.","zh":"(體積、數量、規模)巨大的、龐大的"},{"en":"independent","pos":"adj.","zh":"獨立的"},{"en":"Republic of the Congo","pos":"n.phr.","zh":"剛果共和國(簡稱「剛果」)"},{"en":"Democratic Republic of the Congo (DRC)","pos":"n.phr.","zh":"剛果民主共和國(簡稱「民主剛果」)"},{"en":"have heard of","pos":"v.phr.","zh":"聽說過"},{"en":"bring sth./sb. to mind","pos":"v.phr.","zh":"使人想起…；使人聯想到…"},{"en":"take one's name from…","pos":"v.phr.","zh":"(某人或事物的)名字取自…"},{"en":"the Congo River","pos":"n.phr.","zh":"剛果河"},{"en":"used to V.","pos":"v.phr.","zh":"過去曾經…；過去經常…"},{"en":"have…in common","pos":"v.phr.","zh":"有…共同之處；有…共同點"},{"en":"official language","pos":"n.phr.","zh":"官方語言"}],"id":"g31","raw":"May 26"},{"title":"May 27","cards":[{"en":"summarize","pos":"v.[I,T]","zh":"總結、概括；概述"},{"en":"straightforward","pos":"adj.","zh":"直接了當的；簡單明瞭的"},{"en":"unnecessary","pos":"adj.","zh":"不必要的；多餘的"},{"en":"consequence","pos":"n.[C]","zh":"後果；結果"},{"en":"summary","pos":"n.[C]","zh":"摘要、概要、總結"},{"en":"villager","pos":"n.[C]","zh":"村民"},{"en":"identify","pos":"v.[T]","zh":"辨識、識別、指出；確定"},{"en":"flock","pos":"n.[C]","zh":"群；一群(禽類、羊等動物)"},{"en":"character","pos":"n.[C]","zh":"(電影、戲劇或故事中的)人物、角色"},{"en":"resolution","pos":"n.[C]","zh":"(衝突、問題的)解決、結局、化解方法"},{"en":"cry wolf","pos":"v.phr.","zh":"發假警報;謊報危險"},{"en":"only to V.","pos":"adv.phr.","zh":"結果卻…；不料…"},{"en":"cry out","pos":"v.phr.","zh":"大聲呼叫、喊叫"},{"en":"come to sb.'s aid","pos":"v.phr.","zh":"前來幫助某人；伸出援手"}],"id":"g32","raw":"May 27"},{"title":"May 28~29","cards":[{"en":"encyclopedic","pos":"adj.","zh":"百科全書式的"},{"en":"distant","pos":"adj.","zh":"遙遠的、遠方的"},{"en":"encyclopedia","pos":"n.[C]","zh":"百科全書"},{"en":"pen","pos":"v.[T]","zh":"寫"},{"en":"dedication","pos":"n.[U]","zh":"投入、奉獻、致力於"},{"en":"invention","pos":"n.[U]","zh":"發明、創造"},{"en":"invention","pos":"n.[C]","zh":"發明物、創造出的新技術或工具"},{"en":"consequently","pos":"adv.","zh":"因此、結果"},{"en":"shell","pos":"n.[C]","zh":"(尤指尖果、蛋、某些動物的)殼"},{"en":"outdated","pos":"adj.","zh":"過時的、不再符合最新狀況的"},{"en":"release","pos":"v.[T]","zh":"推出、發布；上映、發行；釋放"},{"en":"entry","pos":"n.[C]","zh":"(百科、字典中的)條目、詞條"},{"en":"offensive","pos":"adj.","zh":"冒犯的、令人反感的；具攻擊性的"},{"en":"feed","pos":"v.[T]","zh":"餵食"},{"en":"collaborative","pos":"adj.","zh":"協作的、合作完成的"},{"en":"format","pos":"n.[C]","zh":"形式；呈現方式；結構"},{"en":"drive","pos":"n.[U]","zh":"動力、驅動力"},{"en":"consider","pos":"v.[T]","zh":"仔細想想、試想"},{"en":"preserve","pos":"v.[T]","zh":"保護、維護;保存"},{"en":"pioneer","pos":"n.[C]","zh":"先驅、開創者"},{"en":"vast","pos":"adj.","zh":"巨大的;廣大的"},{"en":"yet","pos":"conj.","zh":"可是、然而"},{"en":"inaccuracy","pos":"n.[C]","zh":"不準確之處、錯誤"},{"en":"inaccuracy","pos":"n.[U]","zh":"不準確性"},{"en":"circulate","pos":"v.[I,T]","zh":"傳播、流通;循環"},{"en":"intend","pos":"v.[T]","zh":"打算、意圖、旨在"},{"en":"contribute","pos":"v.[I,T]","zh":"撰稿、投稿"},{"en":"incredibly","pos":"adv.","zh":"極其"},{"en":"assistant","pos":"n.[C]","zh":"助手、輔助者；助理"},{"en":"false","pos":"adj.","zh":"錯誤的"},{"en":"via","pos":"prep.","zh":"經由；透過"},{"en":"transform","pos":"v.[T]","zh":"徹底改變、使轉變"},{"en":"humanity","pos":"n.[U]","zh":"人類；人性"},{"en":"reliable","pos":"adj.","zh":"真實可信的；可靠的"},{"en":"turn…into…","pos":"v.phr.","zh":"把…變成…"},{"en":"CE (Common Era)","pos":"n.phr.","zh":"公元"},{"en":"AD (Anno Domini)","pos":"n.phr.","zh":"耶穌紀元、西元"},{"en":"printing press","pos":"n.phr.","zh":"印刷機"},{"en":"be late to the party","pos":"v.phr.","zh":"為時已晚、錯過"},{"en":"hundreds of millions of","pos":"adj.phr.","zh":"數億次的…"},{"en":"A is only as good as B","pos":"v.phr.","zh":"A 的好壞完全取決於 B"},{"en":"look to","pos":"v.phr.","zh":"展望；指望"},{"en":"look to the future","pos":"v.phr.","zh":"展望未來"},{"en":"look to sb. for sth.","pos":"v.phr.","zh":"指望某人提供某事"},{"en":"look for","pos":"v.phr.","zh":"尋找；期望得到"},{"en":"look up","pos":"v.phr.","zh":"查詢、查閱"}],"id":"g33","raw":"May 28~29"}],"total":246});
+// 依時間排序來源：龍騰版 → 5月 → 6月
+(function(){
+  var order={'龍騰版':0,'LIVE 5/18–29':1,'LIVE 6/1–15':2,'LIVE 6/16–30':3};
+  CARD_SOURCES.sort(function(a,b){return (order[a.label]??99)-(order[b.label]??99);});
+})();
 </script>
 <script>
+// 段考總複習資料：文法重點、單字填空、綜合測驗
+const REVIEW = {
+  // ---------- 文法重點（依課程） ----------
+  grammar: [
+    {
+      lesson: "Lesson 7",
+      icon: "📘",
+      points: [
+        {
+          t: "「做…的方式」the way / how",
+          rule: "the way ＝ how ＝ the way that ＝ the way + S+V（how 當連接詞）；另可用 a way + to V / of V-ing。",
+          eg: "This is <u>the way / how / the way that</u> I spend my free time.｜This is my favorite way <u>to spend / of spending</u> free time."
+        },
+        {
+          t: "不定代名詞：one / another / the other",
+          rule: "兩個東西：one … the other。三個：one … another … the other。四個：one … another … still another … the other。群體版：some … (the) other(s)。關鍵：只要 the 出現，就代表「最後一個／最後一群」。",
+          eg: "兩群：some … the other + Ns（或 the others）｜三群：some … other(s) … the other(s)。"
+        },
+        {
+          t: "關代：限定 vs. 非限定用法",
+          rule: "限定用法：限制先行詞範圍，不可省略、不加逗號（先行詞指稱不明確）。非限定用法：補充說明，先行詞為專有名詞或獨一無二，前後加逗號，關代不可省略也不可用 that。",
+          eg: "限定：the celebrity speakers <u>who have inspired millions</u>…｜非限定：TED<u>, which stands for …,</u> has provided a platform."
+        },
+        {
+          t: "主動一致 as well as 家族",
+          rule: "S1 + as well as / along with / together with / coupled with / plus + S2 + V…：動詞單複數由 S1 決定（中間片語視為插入語）。",
+          eg: "The teacher, as well as the students, <u>is</u> here.（動詞看 S1 = teacher）"
+        },
+        {
+          t: "代替詞 so / not",
+          rule: "so 代替前面提過的「情況」避免重複：① 修飾 do 代替動作；② 修飾 say/tell/hear/hope/fear/think/believe/suppose 代替 that 子句；③ 代替整句（否定用 not）。",
+          eg: "…but he refused to <u>do so</u>.｜A: Do you think I should go on a diet? B: Yes, <u>I think so</u>. / No, <u>I don't think so</u>.｜If <u>so</u>, give me a call. / If <u>not</u>, go see it."
+        }
+      ]
+    },
+    {
+      lesson: "Lesson 8",
+      icon: "📘",
+      points: [
+        {
+          t: "「一…就…」On/Upon + Ving",
+          rule: "On / Upon + V-ing / N, S + Ved ＝ As soon as / The moment / The instant / The minute + S + Ved, S + Ved。",
+          eg: "<u>On / Upon arriving</u> at the banquet ＝ <u>As soon as / The moment I arrived</u> at the banquet, I soon realized…"
+        },
+        {
+          t: "對比轉折 on the other hand",
+          rule: "(On the one hand,) S+V. On the other hand, S+V.：表「一方面…另一方面…」。on the one hand 常被省略；on the other hand 用來表示兩種不同或相反的情況。",
+          eg: "On the one hand, it's cheap. <u>On the other hand</u>, the quality is poor."
+        },
+        {
+          t: "長主詞 → 動詞用單數",
+          rule: "當動名詞 V-ing、不定詞 To V、或名詞子句（That + S+V／Wh- + S+V）當主詞時，動詞一律用單數。",
+          eg: "<u>Seeing lines of people strolling home…</u> <u>is</u> something older folks still remember."
+        },
+        {
+          t: "關代 that 的必用與限制",
+          rule: "必用 that：先行詞含 ① 最高級／序數／the only/very/same；② all/much/little/nothing/anything/everything；③ 句首疑問代名詞 who/which；④ 同時含「人＋事物」。限制：that 不可放在介系詞、逗點之後。",
+          eg: "the <u>first / only / very / same</u> + N → 用 that｜<u>all / everything</u> that … → 用 that"
+        },
+        {
+          t: "分詞構句（副詞子句簡化）",
+          rule: "由副詞子句簡化：主動用 V-ing、被動用 p.p.，修飾主要句子。句型：(連接詞)V-ing/p.p., S+V 或 S+V, V-ing/p.p.。",
+          eg: "<u>(Being) Because I was curious</u>, I asked my host parents.｜原句 A huge tent was put up… → <u>Put up to shelter all the guests</u>, a huge tent occupied…"
+        }
+      ]
+    },
+    {
+      lesson: "Lesson 9",
+      icon: "📘",
+      points: [
+        {
+          t: "分詞片語（關代子句簡化）",
+          rule: "由關代子句（形容詞子句）簡化：把 V-ing（主動）或 p.p.（被動）當形容詞，修飾前面的名詞。句型：先行詞 N(,) + V-ing / Vp.p.。",
+          eg: "a writer of a newspaper column <u>featuring / which featured</u> celebrity gossip｜The film, <u>called / which was called</u> La Dolce Vita, …"
+        },
+        {
+          t: "對等連接詞的省略",
+          rule: "and / or 連接兩個以上詞性相同的字詞時，連接詞只需在最後一項前出現一次。",
+          eg: "used to <u>create, modify, or combine</u> images（只在最後 combine 前用 or）"
+        },
+        {
+          t: "現在完成式 + since / for",
+          rule: "S + have p.p. + ① since + S+Ved；② since + 過去時間點；③ for + 一段時間。since 子句用過去式，主句用完成式。",
+          eg: "<u>Since it was first released in 1987</u>, Photoshop <u>has become</u> the standard software…"
+        },
+        {
+          t: "程度因果 so / such … that",
+          rule: "S+V, so + S+V（所以…，前面加逗號）｜so (that) + S+V（以便於…，目的）｜so/such … that + S+V（如此…以致於…，結果）。",
+          eg: "This is <u>so</u> high <u>that</u> the gravity is close to zero."
+        },
+        {
+          t: "no matter / whatever",
+          rule: "No matter wh- / Whatever + (N) + S+V 引導「副詞子句」（無論…）。Anything that / Whatever + S+V 引導「名詞子句」（任何…的東西）。",
+          eg: "<u>No matter what / Whatever</u> software is used, the result is the same.｜<u>Anything that / Whatever</u> the boy had once possessed was lost."
+        },
+        {
+          t: "太過…以致於 too … to",
+          rule: "too + adj./adv. + to + VR（太過…以致於無法…）｜too + adj./adv. + for + N（對於…而言太過…）。",
+          eg: "The eponym has become <u>too</u> popular <u>for</u> them <u>to</u> stop its widespread usage."
+        }
+      ]
+    },
+    {
+      lesson: "Review 3",
+      icon: "📘",
+      points: [
+        {
+          t: "表「目的」的句型",
+          rule: "肯定：S+V + to / in order to / so as to + VR（為了要…）＝ To+V, S+V。否定：S+V + in order not to / so as not to + VR（為了不要…）。",
+          eg: "He studies hard <u>in order to / so as to</u> pass.｜He left early <u>so as not to / in order not to</u> miss the train."
+        },
+        {
+          t: "舉例 such as / like",
+          rule: "A + such as / like（介系詞）+ B：像是（B 一樣的）A，用來舉例。",
+          eg: "fruits <u>such as / like</u> apples and bananas"
+        },
+        {
+          t: "連接詞 since 的兩義",
+          rule: "① 因為（＝ because ＝ as）；② 自從…以來（搭配完成式使用）。",
+          eg: "<u>Since</u> everything floats, eating utensils all contain magnets.（因為）"
+        },
+        {
+          t: "instead vs. instead of / rather than",
+          rule: "instead / rather（副詞）：相反地；取而代之地，放句首或句中。instead of / in place of / in preference to / rather than（介系詞或連接詞）：而不是…。",
+          eg: "Many people tell white lies <u>instead of</u> the truth.（O 說謊　X 實話）"
+        },
+        {
+          t: "準分裂句（強調動詞）",
+          rule: "What / All (that) + S + have to / need to / should do + is + VR：…必須要／需要／應該做的是…（動詞必為單數）。",
+          eg: "<u>What / All (that)</u> they need to do <u>is ignore</u> the frequent sunrises and sunsets."
+        }
+      ]
+    }
+  ],
+
+  // ---------- 一、單字填空（首字母提示） ----------
+  fill: [
+    { hint:"s", ans:"slogan", zh:"口號；標語",
+      sentence:["A catchy campaign ","slogan"," helps a candidate connect with voters and make a long lasting impression in the minds."] },
+    { hint:"m", ans:"medical", zh:"醫療的",
+      sentence:["Although the injury is not life-threatening, it still requires urgent ","medical"," attention. It is necessary that the injured person be sent to the emergency room now."] },
+    { hint:"r", ans:"released", zh:"釋放；獲釋",
+      sentence:["After twenty years of imprisonment, the freedom fighter was ","released"," from prison on humanitarian grounds."] },
+    { hint:"f", ans:"feature", zh:"特色；特徵",
+      sentence:["The most obvious ","feature"," of a zebra is the sharp pattern of black and white stripes."] },
+    { hint:"o", ans:"origin", zh:"起源",
+      sentence:["The ","origin"," of wine making can be traced back to the twelfth century in Europe."] },
+    { hint:"t", ans:"temporary", zh:"臨時的；暫時的",
+      sentence:["Father bought a recreational vehicle so that we can go camping on holidays. With a bathroom, a kitchen, and beds, it is like a ","temporary"," home when we travel."] },
+    { hint:"c", ans:"collection", zh:"收藏品；一批",
+      sentence:["Mickey has a good ","collection"," of Starbucks City Mugs. His house is just like a mini museum of Starbucks."] },
+    { hint:"d", ans:"discussed", zh:"討論",
+      sentence:["We ","discussed"," the problem in great detail and finally reached an agreement on a solution."] },
+    { hint:"f", ans:"fascination", zh:"著迷；吸引力",
+      sentence:["People believe that blonde hair holds a ","fascination"," for man, so some women dye their hair blonde to be more attractive."] },
+    { hint:"s", ans:"sacrificed", zh:"犧牲",
+      sentence:["The National Revolutionary Martyrs' Shrine was built in 1969 to honor the 330,000 fallen soldiers who ","sacrificed"," their lives to the revolution and the WWII."] }
+  ],
+
+  // ---------- 二、綜合測驗（克漏字 11–20） ----------
+  cloze: {
+    // 文章用 {n} 當空格標記
+    passage: "Oftentimes, a young boy or girl easily falls in love — and just as easily falls out of love. In fact, romance is {11} the most common sources of regret among young people. A more mature person, {12}, may learn that true love takes time to grow and {13} it rarely happens quickly. He or she may also learn that mistakes are a {14} part of a relationship. After all, no relationship is like a fairy tale, and nobody is perfect.\n\nBut how do older people know such things? It is because they were once young, and some of {15} are wise enough to learn from their mistakes. As an old proverb {16}, \u201cLive and learn\u201d — or, we might say, \u201cLove and learn.\u201d {17}, does that mean people must make mistakes {18} wiser and more mature? Not really, but as Albert Einstein once said, \u201c{19} has never made a mistake has never tried anything new.\u201d Therefore, one should not be afraid to make mistakes {20} he or she is capable of learning from them.",
+    questions: [
+      { n:11, ans:"B", opts:[["A","such as"],["B","among"],["C","between"],["D","like"]],
+        why:"「在…之中」用 among（三者以上）。be among the most common sources＝是最常見的來源之一。" },
+      { n:12, ans:"D", opts:[["A","instead"],["B","as a matter of fact"],["C","for example"],["D","on the other hand"]],
+        why:"前面講不成熟的人，這裡轉折講成熟的人，用 on the other hand（另一方面）對比。" },
+      { n:13, ans:"D", opts:[["A","whom"],["B","what"],["C","which"],["D","that"]],
+        why:"learn 後接名詞子句當受詞，連接詞用 that（子句完整、不缺主受詞）。" },
+      { n:14, ans:"A", opts:[["A","normal"],["B","dependent"],["C","nonprofit"],["D","surprising"]],
+        why:"語意：犯錯是感情中「正常的」一部分（normal）。" },
+      { n:15, ans:"C", opts:[["A","who"],["B","whom"],["C","them"],["D","they"]],
+        why:"some of 後面接受格代名詞，指前面的 older people，用 them。" },
+      { n:16, ans:"C", opts:[["A","puts"],["B","has"],["C","goes"],["D","expresses"]],
+        why:"固定用法：the proverb goes…（諺語是這麼說的）。" },
+      { n:17, ans:"A", opts:[["A","However"],["B","In other words"],["C","As a result"],["D","In addition"]],
+        why:"語氣轉折，提出反問，用 However（然而）。" },
+      { n:18, ans:"B", opts:[["A","by becoming"],["B","so as to become"],["C","without becoming"],["D","rather than become"]],
+        why:"表目的「為了要變得更聰明成熟」，用 so as to + VR。" },
+      { n:19, ans:"B", opts:[["A","Anyone"],["B","Whoever"],["C","people"],["D","No matter who"]],
+        why:"引導名詞子句當主詞，用複合關代 Whoever（＝ Anyone who）。No matter who 只能引導副詞子句，不可當主詞。" },
+      { n:20, ans:"D", opts:[["A","as far as"],["B","as well as"],["C","as much as"],["D","as long as"]],
+        why:"表條件「只要…」用 as long as。" }
+    ]
+  }
+};
+
 // 50 題完整資料：句子、搭配詞、選項、解題提示、字根字首拆解
 const QUESTIONS = [
   {
@@ -1937,23 +2256,28 @@ function toggleAuto(){
 
 /* --- 區域切換 --- */
 function showArea(which){
-  const quiz = which==='quiz';
-  $('quizArea').style.display = quiz?'block':'none';
-  $('cardArea').style.display = quiz?'none':'block';
-  $('goQuiz').classList.toggle('on',quiz);
-  $('goCards').classList.toggle('on',!quiz);
-  if(synth) synth.cancel(); stopAuto();
-  if(quiz){ sizeFlip(); sayMascot('回到解題練習！加油破關 🎯'); }
-  else {
+  $('quizArea').style.display = which==='quiz'?'block':'none';
+  $('cardArea').style.display = which==='cards'?'block':'none';
+  $('reviewArea').style.display = which==='review'?'block':'none';
+  $('goQuiz').classList.toggle('on',which==='quiz');
+  $('goCards').classList.toggle('on',which==='cards');
+  $('goReview').classList.toggle('on',which==='review');
+  if(synth) synth.cancel(); stopAuto(); if(typeof stopGameTimer==='function') stopGameTimer();
+  if(which==='quiz'){ sizeFlip(); sayMascot('回到解題練習！加油破關 🎯'); }
+  else if(which==='cards'){
     renderSrcRow(); renderGroups();
     if(cGroup) sizeCFlip();
     sayMascot('歡迎來到單字卡！選課程開始，點喇叭就能聽發音 🔊');
+  } else {
+    initReview();
+    sayMascot('段考總複習來囉！文法看一遍，再做填空和克漏字 📖');
   }
 }
 
 /* --- 事件綁定 --- */
 $('goQuiz').addEventListener('click',()=>showArea('quiz'));
 $('goCards').addEventListener('click',()=>showArea('cards'));
+$('goReview').addEventListener('click',()=>showArea('review'));
 $('cflip').addEventListener('click',cFlip);
 $('cFlipBtn').addEventListener('click',(e)=>{e.stopPropagation();cFlip();});
 $('cPrev').addEventListener('click',(e)=>{e.stopPropagation();cGo(-1);});
@@ -2281,6 +2605,185 @@ $('goBack').addEventListener('click',()=>{ gWrongFromPanel=false; showGameScreen
 $('wpReview').addEventListener('click',()=>{ setCardMode('game'); startGame(true); });
 $('wpClear').addEventListener('click',()=>{ if(confirm('確定清空整個錯字表嗎？')){ wrongWords={}; saveWrong(); updateWrongBadge(); renderWrongPanel(); } });
 updateWrongBadge();
+
+/* ===================================================================
+   段考總複習：文法重點 / 單字填空 / 綜合測驗
+   =================================================================== */
+let reviewInited=false, rLessonIdx=0, rSub='grammar';
+const rFillState={};   // i -> true(答對)
+const rClozeState={};  // n -> chosenLetter
+
+function initReview(){
+  if(reviewInited){ return; }
+  reviewInited=true;
+  renderLessonTabs();
+  renderNotes();
+  renderFill();
+  renderCloze();
+  setRSub('grammar');
+}
+
+/* ---- 子分頁切換 ---- */
+function setRSub(s){
+  rSub=s;
+  $('rsubGrammar').classList.toggle('on',s==='grammar');
+  $('rsubFill').classList.toggle('on',s==='fill');
+  $('rsubCloze').classList.toggle('on',s==='cloze');
+  $('rGrammar').style.display = s==='grammar'?'block':'none';
+  $('rFill').style.display    = s==='fill'?'block':'none';
+  $('rCloze').style.display   = s==='cloze'?'block':'none';
+  if(synth) synth.cancel();
+}
+$('rsubGrammar').addEventListener('click',()=>setRSub('grammar'));
+$('rsubFill').addEventListener('click',()=>setRSub('fill'));
+$('rsubCloze').addEventListener('click',()=>setRSub('cloze'));
+
+/* ---- 文法重點 ---- */
+function renderLessonTabs(){
+  const box=$('rLessonTabs'); box.innerHTML='';
+  REVIEW.grammar.forEach((g,i)=>{
+    const b=document.createElement('button');
+    b.className='rltab'+(i===rLessonIdx?' on':'');
+    b.textContent=g.lesson;
+    b.addEventListener('click',()=>{ rLessonIdx=i; renderLessonTabs(); renderNotes(); });
+    box.appendChild(b);
+  });
+}
+function renderNotes(){
+  const g=REVIEW.grammar[rLessonIdx];
+  const box=$('rNotes'); box.innerHTML='';
+  g.points.forEach((p,i)=>{
+    const card=document.createElement('div');
+    card.className='rnote'+(i===0?' open':'');
+    card.innerHTML=`
+      <div class="rnote-head">
+        <span class="rnote-num">${i+1}</span>
+        <span class="rnote-t">${p.t}</span>
+        <span class="rnote-arrow">▼</span>
+      </div>
+      <div class="rnote-body">
+        <div class="rnote-rule">${p.rule}</div>
+        <div class="rnote-eg"><span class="eglab">📌 例句</span>${p.eg}</div>
+      </div>`;
+    card.querySelector('.rnote-head').addEventListener('click',()=>card.classList.toggle('open'));
+    box.appendChild(card);
+  });
+}
+
+/* ---- 單字填空 ---- */
+function fillFullSentence(item){
+  return item.sentence.join('').replace(/\s+([,.;!?])/g,'$1').replace(/\s{2,}/g,' ').trim();
+}
+function renderFill(){
+  const box=$('rFillList'); box.innerHTML='';
+  REVIEW.fill.forEach((item,i)=>{
+    const solved=rFillState[i];
+    let sent='';
+    item.sentence.forEach(seg=>{
+      if(seg===item.ans){
+        sent += solved
+          ? `<span class="rfi-blankspot"><span class="rfi-ans">${item.ans}</span></span>`
+          : `<span class="rfi-blankspot"><span class="rfi-hint">${item.hint}</span><span style="color:var(--ink-soft)">______</span></span>`;
+      } else sent += seg;
+    });
+    const card=document.createElement('div');
+    card.className='rfi'+(solved?' done':'');
+    card.innerHTML=`
+      <div class="rfi-q"><span class="rfi-num">${i+1}.</span>${sent}</div>
+      <div class="rfi-row">
+        ${solved? '<span style="color:var(--mint-deep);font-weight:800;font-family:Baloo 2">✅ 答對了！</span>'
+          : `<input class="rfi-input" type="text" placeholder="輸入單字（首字母 ${item.hint}）" autocomplete="off" autocapitalize="off" spellcheck="false">
+             <button class="rfi-check">送出</button>`}
+        <button class="rfi-sp" title="念整句">${speakIcon()}</button>
+      </div>
+      <div class="rfi-zh">💡 ${item.ans} = ${item.zh}</div>`;
+    // wire
+    const sp=card.querySelector('.rfi-sp');
+    sp.addEventListener('click',()=>speak(fillFullSentence(item),0.92,sp));
+    if(!solved){
+      const inp=card.querySelector('.rfi-input');
+      const chk=card.querySelector('.rfi-check');
+      const submit=()=>{
+        const v=(inp.value||'').trim().toLowerCase();
+        if(!v) return;
+        if(v===item.ans.toLowerCase()){
+          rFillState[i]=true; updateFillScore(); burstConfetti(); cheerMascot('答對了！🎉');
+          renderFill();
+        } else {
+          inp.classList.remove('no'); void inp.offsetWidth; inp.classList.add('no');
+          sayMascot(`再試試～提示：開頭是 ${item.hint}`);
+        }
+      };
+      chk.addEventListener('click',submit);
+      inp.addEventListener('keydown',e=>{ if(e.key==='Enter') submit(); });
+    }
+    box.appendChild(card);
+  });
+  updateFillScore();
+}
+function updateFillScore(){ $('rfDone').textContent = Object.values(rFillState).filter(Boolean).length; }
+$('rfReveal').addEventListener('click',()=>{
+  REVIEW.fill.forEach((_,i)=>rFillState[i]=true); renderFill(); sayMascot('已顯示全部答案，對照記憶一下吧 👀');
+});
+$('rfReset').addEventListener('click',()=>{
+  for(const k in rFillState) delete rFillState[k]; renderFill(); sayMascot('填空重置！再做一次更熟練 ✏️');
+});
+
+/* ---- 綜合測驗（克漏字） ---- */
+function renderCloze(){
+  // passage with blanks
+  const pass=REVIEW.cloze.passage;
+  const html=pass.replace(/\{(\d+)\}/g,(m,n)=>{
+    const chosen=rClozeState[n];
+    const q=REVIEW.cloze.questions.find(x=>x.n==n);
+    const correct = chosen && chosen===q.ans;
+    const txt = chosen? (q.opts.find(o=>o[0]===chosen)[1]) : '____';
+    return `<span class="cloze-blank ${chosen?'filled':''}" data-n="${n}"><span class="bn">${n}.</span>&nbsp;${chosen?txt:'____'}</span>`;
+  });
+  $('rClozePassage').innerHTML=html;
+
+  const box=$('rClozeQs'); box.innerHTML='';
+  REVIEW.cloze.questions.forEach(q=>{
+    const ansd = rClozeState[q.n];
+    const card=document.createElement('div');
+    card.className='rcq'+(ansd?' answered':'');
+    let opts='';
+    q.opts.forEach(o=>{
+      let cls='rcq-opt';
+      if(ansd){
+        cls+=' locked';
+        if(o[0]===q.ans) cls+=' correct';
+        else if(o[0]===ansd) cls+=' wrong';
+        else cls+=' fade';
+      }
+      opts+=`<button class="${cls}" data-l="${o[0]}"><span class="ol">${o[0]}</span>${o[1]}</button>`;
+    });
+    card.innerHTML=`
+      <div class="rcq-h"><b>${q.n}.</b>選出最適合的答案</div>
+      <div class="rcq-opts">${opts}</div>
+      <div class="rcq-why">💡 ${q.why}</div>`;
+    if(!ansd){
+      card.querySelectorAll('.rcq-opt').forEach(btn=>{
+        btn.addEventListener('click',()=>{
+          const l=btn.dataset.l;
+          rClozeState[q.n]=l;
+          if(l===q.ans){ burstConfetti(); cheerMascot('正確！🎉'); }
+          else { sayMascot('看一下解析，下次就會了 💪'); }
+          renderCloze();
+        });
+      });
+    }
+    box.appendChild(card);
+  });
+  updateClozeScore();
+}
+function updateClozeScore(){
+  const done=REVIEW.cloze.questions.filter(q=>rClozeState[q.n]===q.ans).length;
+  $('rcDone').textContent=done;
+}
+$('rcReset').addEventListener('click',()=>{
+  for(const k in rClozeState) delete rClozeState[k]; renderCloze(); sayMascot('克漏字重置，再挑戰一次 🧩');
+});
 
 /* ===== init ===== */
 loadProgress();                 // 先讀回 localStorage 裡的進度
