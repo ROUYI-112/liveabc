@@ -407,6 +407,117 @@ footer{text-align:center;color:var(--ink-soft);font-size:12px;font-weight:600;ma
 .cdot.seen{background:var(--mint);border-color:var(--mint-deep)}
 .cdot.cur.seen{background:var(--grape);border-color:var(--grape-deep)}
 
+/* ===== card-area mode switch ===== */
+.cmodeswitch{display:flex;gap:8px;justify-content:center;margin-bottom:14px;flex-wrap:wrap}
+.cmodebtn{font-family:"Baloo 2","Noto Sans TC";font-weight:800;border:2.5px solid var(--ink);background:#fff;color:var(--ink);
+  border-radius:14px;padding:8px 15px;font-size:14.5px;cursor:pointer;box-shadow:0 4px 0 rgba(66,52,42,.15);
+  transition:transform .12s var(--pop),box-shadow .12s,background .2s;position:relative}
+.cmodebtn:hover{transform:translateY(-2px)}
+.cmodebtn:active{transform:translateY(2px)}
+.cmodebtn.on{background:linear-gradient(120deg,var(--mint),var(--mint-deep));color:#fff;border-color:var(--mint-deep);box-shadow:0 4px 0 var(--mint-deep)}
+.cmodebtn.wrongtab.on{background:linear-gradient(120deg,var(--bubble),var(--bubble-deep));border-color:var(--bubble-deep)}
+.wrongBadge{display:inline-flex;align-items:center;justify-content:center;min-width:19px;height:19px;padding:0 4px;margin-left:5px;
+  background:var(--coral);color:#fff;border-radius:999px;font-size:11px;font-weight:800;border:2px solid #fff}
+
+/* ===== game ===== */
+.game{margin-top:6px}
+.game-start{background:linear-gradient(170deg,#fff,#eef5ff);border:3px solid var(--ink);border-radius:26px;
+  padding:26px 22px;text-align:center;box-shadow:var(--card-shadow)}
+.gs-emoji{font-size:54px;animation:bob 2.6s ease-in-out infinite}
+.gs-title{font-family:"Baloo 2","Noto Sans TC";font-weight:800;font-size:28px;color:var(--grape-deep);margin:4px 0}
+.gs-pick{font-weight:700;color:var(--ink);font-size:15px;margin:6px 0;min-height:20px}
+.gs-best{font-weight:700;color:var(--sun-deep);font-size:14px;margin-bottom:14px;min-height:18px}
+.gs-go{font-family:"Baloo 2","Noto Sans TC";font-weight:800;border:none;cursor:pointer;font-size:19px;color:#fff;
+  background:linear-gradient(95deg,var(--grape),var(--bubble));border-radius:999px;padding:13px 32px;box-shadow:0 6px 0 var(--grape-deep);
+  transition:transform .12s var(--pop),box-shadow .12s}
+.gs-go:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 0 var(--grape-deep)}
+.gs-go:active:not(:disabled){transform:translateY(3px);box-shadow:0 3px 0 var(--grape-deep)}
+.gs-go:disabled{opacity:.4;cursor:not-allowed}
+.gs-rules{font-size:12.5px;color:var(--ink-soft);font-weight:600;margin-top:14px;line-height:1.6}
+
+.game-play{background:#fff;border:3px solid var(--ink);border-radius:26px;padding:18px 18px 20px;box-shadow:var(--card-shadow)}
+.gp-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+.gp-score{font-family:"Baloo 2";font-weight:800;font-size:20px;color:var(--ink)}
+.gp-score b{color:var(--sun-deep)}
+.gp-combo{font-family:"Baloo 2","Noto Sans TC";font-weight:800;font-size:15px;color:var(--coral);min-height:22px;transition:transform .2s var(--pop)}
+.gp-combo.pop{animation:comboPop .4s var(--pop)}
+@keyframes comboPop{0%{transform:scale(1)}40%{transform:scale(1.35)}100%{transform:scale(1)}}
+.gp-prog{font-family:"Baloo 2";font-weight:700;font-size:14px;color:var(--ink-soft)}
+.gp-timer{height:12px;border-radius:99px;background:#eee5d8;overflow:hidden;border:2px solid var(--ink);margin-bottom:16px}
+.gp-timer-fill{height:100%;width:100%;background:linear-gradient(90deg,var(--mint),var(--sun));transition:width .1s linear}
+.gp-timer-fill.low{background:linear-gradient(90deg,var(--coral),var(--bubble-deep))}
+
+.gp-card{background:linear-gradient(165deg,#fff 60%,#f3eeff);border:2.5px solid var(--grape);border-radius:20px;
+  padding:22px 16px;text-align:center;margin-bottom:14px;min-height:120px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.gp-qtype{font-family:"Baloo 2","Noto Sans TC";font-weight:700;font-size:12.5px;color:#fff;background:var(--grape);
+  border-radius:999px;padding:3px 12px;margin-bottom:12px}
+.gp-qmain{font-family:"Baloo 2","Noto Sans TC";font-weight:800;color:var(--ink);font-size:clamp(28px,7vw,40px);line-height:1.2;word-break:break-word}
+.gp-qmain.listen{font-size:46px}
+.gp-replay{margin-top:12px;font-family:"Baloo 2","Noto Sans TC";font-weight:700;border:2.5px solid var(--sky);background:#eaf7fe;color:#2f9fd6;
+  border-radius:999px;padding:8px 18px;font-size:14px;cursor:pointer;box-shadow:0 4px 0 #b9e3f6;transition:transform .12s var(--pop)}
+.gp-replay:hover{transform:translateY(-2px)}
+.gp-replay:active{transform:translateY(2px)}
+
+.gp-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.gopt{font-family:"Fredoka","Noto Sans TC";border:2.5px solid var(--ink);background:#fff;border-radius:15px;padding:13px 12px;
+  cursor:pointer;font-size:16px;font-weight:700;color:var(--ink);box-shadow:0 4px 0 rgba(66,52,42,.14);
+  transition:transform .1s var(--pop),box-shadow .12s,background .2s,border-color .2s;min-height:52px;display:flex;align-items:center;justify-content:center;text-align:center;word-break:break-word;line-height:1.3}
+.gopt:hover:not(.locked){transform:translateY(-2px) rotate(-.4deg)}
+.gopt:active:not(.locked){transform:translateY(2px)}
+.gopt.correct{background:linear-gradient(180deg,#e6fff6,#c6f6e6);border-color:var(--mint-deep);box-shadow:0 4px 0 var(--mint-deep);color:var(--mint-deep)}
+.gopt.wrong{background:linear-gradient(180deg,#ffeef2,#ffd9e3);border-color:var(--bubble-deep);box-shadow:0 4px 0 var(--bubble-deep);color:var(--bubble-deep);animation:shake .4s}
+.gopt.locked{cursor:default}
+.gopt.fade{opacity:.4}
+.gp-feedback{text-align:center;font-family:"Baloo 2","Noto Sans TC";font-weight:800;font-size:16px;margin-top:12px;min-height:24px}
+.gp-feedback.good{color:var(--mint-deep)}
+.gp-feedback.bad{color:var(--bubble-deep)}
+
+.game-over{background:linear-gradient(170deg,#fff,#fff0f5);border:3px solid var(--ink);border-radius:26px;padding:24px 20px;text-align:center;box-shadow:var(--card-shadow)}
+.go-emoji{font-size:56px;animation:starpop .8s var(--pop)}
+.go-title{font-family:"Baloo 2","Noto Sans TC";font-weight:800;font-size:26px;color:var(--grape-deep);margin:2px 0 8px}
+.go-score{font-family:"Baloo 2","Noto Sans TC";font-weight:700;font-size:18px;color:var(--ink)}
+.go-score b{font-size:34px;color:var(--sun-deep);display:block;line-height:1.1}
+.go-stats{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:14px 0}
+.go-stat{background:#fff;border:2.5px solid var(--ink);border-radius:14px;padding:8px 14px;box-shadow:0 3px 0 rgba(66,52,42,.13)}
+.go-stat .v{font-family:"Baloo 2";font-weight:800;font-size:20px;color:var(--grape-deep);line-height:1}
+.go-stat .l{font-size:11px;color:var(--ink-soft);font-weight:600;margin-top:2px}
+.go-newbest{font-family:"Baloo 2","Noto Sans TC";font-weight:800;color:var(--coral);font-size:18px;margin-bottom:10px;animation:comboPop .5s var(--pop)}
+.go-wrong{text-align:left;margin:10px 0 16px}
+.go-wrong-h{font-family:"Baloo 2","Noto Sans TC";font-weight:800;color:var(--bubble-deep);font-size:14px;margin-bottom:6px}
+.go-wrong-item{display:flex;align-items:center;gap:8px;background:#fff;border:2px solid #f0c8d4;border-radius:12px;padding:7px 11px;margin-bottom:6px}
+.go-wrong-item .w{font-family:"Baloo 2";font-weight:800;color:var(--ink);font-size:15px}
+.go-wrong-item .z{font-size:13px;color:var(--ink-soft);font-weight:600}
+.go-wrong-item .sp{margin-left:auto;border:none;background:#eaf7fe;color:#2f9fd6;border-radius:9px;width:30px;height:30px;cursor:pointer;font-size:15px}
+.go-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.go-again,.go-back{font-family:"Baloo 2","Noto Sans TC";font-weight:800;border:2.5px solid var(--ink);cursor:pointer;border-radius:16px;padding:11px 20px;font-size:15px;box-shadow:0 5px 0 rgba(66,52,42,.16);transition:transform .12s var(--pop)}
+.go-again{background:linear-gradient(95deg,var(--grape),var(--bubble));color:#fff;border-color:var(--grape-deep);box-shadow:0 5px 0 var(--grape-deep)}
+.go-back{background:#fff;color:var(--ink)}
+.go-again:hover,.go-back:hover{transform:translateY(-2px)}
+.go-again:active,.go-back:active{transform:translateY(3px)}
+
+/* ===== wrong-words panel ===== */
+.wrongPanel{background:linear-gradient(170deg,#fff,#fff0f3);border:3px solid var(--bubble-deep);border-radius:22px;padding:16px;box-shadow:0 8px 24px rgba(245,106,150,.18);margin-top:6px}
+.wp-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.wp-title{font-family:"Baloo 2","Noto Sans TC";font-weight:800;color:var(--bubble-deep);font-size:17px}
+.wp-pill{background:#fff;border:2px solid var(--bubble-deep);border-radius:999px;padding:2px 10px;font-size:13px;margin-left:4px}
+.wp-pill b{color:var(--bubble-deep)}
+.wp-tools{display:flex;gap:8px}
+.wp-review,.wp-clear{font-family:"Baloo 2","Noto Sans TC";font-weight:700;border:2px solid var(--ink);cursor:pointer;border-radius:11px;padding:6px 12px;font-size:13px;box-shadow:0 3px 0 rgba(66,52,42,.14);transition:transform .1s var(--pop)}
+.wp-review{background:var(--mint);color:#fff;border-color:var(--mint-deep);box-shadow:0 3px 0 var(--mint-deep)}
+.wp-clear{background:#fff;color:var(--ink-soft)}
+.wp-review:hover,.wp-clear:hover{transform:translateY(-2px)}
+.wp-review:active,.wp-clear:active{transform:translateY(2px)}
+.wp-body{display:flex;flex-direction:column;gap:7px;max-height:440px;overflow-y:auto}
+.wp-empty{text-align:center;color:var(--ink-soft);font-weight:600;padding:24px 10px;line-height:1.7}
+.wp-item{display:flex;align-items:center;gap:10px;background:#fff;border:2px solid #f0c8d4;border-radius:13px;padding:9px 12px}
+.wp-item .wp-w{font-family:"Baloo 2","Noto Sans TC";font-weight:800;color:var(--ink);font-size:16px}
+.wp-item .wp-pos{font-size:11px;color:#fff;background:var(--bubble);border-radius:999px;padding:1px 8px;font-weight:700}
+.wp-item .wp-z{font-size:13.5px;color:var(--ink-soft);font-weight:600}
+.wp-item .wp-n{margin-left:auto;font-family:"Baloo 2";font-weight:800;color:var(--bubble-deep);font-size:14px}
+.wp-item .wp-sp{border:none;background:#eaf7fe;color:#2f9fd6;border-radius:9px;width:32px;height:32px;cursor:pointer;font-size:16px;flex:0 0 auto;transition:transform .1s var(--pop)}
+.wp-item .wp-sp:active{transform:scale(.9)}
+.wp-item .wp-rm{border:none;background:#f5f0e8;color:var(--ink-soft);border-radius:9px;width:30px;height:30px;cursor:pointer;font-size:14px;flex:0 0 auto}
+
 @media (max-width:520px){
   .opts{grid-template-columns:1fr 1fr}
   .sentence{font-size:16.5px}
@@ -526,7 +637,14 @@ footer{text-align:center;color:var(--ink-soft);font-size:12px;font-weight:600;ma
 
   <!-- ============ 區域 B：單字卡（依課程分組 + 發音） ============ -->
   <div id="cardArea" style="display:none">
-    <div class="cardintro">🃏 選一個來源 → 選課程／日期 → 開始翻卡學單字（點卡片或喇叭可發音）</div>
+    <div class="cardintro">🃏 選一個來源 → 選課程／日期 → 翻卡學習，或開「單字挑戰」累積分數！</div>
+
+    <!-- 學習 / 挑戰 切換 -->
+    <div class="cmodeswitch">
+      <button class="cmodebtn on" id="cmodeStudy">📖 翻卡學習</button>
+      <button class="cmodebtn" id="cmodeGame">🎮 單字挑戰</button>
+      <button class="cmodebtn wrongtab" id="cmodeWrong">📕 錯字表<span class="wrongBadge" id="wrongBadge" style="display:none">0</span></button>
+    </div>
 
     <!-- 來源切換 -->
     <div class="srcrow" id="srcRow"></div>
@@ -562,6 +680,65 @@ footer{text-align:center;color:var(--ink-soft);font-size:12px;font-weight:600;ma
 
       <div class="cdots" id="cDots"></div>
     </div>
+
+    <!-- ===== 單字挑戰遊戲 ===== -->
+    <div class="game" id="game" style="display:none">
+      <!-- 開始畫面 -->
+      <div class="game-start" id="gameStart">
+        <div class="gs-emoji">🎮</div>
+        <div class="gs-title">單字挑戰</div>
+        <div class="gs-pick" id="gsPick">先在上面選一個課程／日期，就能開始挑戰！</div>
+        <div class="gs-best" id="gsBest"></div>
+        <button class="gs-go" id="gsGo" disabled>開始挑戰 →</button>
+        <div class="gs-rules">看英文選中文 ＆ 聽發音選英文，隨機混出 · 答對加分、連擊加倍、越快越高分</div>
+      </div>
+
+      <!-- 遊玩畫面 -->
+      <div class="game-play" id="gamePlay" style="display:none">
+        <div class="gp-top">
+          <div class="gp-score">⭐ <b id="gScore">0</b></div>
+          <div class="gp-combo" id="gCombo">　</div>
+          <div class="gp-prog"><span id="gQn">1</span>/<span id="gQtot">10</span></div>
+        </div>
+        <div class="gp-timer"><div class="gp-timer-fill" id="gTimer"></div></div>
+
+        <div class="gp-card" id="gQcard">
+          <div class="gp-qtype" id="gQtype">看英文，選出正確中文</div>
+          <div class="gp-qmain" id="gQmain"></div>
+          <button class="gp-replay" id="gReplay" style="display:none">🔊 再聽一次</button>
+        </div>
+
+        <div class="gp-opts" id="gOpts"></div>
+        <div class="gp-feedback" id="gFeedback"></div>
+      </div>
+
+      <!-- 結算畫面 -->
+      <div class="game-over" id="gameOver" style="display:none">
+        <div class="go-emoji" id="goEmoji">🏆</div>
+        <div class="go-title" id="goTitle">挑戰完成！</div>
+        <div class="go-score">本回合得分 <b id="goScore">0</b></div>
+        <div class="go-stats" id="goStats"></div>
+        <div class="go-newbest" id="goNewBest" style="display:none">🎉 新紀錄！</div>
+        <div class="go-wrong" id="goWrong"></div>
+        <div class="go-btns">
+          <button class="go-again" id="goAgain">🔁 再玩一次</button>
+          <button class="go-back" id="goBack">選其他課程</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 錯字表面板 ===== -->
+    <div class="wrongPanel" id="wrongPanel" style="display:none">
+      <div class="wp-head">
+        <div class="wp-title">📕 我的錯字表 <span class="wp-pill"><b id="wrongCount2">0</b> 個字</span></div>
+        <div class="wp-tools">
+          <button class="wp-review" id="wpReview">🎮 用錯字挑戰</button>
+          <button class="wp-clear" id="wpClear">清空</button>
+        </div>
+      </div>
+      <div class="wp-body" id="wrongBody"></div>
+    </div>
+
   </div><!-- /#cardArea -->
 
   <footer>Live ABC 考前衝刺複習精選 · 龍騰版 L7–R3 · LIVE 6月 單字卡 🦉</footer>
@@ -1650,12 +1827,17 @@ function openGroup(g){
   cCards=g.cards.map((c,i)=>({...c,_i:i}));   // 保留原 index 以記錄 seen
   cPos=0;
   renderGroups();
-  $('cdeck').style.display='block';
-  $('cdeckName').textContent = `${CARD_SOURCES[cSrcIdx].label} · ${g.title}`;
-  $('cTotal').textContent = cCards.length;
-  stopAuto();
-  renderCard();
-  $('cdeck').scrollIntoView({behavior:'smooth',block:'start'});
+  if(cardMode==='study'){
+    $('cdeck').style.display='block';
+    $('cdeckName').textContent = `${CARD_SOURCES[cSrcIdx].label} · ${g.title}`;
+    $('cTotal').textContent = cCards.length;
+    stopAuto();
+    renderCard();
+    $('cdeck').scrollIntoView({behavior:'smooth',block:'start'});
+  } else if(cardMode==='game'){
+    updateGameStart();
+    $('game').scrollIntoView({behavior:'smooth',block:'start'});
+  }
 }
 
 /* --- 渲染單張卡 --- */
@@ -1786,10 +1968,319 @@ $('cBackHint').addEventListener('click',()=>{
 window.addEventListener('resize',()=>{ if(curArea()) sizeCFlip(); });
 document.addEventListener('keydown',e=>{
   if(!curArea()) return;
+  if(cardMode!=='study') return;          // 遊戲/錯字表時，方向鍵與空白鍵不翻卡
   if(e.key==='ArrowLeft'){cGo(-1);}
   if(e.key==='ArrowRight'){cGo(1);}
   if(e.key===' '||e.key==='Enter'){e.preventDefault();cFlip();}
 });
+
+/* ===================================================================
+   單字卡 子模式：學習 / 挑戰 / 錯字表
+   =================================================================== */
+let cardMode = 'study';
+function setCardMode(m){
+  cardMode = m;
+  $('cmodeStudy').classList.toggle('on', m==='study');
+  $('cmodeGame').classList.toggle('on', m==='game');
+  $('cmodeWrong').classList.toggle('on', m==='wrong');
+  // 顯示對應區塊
+  const showSrc = (m!=='wrong');
+  $('srcRow').style.display = showSrc?'flex':'none';
+  $('groupTitle').style.display = showSrc?'block':'none';
+  $('groupGrid').style.display = showSrc?'grid':'none';
+  $('cdeck').style.display = (m==='study' && cGroup)?'block':'none';
+  $('game').style.display = (m==='game')?'block':'none';
+  $('wrongPanel').style.display = (m==='wrong')?'block':'none';
+  stopGameTimer(); if(synth) synth.cancel(); stopAuto();
+
+  if(m==='game'){ showGameScreen('start'); updateGameStart(); }
+  if(m==='wrong'){ renderWrongPanel(); }
+  if(m==='study' && cGroup){ renderCard(); }
+}
+
+/* ===================================================================
+   錯字表 (localStorage)
+   結構：{ "en\u0001zh\u0001pos": {en,zh,pos,n,src} }
+   =================================================================== */
+const WRONG_LS = 'wordlab.wordwrong.v1';
+let wrongWords = {};
+try{ wrongWords = JSON.parse(localStorage.getItem(WRONG_LS)||'{}')||{}; }catch(e){ wrongWords={}; }
+function saveWrong(){ if(!storageOK) return; try{ localStorage.setItem(WRONG_LS, JSON.stringify(wrongWords)); }catch(e){} }
+function wKey(c){ return c.en+'\u0001'+(c.zh||''); }
+function addWrong(c){
+  const k=wKey(c);
+  if(wrongWords[k]) wrongWords[k].n++;
+  else wrongWords[k]={en:c.en,zh:c.zh||'',pos:c.pos||'',n:1};
+  saveWrong(); updateWrongBadge();
+}
+function removeWrong(k){ delete wrongWords[k]; saveWrong(); updateWrongBadge(); renderWrongPanel(); }
+function wrongArr(){ return Object.entries(wrongWords).map(([k,v])=>({k,...v})).sort((a,b)=>b.n-a.n || a.en.localeCompare(b.en)); }
+function updateWrongBadge(){
+  const n=Object.keys(wrongWords).length;
+  const b=$('wrongBadge'); if(n){b.style.display='inline-flex';b.textContent=n;} else b.style.display='none';
+}
+function renderWrongPanel(){
+  const arr=wrongArr();
+  $('wrongCount2').textContent=arr.length;
+  const body=$('wrongBody');
+  $('wpReview').style.display = arr.length? 'inline-block':'none';
+  if(!arr.length){ body.innerHTML=`<div class="wp-empty">錯字表還是空的 🎉<br>去「單字挑戰」玩玩看，答錯的字會自動收進來，方便你針對性複習！</div>`; return; }
+  body.innerHTML='';
+  arr.forEach(w=>{
+    const it=document.createElement('div');
+    it.className='wp-item';
+    it.innerHTML=`<span class="wp-w">${w.en}</span>${w.pos?`<span class="wp-pos">${w.pos}</span>`:''}<span class="wp-z">${w.zh}</span>
+      <span class="wp-n">錯 ${w.n}</span>
+      <button class="wp-sp" title="發音">🔊</button>
+      <button class="wp-rm" title="移除">✕</button>`;
+    it.querySelector('.wp-sp').addEventListener('click',()=>speak(w.en,0.85,null));
+    it.querySelector('.wp-rm').addEventListener('click',()=>removeWrong(w.k));
+    body.appendChild(it);
+  });
+}
+
+/* ===================================================================
+   單字挑戰遊戲
+   =================================================================== */
+const BEST_LS = 'wordlab.gamebest.v1';
+let bestScores = {};
+try{ bestScores = JSON.parse(localStorage.getItem(BEST_LS)||'{}')||{}; }catch(e){ bestScores={}; }
+function saveBest(){ if(!storageOK) return; try{ localStorage.setItem(BEST_LS, JSON.stringify(bestScores)); }catch(e){} }
+
+const Q_TIME = 8000;          // 每題時限 (ms)
+const BASE_PT = 100;          // 答對基本分
+let gPool=[];                 // 本回合題庫（{en,zh,pos}）
+let gQueue=[];                // 出題順序
+let gI=0, gScore=0, gCombo=0, gMaxCombo=0, gCorrect=0;
+let gWrongList=[];            // 本回合錯的字
+let gTimer=null, gTimeLeft=0, gAnswered=false, gMode='', gWrongFromPanel=false;
+let gBestKey='';
+
+function showGameScreen(which){
+  $('gameStart').style.display = which==='start'?'block':'none';
+  $('gamePlay').style.display  = which==='play'?'block':'none';
+  $('gameOver').style.display  = which==='over'?'block':'none';
+}
+function updateGameStart(){
+  if(gWrongFromPanel){ return; }
+  const pick=$('gsPick'), go=$('gsGo'), best=$('gsBest');
+  if(!cGroup){
+    pick.textContent='先在上面選一個課程／日期，就能開始挑戰！';
+    go.disabled=true; best.textContent=''; return;
+  }
+  const n=cGroup.cards.length;
+  pick.innerHTML=`已選：<b>${CARD_SOURCES[cSrcIdx].label} · ${cGroup.title}</b>（${n} 字）`;
+  go.disabled=false;
+  gBestKey = CARD_SOURCES[cSrcIdx].label+'｜'+cGroup.title;
+  const bs=bestScores[gBestKey];
+  best.textContent = bs? `🏅 最佳紀錄：${bs} 分` : '還沒有紀錄，來搶第一名！';
+}
+function shuffle(a){ for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+
+function startGame(fromWrong){
+  gWrongFromPanel = !!fromWrong;
+  if(fromWrong){
+    gPool = wrongArr().map(w=>({en:w.en,zh:w.zh,pos:w.pos}));
+    gBestKey = '__wrong__';
+  } else {
+    if(!cGroup) return;
+    gPool = cGroup.cards.slice();
+  }
+  // 過濾掉沒有中文的（片語仍可，只要有 zh）
+  gPool = gPool.filter(c=>c.en && c.zh);
+  if(gPool.length<2){ sayMascot('這組可玩的字太少了，換一組或先累積點錯字吧！'); return; }
+  const qn = Math.min(10, gPool.length);
+  gQueue = shuffle(gPool.slice()).slice(0,qn);
+  gI=0; gScore=0; gCombo=0; gMaxCombo=0; gCorrect=0; gWrongList=[];
+  $('gQtot').textContent=gQueue.length;
+  $('game').style.display='block';
+  showGameScreen('play');
+  $('game').scrollIntoView({behavior:'smooth',block:'start'});
+  nextQuestion();
+}
+
+function makeOptions(correct){
+  // 4 選項：1 正確 + 3 干擾（同樣來自 gPool，盡量不同中文）
+  const opts=[correct];
+  const others = shuffle(gPool.filter(c=> c.zh!==correct.zh && c.en!==correct.en));
+  for(const o of others){ if(opts.length>=4) break; if(!opts.some(x=>x.zh===o.zh)) opts.push(o); }
+  // 若不足 4（字很少），用全字庫補
+  if(opts.length<4){
+    const all = shuffle(CARD_SOURCES.flatMap(s=>s.groups).flatMap(g=>g.cards).filter(c=>c.zh && c.zh!==correct.zh));
+    for(const o of all){ if(opts.length>=4) break; if(!opts.some(x=>x.zh===o.zh)) opts.push(o); }
+  }
+  return shuffle(opts);
+}
+
+function nextQuestion(){
+  if(gI>=gQueue.length){ endGame(); return; }
+  gAnswered=false;
+  const q=gQueue[gI];
+  // 隨機題型：看英文選中文 / 聽發音選英文
+  gMode = Math.random()<0.5 ? 'en2zh' : 'listen';
+  $('gQn').textContent=gI+1;
+  $('gScore').textContent=gScore;
+  $('gCombo').textContent = gCombo>=2? `🔥 ${gCombo} 連擊　×${comboMult(gCombo)}` : '　';
+  $('gFeedback').textContent=''; $('gFeedback').className='gp-feedback';
+
+  const qmain=$('gQmain'), qtype=$('gQtype'), replay=$('gReplay'), optsBox=$('gOpts');
+  if(gMode==='en2zh'){
+    qtype.textContent='看英文，選出正確中文';
+    qmain.textContent=q.en; qmain.className='gp-qmain';
+    replay.style.display='none';
+    const opts=makeOptions(q);
+    optsBox.innerHTML='';
+    opts.forEach(o=>{
+      const b=document.createElement('button');
+      b.className='gopt'; b.textContent=o.zh;
+      b.addEventListener('click',()=>answer(b,o.zh===q.zh,q,opts));
+      optsBox.appendChild(b);
+    });
+  } else {
+    qtype.textContent='🔊 聽發音，選出正確英文';
+    qmain.textContent='🔊'; qmain.className='gp-qmain listen';
+    replay.style.display='inline-block';
+    setTimeout(()=>speak(q.en,0.85,null),250);
+    // 英文選項
+    const opts=[q];
+    const others=shuffle(gPool.filter(c=>c.en!==q.en));
+    for(const o of others){ if(opts.length>=4)break; if(!opts.some(x=>x.en===o.en)) opts.push(o); }
+    if(opts.length<4){ const all=shuffle(CARD_SOURCES.flatMap(s=>s.groups).flatMap(g=>g.cards).filter(c=>c.en!==q.en)); for(const o of all){ if(opts.length>=4)break; if(!opts.some(x=>x.en===o.en)) opts.push(o);} }
+    const fopts=shuffle(opts);
+    optsBox.innerHTML='';
+    fopts.forEach(o=>{
+      const b=document.createElement('button');
+      b.className='gopt'; b.textContent=o.en;
+      b.addEventListener('click',()=>answer(b,o.en===q.en,q,fopts));
+      optsBox.appendChild(b);
+    });
+  }
+  startGameTimer();
+}
+
+function comboMult(combo){ return combo>=8?3 : combo>=5?2.5 : combo>=3?2 : combo>=2?1.5 : 1; }
+
+function startGameTimer(){
+  stopGameTimer();
+  gTimeLeft=Q_TIME;
+  const fill=$('gTimer'); fill.style.width='100%'; fill.classList.remove('low');
+  const t0=performance.now();
+  gTimer=setInterval(()=>{
+    const el=performance.now()-t0;
+    gTimeLeft=Math.max(0,Q_TIME-el);
+    const pct=gTimeLeft/Q_TIME*100;
+    fill.style.width=pct+'%';
+    fill.classList.toggle('low', pct<30);
+    if(gTimeLeft<=0){ stopGameTimer(); if(!gAnswered) timeUp(); }
+  },60);
+}
+function stopGameTimer(){ if(gTimer){clearInterval(gTimer);gTimer=null;} }
+
+function answer(btn,correct,q,opts){
+  if(gAnswered) return;
+  gAnswered=true; stopGameTimer();
+  const optsBox=$('gOpts');
+  optsBox.querySelectorAll('.gopt').forEach(b=>b.classList.add('locked'));
+  if(correct){
+    btn.classList.add('correct');
+    gCorrect++; gCombo++; gMaxCombo=Math.max(gMaxCombo,gCombo);
+    const mult=comboMult(gCombo);
+    const timeBonus=Math.round(gTimeLeft/Q_TIME*60);     // 最多 +60
+    const gain=Math.round((BASE_PT+timeBonus)*mult);
+    gScore+=gain;
+    $('gScore').textContent=gScore;
+    const fb=$('gFeedback'); fb.className='gp-feedback good';
+    fb.textContent = `+${gain}` + (mult>1?`（${gCombo} 連擊 ×${mult}）`:'') + (timeBonus>40?' ⚡ 手速王！':'');
+    const cc=$('gCombo'); if(gCombo>=2){cc.textContent=`🔥 ${gCombo} 連擊　×${comboMult(gCombo)}`;cc.classList.remove('pop');void cc.offsetWidth;cc.classList.add('pop');}
+    miniConfetti();
+  } else {
+    btn.classList.add('wrong');
+    gCombo=0;
+    // 標出正確答案
+    const correctText = gMode==='en2zh'? q.zh : q.en;
+    optsBox.querySelectorAll('.gopt').forEach(b=>{ if(b.textContent===correctText) b.classList.add('correct'); else if(b!==btn) b.classList.add('fade'); });
+    const fb=$('gFeedback'); fb.className='gp-feedback bad';
+    fb.textContent = `正解：${q.en} = ${q.zh}`;
+    addWrong(q);
+    if(!gWrongList.some(w=>w.en===q.en)) gWrongList.push(q);
+    if(synth && gMode==='en2zh'){ setTimeout(()=>speak(q.en,0.85,null),200); }
+  }
+  gI++;
+  setTimeout(()=>{ showGameScreen('play'); nextQuestion(); }, correct?850:1700);
+}
+function timeUp(){
+  gAnswered=true;
+  const q=gQueue[gI];
+  $('gOpts').querySelectorAll('.gopt').forEach(b=>{ b.classList.add('locked'); const t=gMode==='en2zh'?q.zh:q.en; if(b.textContent===t) b.classList.add('correct'); });
+  gCombo=0;
+  const fb=$('gFeedback'); fb.className='gp-feedback bad'; fb.textContent=`⏰ 時間到！正解：${q.en} = ${q.zh}`;
+  addWrong(q);
+  if(!gWrongList.some(w=>w.en===q.en)) gWrongList.push(q);
+  gI++;
+  setTimeout(()=>{ showGameScreen('play'); nextQuestion(); }, 1700);
+}
+
+function endGame(){
+  stopGameTimer();
+  const acc = Math.round(gCorrect/gQueue.length*100);
+  // 紀錄最佳分數（錯字挑戰不記榜）
+  let newBest=false;
+  if(!gWrongFromPanel && gBestKey){
+    if(!bestScores[gBestKey] || gScore>bestScores[gBestKey]){ bestScores[gBestKey]=gScore; saveBest(); newBest=true; }
+  }
+  showGameScreen('over');
+  // 評語
+  let emoji='🏆', title='挑戰完成！';
+  if(acc===100){ emoji='🌟'; title='完美全對！'; }
+  else if(acc>=80){ emoji='🎉'; title='表現超棒！'; }
+  else if(acc>=50){ emoji='💪'; title='繼續加油！'; }
+  else { emoji='📚'; title='多練幾次會更好！'; }
+  $('goEmoji').textContent=emoji; $('goTitle').textContent=title;
+  $('goScore').textContent=gScore;
+  $('goStats').innerHTML=`
+    <div class="go-stat"><div class="v">${gCorrect}/${gQueue.length}</div><div class="l">答對</div></div>
+    <div class="go-stat"><div class="v">${acc}%</div><div class="l">正確率</div></div>
+    <div class="go-stat"><div class="v">🔥 ${gMaxCombo}</div><div class="l">最高連擊</div></div>`;
+  $('goNewBest').style.display = newBest? 'block':'none';
+  if(newBest) popBigStar();
+  // 錯字回顧
+  const gw=$('goWrong');
+  if(gWrongList.length){
+    let h=`<div class="go-wrong-h">📕 這回合答錯的字（已存進錯字表）</div>`;
+    gWrongList.forEach(w=>{ h+=`<div class="go-wrong-item"><span class="w">${w.en}</span><span class="z">${w.zh}</span><button class="sp" data-en="${w.en.replace(/"/g,'&quot;')}">🔊</button></div>`; });
+    gw.innerHTML=h;
+    gw.querySelectorAll('.sp').forEach(b=>b.addEventListener('click',()=>speak(b.dataset.en,0.85,null)));
+  } else {
+    gw.innerHTML=`<div class="go-wrong-h" style="color:var(--mint-deep)">🎯 全部沒有錯，太厲害了！</div>`;
+  }
+  if(acc>=80) burstConfetti();
+  cheerMascot(acc>=80?'打得漂亮！🎉':'有進步空間，再來一場吧 💪');
+}
+
+/* 小彩帶（答對時，比 burstConfetti 輕量） */
+function miniConfetti(){
+  const fx=$('fx'); const colors=['#8b6dd6','#ff8fb1','#4ecdb0','#ffc94d','#ff7a59'];
+  for(let i=0;i<14;i++){
+    const c=document.createElement('div'); c.className='conf';
+    c.style.background=colors[i%colors.length]; c.style.borderRadius=i%2?'50%':'2px';
+    c.style.left=(40+Math.random()*20)+'%'; c.style.top='46%';
+    fx.appendChild(c);
+    const dx=(Math.random()-0.5)*240, dy=180+Math.random()*160, rot=Math.random()*540-270;
+    c.animate([{transform:'translate(0,0) rotate(0)',opacity:1},{transform:`translate(${dx}px,${dy}px) rotate(${rot}deg)`,opacity:0}],{duration:900+Math.random()*400,easing:'cubic-bezier(.2,.6,.4,1)'}).onfinish=()=>c.remove();
+  }
+}
+
+/* --- 遊戲事件綁定 --- */
+$('cmodeStudy').addEventListener('click',()=>setCardMode('study'));
+$('cmodeGame').addEventListener('click',()=>setCardMode('game'));
+$('cmodeWrong').addEventListener('click',()=>setCardMode('wrong'));
+$('gsGo').addEventListener('click',()=>startGame(false));
+$('gReplay').addEventListener('click',()=>{ const q=gQueue[gI]; if(q) speak(q.en,0.85,null); });
+$('goAgain').addEventListener('click',()=>{ if(gWrongFromPanel) startGame(true); else startGame(false); });
+$('goBack').addEventListener('click',()=>{ gWrongFromPanel=false; showGameScreen('start'); updateGameStart(); $('srcRow').scrollIntoView({behavior:'smooth',block:'start'}); });
+$('wpReview').addEventListener('click',()=>{ setCardMode('game'); startGame(true); });
+$('wpClear').addEventListener('click',()=>{ if(confirm('確定清空整個錯字表嗎？')){ wrongWords={}; saveWrong(); updateWrongBadge(); renderWrongPanel(); } });
+updateWrongBadge();
 
 /* ===== init ===== */
 loadProgress();                 // 先讀回 localStorage 裡的進度
