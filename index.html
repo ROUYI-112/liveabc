@@ -648,6 +648,100 @@ footer{text-align:center;color:var(--ink-soft);font-size:12px;font-weight:600;ma
 .gt-in.ok{background:#e6fff6;border-color:var(--mint-deep);color:var(--mint-deep);font-weight:700}
 .gt-in.no{background:#ffeef2;border-color:var(--bubble-deep);animation:shake .4s}
 
+/* ===== 非選特訓 互動版 ===== */
+/* 得分列 */
+.exhud{display:flex;gap:10px;justify-content:center;margin-bottom:16px}
+.exhud-item{display:flex;flex-direction:column;align-items:center;gap:1px;background:#fff;border:2.5px solid var(--ink);
+  border-radius:15px;padding:7px 16px;box-shadow:0 4px 0 rgba(66,52,42,.14);min-width:74px}
+.exhud-ico{font-size:17px;line-height:1}
+.exhud-num{font-family:"Baloo 2";font-weight:800;color:var(--grape-deep);font-size:20px;line-height:1.1}
+.exhud-lab{font-family:"Baloo 2","Noto Sans TC";font-weight:700;color:var(--ink-soft);font-size:11px}
+#exComboWrap.hot{background:linear-gradient(160deg,#fff0d6,#ffe0a8);border-color:var(--sun-deep);box-shadow:0 4px 0 var(--sun-deep);animation:comboPulse .6s var(--pop)}
+#exComboWrap.hot .exhud-num{color:#e0613f}
+@keyframes comboPulse{0%{transform:scale(1)}45%{transform:scale(1.14) rotate(-2deg)}100%{transform:scale(1)}}
+
+/* 搭配詞畫底線 + 中文 */
+.collo{position:relative;text-decoration:underline;text-decoration-color:var(--coral);text-decoration-thickness:2.5px;
+  text-underline-offset:3px;font-weight:700;color:var(--grape-deep);cursor:help;outline:none}
+.collo .collo-zh{visibility:hidden;opacity:0;position:absolute;left:50%;bottom:135%;transform:translateX(-50%) translateY(4px);
+  background:var(--ink);color:#fff;font-family:"Noto Sans TC";font-weight:700;font-size:12px;white-space:nowrap;padding:4px 9px;border-radius:9px;
+  transition:opacity .18s,transform .18s;z-index:6;pointer-events:none;box-shadow:0 4px 12px rgba(0,0,0,.18)}
+.collo .collo-zh::after{content:"";position:absolute;top:100%;left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:var(--ink)}
+.collo:hover .collo-zh,.collo:focus .collo-zh{visibility:visible;opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* 搭配詞中文小卡列 */
+.exv-collo{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.exv-collo .cc{font-family:"Noto Sans TC";font-size:12.5px;font-weight:600;color:var(--ink);background:#fff4ee;border:1.5px solid #f3c5b3;
+  border-radius:8px;padding:3px 9px}
+.exv-collo .cc b{font-family:"Nunito";color:#e0613f;font-weight:800;margin-right:3px}
+
+/* I. 四選一 */
+.exv{border:3px solid var(--ink);border-radius:18px;background:#fff;box-shadow:0 5px 0 rgba(110,81,196,.14);padding:14px 15px}
+.exv.done{background:linear-gradient(170deg,#fff,#f3fff9)}
+.exv-q{font-family:"Nunito","Noto Sans TC";font-weight:600;font-size:16px;line-height:1.9;color:var(--ink);margin-bottom:11px}
+.exv-num{font-family:"Baloo 2";font-weight:800;color:var(--grape);margin-right:5px}
+.exv-blank{display:inline-flex;align-items:center;justify-content:center;min-width:64px;height:27px;padding:0 8px;
+  border-bottom:3px solid var(--grape);font-family:"Baloo 2";font-weight:800;color:var(--bubble-deep);font-size:16px;vertical-align:middle}
+.exv-blank.filled{border-bottom-color:var(--mint-deep);color:var(--mint-deep)}
+.exv-blank.pop{animation:revealPop .4s var(--pop)}
+.exv-sp{border:2px solid var(--sky);background:#eaf7fe;color:#2f9fd6;border-radius:9px;width:34px;height:30px;cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;margin-left:6px;box-shadow:0 3px 0 #b9e3f6}
+.exv-sp svg{width:17px;height:17px}
+.exv-sp.speaking{background:#d6f6ee;border-color:var(--mint-deep);color:var(--mint-deep);box-shadow:0 3px 0 var(--mint-deep);animation:speakpulse .7s infinite}
+.exv-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.exv-opt{font-family:"Nunito","Noto Sans TC";font-weight:700;text-align:center;border:2.5px solid var(--ink);background:#fff;
+  border-radius:13px;padding:11px 10px;cursor:pointer;font-size:15.5px;box-shadow:0 4px 0 rgba(66,52,42,.13);
+  transition:transform .12s var(--pop),background .2s}
+.exv-opt:hover:not(.locked){transform:translateY(-2px);background:var(--paper2)}
+.exv-opt:active:not(.locked){transform:translateY(2px)}
+.exv-opt.correct{background:linear-gradient(180deg,#e6fff6,#c6f6e6);border-color:var(--mint-deep);box-shadow:0 4px 0 var(--mint-deep);color:var(--mint-deep)}
+.exv-opt.wrong{background:linear-gradient(180deg,#ffeef2,#ffd9e3);border-color:var(--bubble-deep);box-shadow:0 4px 0 var(--bubble-deep);color:var(--bubble-deep)}
+.exv-opt.fade{opacity:.4}
+.exv-opt.shake{animation:shake .4s}
+.exv-info{margin-top:11px}
+.exv-zh{font-family:"Noto Sans TC";font-weight:600;color:var(--ink-soft);font-size:13px;line-height:1.6}
+
+/* II. 拖曳排序 */
+.exg{border:3px solid var(--ink);border-radius:18px;background:#fff;box-shadow:0 5px 0 rgba(110,81,196,.14);padding:14px 15px}
+.exg.done{background:linear-gradient(170deg,#fff,#f3fff9)}
+.exg-zh{font-family:"Noto Sans TC";font-weight:700;color:var(--grape-deep);font-size:15.5px;margin-bottom:10px;line-height:1.5}
+.exg-ok{color:var(--mint-deep);font-weight:800;font-family:"Baloo 2";margin-left:6px}
+.exg-sentence{font-family:"Nunito","Noto Sans TC";font-weight:600;font-size:16px;line-height:2.2;color:var(--ink);margin-bottom:10px}
+.exg-slots{display:inline}
+.exg-slot{display:inline-flex;align-items:center;justify-content:center;min-width:74px;height:36px;padding:0 10px;margin:2px 3px;
+  border:2.5px dashed var(--grape);border-radius:11px;background:#faf7ff;color:#b9a8e0;font-family:"Nunito";font-weight:800;font-size:15px;
+  cursor:pointer;vertical-align:middle;transition:background .2s,border-color .2s,transform .12s var(--pop)}
+.exg-slot.filled{border-style:solid;background:#fff;color:var(--ink);border-color:var(--grape)}
+.exg-slot.over{background:#ece0ff;border-color:var(--grape-deep);transform:scale(1.05)}
+.exg-slot.ok{background:#e6fff6;border-color:var(--mint-deep);color:var(--mint-deep)}
+.exg-slot.no{background:#ffeef2;border-color:var(--bubble-deep);color:var(--bubble-deep);animation:shake .4s}
+.exg-slot.pop{animation:revealPop .35s var(--pop)}
+.exg-fixed{display:inline-block;padding:2px 8px;margin:2px 2px;background:linear-gradient(180deg,#eef9ff,#dceffb);border:2px solid var(--sky);
+  border-radius:9px;font-family:"Nunito";font-weight:800;color:#2480ad;vertical-align:middle}
+.exg-bankwrap{margin:6px 0 10px}
+.exg-banklabel{font-family:"Baloo 2","Noto Sans TC";font-weight:700;color:var(--ink-soft);font-size:12.5px;margin-bottom:7px}
+.exg-bank{display:flex;flex-wrap:wrap;gap:8px;min-height:44px;padding:10px;border:2px dashed #d8c3a8;border-radius:14px;background:#fffdf8}
+.exg-piece{font-family:"Nunito","Noto Sans TC";font-weight:800;font-size:15.5px;border:2.5px solid var(--ink);
+  background:linear-gradient(180deg,#fff,#fff0f5);border-radius:12px;padding:9px 14px;cursor:grab;box-shadow:0 4px 0 var(--bubble-deep);
+  transition:transform .12s var(--pop),opacity .2s,background .2s;color:var(--ink);user-select:none}
+.exg-piece:hover:not(.used){transform:translateY(-2px) rotate(-1deg)}
+.exg-piece:active{cursor:grabbing}
+.exg-piece.sel{background:linear-gradient(180deg,#fff7e0,#ffe9b0);border-color:var(--sun-deep);box-shadow:0 4px 0 var(--sun-deep);transform:translateY(-2px) scale(1.04)}
+.exg-piece.dragging{opacity:.5}
+.exg-piece.used{opacity:.3;pointer-events:none;box-shadow:0 2px 0 rgba(66,52,42,.12)}
+.exg-actions{display:flex;gap:8px}
+.exv-mini{font-family:"Baloo 2","Noto Sans TC";font-weight:800;border:2.5px solid var(--ink);background:#fff;color:var(--ink);
+  border-radius:11px;padding:8px 14px;font-size:13.5px;cursor:pointer;box-shadow:0 4px 0 rgba(66,52,42,.14);transition:transform .1s var(--pop)}
+.exv-mini:active{transform:translateY(2px)}
+.exg-check{background:var(--mint);color:#fff;border-color:var(--mint-deep);box-shadow:0 4px 0 var(--mint-deep)}
+.exg-sp{margin-left:4px}
+
+@media (max-width:520px){
+  .exv-opts{grid-template-columns:1fr 1fr}
+  .exhud-item{min-width:0;padding:7px 12px;flex:1}
+  .exg-slot{min-width:60px}
+}
+
 @media (max-width:520px){
   .opts{grid-template-columns:1fr 1fr}
   .sentence{font-size:16.5px}
@@ -919,6 +1013,13 @@ footer{text-align:center;color:var(--ink-soft);font-size:12px;font-weight:600;ma
         <button class="exsubbtn" id="exTabSent">III. 句子翻譯</button>
       </div>
 
+      <!-- 得分列 -->
+      <div class="exhud" id="exHud">
+        <div class="exhud-item"><span class="exhud-ico">🏆</span><span class="exhud-num" id="exScore">0</span><span class="exhud-lab">分數</span></div>
+        <div class="exhud-item" id="exComboWrap"><span class="exhud-ico">🔥</span><span class="exhud-num" id="exCombo">0</span><span class="exhud-lab">連擊</span></div>
+        <div class="exhud-item"><span class="exhud-ico">⭐</span><span class="exhud-num" id="exStars">0</span><span class="exhud-lab">星星</span></div>
+      </div>
+
       <!-- I. 字彙填空 -->
       <div id="exVocab">
         <div class="rfill-bar">
@@ -1167,170 +1268,237 @@ const REVIEW = {
 };
 
 // 第三次段考 非選特訓：字彙填空 / 引導式翻譯 / 句子翻譯
+// 第三次段考 非選特訓（互動版：四選一 + 拖曳排序 + 翻牌）
 const EXAM = {
-  // ---------- I. Vocabulary（字彙填空，首字母提示） ----------
   vocab: [
-    {hint:"c", ans:"celebrities", zh:"名人；網紅",
+    {ans:"celebrities", zh:"名人；網紅",
      sentence:["Many well-recognized online ","celebrities"," and KOLs attended the charity performance to raise money for the earthquake victims."],
-     tip:"前有 Many，需用可數名詞複數；KOLs 為同義線索。搭配：online celebrities（網路名人）。"},
-    {hint:"m", ans:"methods", zh:"方法",
+     opts:["celebrities","celebrity","celebrate","celebration"],
+     collo:[["online celebrities","網路名人"],["charity performance","慈善演出"]],
+     tip:"前有 Many → 可數名詞複數；KOLs 是同義線索。"},
+    {ans:"methods", zh:"方法",
      sentence:["Mr. Cruise likes to experiment with new teaching ","methods"," to see how they work on his students."],
-     tip:"指多種方法 → 複數。搭配：experiment with（嘗試）／teaching methods（教學方法）。"},
-    {hint:"o", ans:"organizations", zh:"組織",
+     opts:["methods","method","methodical","mythology"],
+     collo:[["experiment with","嘗試、實驗"],["teaching methods","教學方法"]],
+     tip:"指多種方法 → 複數 s。"},
+    {ans:"organizations", zh:"組織",
      sentence:["Tzu Chi set up one of the biggest charitable ","organizations"," in Taiwan, providing aid for people in disaster areas at home and abroad."],
-     tip:"句型 one of the + 最高級 + 複數名詞 →加 s。搭配：charitable organizations／set up（建立）。"},
-    {hint:"s", ans:"series", zh:"一系列",
+     opts:["organizations","organization","organize","organized"],
+     collo:[["one of the biggest","最大的…之一"],["charitable organizations","慈善組織"],["set up","建立"]],
+     tip:"one of the + 最高級 + 複數名詞 → 加 s。"},
+    {ans:"series", zh:"一系列",
      sentence:["Hollywood has produced a ","series"," of Spider-Man movies, and each of them turned out to be a box-office success."],
-     tip:"series 單複數同形，此處單數用。搭配：a series of（一系列）／box-office success（票房成功）。"},
-    {hint:"f", ans:"field", zh:"領域",
+     opts:["series","serial","serious","seris"],
+     collo:[["a series of","一系列的"],["box-office success","票房成功"]],
+     tip:"series 單複數同形，此處單數用。"},
+    {ans:"field", zh:"領域",
      sentence:["Lisa is planning to pursue a career in the ","field"," of medical research when she grows up."],
-     tip:"in the field of（在…領域）。搭配：pursue a career（追求事業）。"},
-    {hint:"f", ans:"fiction", zh:"小說（總稱）",
+     opts:["field","found","feeling","fields"],
+     collo:[["pursue a career","追求事業"],["in the field of","在…領域"],["medical research","醫學研究"]],
+     tip:"in 搭配名詞 field（領域）。"},
+    {ans:"fiction", zh:"小說（總稱）",
      sentence:["One of the reasons why people are quite into reading ","fiction"," is that it is full of imaginary characters and events."],
-     tip:"fiction 為不可數名詞，指小說類別總稱。搭配：read fiction／imaginary characters（虛構角色）。"},
-    {hint:"n", ans:"numerous", zh:"許多的",
+     opts:["fiction","fictions","friction","faction"],
+     collo:[["be into","熱衷於"],["read fiction","閱讀小說"],["imaginary characters","虛構角色"]],
+     tip:"fiction 不可數，指小說類別總稱。"},
+    {ans:"numerous", zh:"許多的",
      sentence:["The couple broke up because there were ","numerous"," differences in their viewpoints on family and money issues."],
-     tip:"修飾複數名詞 differences → 形容詞。搭配：numerous differences／break up（分手）。"},
-    {hint:"t", ans:"technological", zh:"科技的",
+     opts:["numerous","number","numb","numbers"],
+     collo:[["numerous differences","許多差異"],["break up","分手"]],
+     tip:"修飾複數名詞 differences → 形容詞。"},
+    {ans:"technological", zh:"科技的",
      sentence:["Thanks to rapid ","technological"," development, we can now relish the easy access to all sorts of AI services."],
-     tip:"修飾名詞 development → 形容詞（technology→technological）。搭配：technological development／rapid development。"},
-    {hint:"c", ans:"collection", zh:"收藏",
+     opts:["technological","technology","technically","technologies"],
+     collo:[["thanks to","由於、多虧"],["technological development","科技發展"],["rapid development","快速發展"]],
+     tip:"修飾名詞 development → 形容詞（-cal）。"},
+    {ans:"collection", zh:"收藏",
      sentence:["As a loyal fan of Japanese anime, Dan has a huge ","collection"," of comic books and other related merchandise."],
-     tip:"a huge collection of（大量的…收藏）。搭配：loyal fan（忠實粉絲）。"},
-    {hint:"i", ans:"increasingly", zh:"越來越…地",
+     opts:["collection","collect","collective","collections"],
+     collo:[["a loyal fan","忠實粉絲"],["a huge collection of","大量的…收藏"]],
+     tip:"a huge collection of（大量的…收藏）。"},
+    {ans:"increasingly", zh:"越來越…地",
      sentence:["Tapioca milk tea has become ","increasingly"," popular in Japan, and you can easily find tea shops everywhere in many Japanese cities."],
-     tip:"修飾形容詞 popular → 副詞(-ly)。搭配：become increasingly popular（越來越受歡迎）。（亦可填 immensely）"},
-    {hint:"a", ans:"assistance", zh:"協助",
+     opts:["increasingly","increasing","increase","increased"],
+     collo:[["become increasingly popular","變得越來越受歡迎"]],
+     tip:"修飾形容詞 popular → 副詞(-ly)。"},
+    {ans:"assistance", zh:"協助",
      sentence:["With the ","assistance"," of her secretary, Ms. Smith can deal with her work in an efficient way."],
-     tip:"the…of 之間填名詞。搭配：with the assistance of（在…協助下）／deal with（處理）。"},
-    {hint:"o", ans:"originated", zh:"發源、起源（過去式）",
+     opts:["assistance","assistant","assist","assists"],
+     collo:[["with the assistance of","在…的協助下"],["deal with","處理"]],
+     tip:"the…of 之間填名詞「協助」。"},
+    {ans:"originated", zh:"發源、起源（過去式）",
      sentence:["The custom of eating mooncakes ","originated"," in the Yuan dynasty, when the Han people were under the rule of the Mongols."],
-     tip:"歷史事實（元朝）→ 過去式 -ed。搭配：originate in（發源於）／under the rule of（在…統治下）。"},
-    {hint:"s", ans:"sheltered", zh:"躲避、庇護（過去式）",
+     opts:["originated","originates","originate","originating"],
+     collo:[["originate in","發源於"],["under the rule of","在…統治下"]],
+     tip:"歷史事實（元朝）→ 過去式 -ed。"},
+    {ans:"sheltered", zh:"躲避、庇護（過去式）",
      sentence:["After getting caught in the heavy rain, Bella ","sheltered"," herself under a tree until it stopped."],
-     tip:"配合過去情境 → 過去式 -ed。搭配：shelter oneself under a tree（在樹下躲雨）／heavy rain。"},
-    {hint:"v", ans:"vehicles", zh:"交通工具",
+     opts:["sheltered","shelter","shelters","sheltering"],
+     collo:[["get caught in the rain","淋到雨"],["shelter oneself under a tree","在樹下躲雨"]],
+     tip:"配合過去情境 → 過去式 -ed。"},
+    {ans:"vehicles", zh:"交通工具",
      sentence:["In Africa and Asia, camels often serve as ","vehicles"," to carry people and things across the desert."],
-     tip:"主詞 camels 為複數 → 加 s。搭配：serve as vehicles（作為交通工具）。"},
-    {hint:"c", ans:"containing", zh:"含有（現在分詞）",
+     opts:["vehicles","vehicle","vehicular","vehicals"],
+     collo:[["serve as vehicles","作為交通工具"]],
+     tip:"主詞 camels 複數 → 加 s。"},
+    {ans:"containing", zh:"含有（現在分詞）",
      sentence:["Doctors strongly suggested that patients with high blood pressure avoid foods ","containing"," a lot of fat and salt."],
-     tip:"分詞構句修飾 foods；食物「主動」含有 → 現在分詞 V-ing。搭配：foods containing…／high blood pressure。"},
-    {hint:"f", ans:"fierce", zh:"強烈的、猛烈的",
+     opts:["containing","contained","contain","contains"],
+     collo:[["foods containing…","含有…的食物"],["high blood pressure","高血壓"]],
+     tip:"分詞構句修飾 foods；食物「主動」含有 → 現在分詞。"},
+    {ans:"fierce", zh:"強烈的、猛烈的",
      sentence:["The fishing village is extremely cold in winter because ","fierce"," northeast winds blow all day long."],
-     tip:"修飾名詞 winds → 形容詞。搭配：fierce northeast winds（強烈東北季風）。"},
-    {hint:"t", ans:"temporary", zh:"暫時的",
+     opts:["fierce","fiercely","fierceness","fiercer"],
+     collo:[["fierce northeast winds","強烈的東北季風"],["all day long","一整天"]],
+     tip:"修飾名詞 winds → 形容詞。"},
+    {ans:"temporary", zh:"暫時的",
      sentence:["It is only ","temporary"," for Gabriel to live with his friend. He will move out after he finds a job."],
-     tip:"找到工作就搬走 → 暫時的。搭配：temporary for sb.／move out（搬出去）。"},
-    {hint:"s", ans:"spiritual", zh:"精神上的",
+     opts:["temporary","temporarily","temper","temporal"],
+     collo:[["temporary for sb.","對某人而言是暫時的"],["move out","搬出去"]],
+     tip:"找到工作就搬走 → 暫時的（形容詞）。"},
+    {ans:"spiritual", zh:"精神上的",
      sentence:["Art, like music and painting, can fulfill people's ","spiritual"," needs for beauty. Through viewing these works, people can find their inner peace."],
-     tip:"對應 inner peace → 形容詞「精神上的」。搭配：spiritual needs／inner peace（內心平靜）。"},
-    {hint:"e", ans:"expectations", zh:"期望",
+     opts:["spiritual","spirit","spiritually","spirits"],
+     collo:[["fulfill needs","滿足需求"],["spiritual needs","精神上的需求"],["inner peace","內心的平靜"]],
+     tip:"對應 inner peace → 形容詞。"},
+    {ans:"expectations", zh:"期望",
      sentence:["Many parents have high ","expectations"," for their children, which often in turn give the children unnecessary pressure."],
-     tip:"期望含多面向，習慣用複數。搭配：have high expectations for／unnecessary pressure。"},
-    {hint:"o", ans:"occupation", zh:"職業",
+     opts:["expectations","expectation","expect","expected"],
+     collo:[["have high expectations for","對…有很高的期望"],["unnecessary pressure","不必要的壓力"]],
+     tip:"期望含多面向，習慣用複數。"},
+    {ans:"occupation", zh:"職業",
      sentence:["Alex wants to become a journalist because he thinks it is an ","occupation"," full of adventures and challenges."],
-     tip:"前有 an → 母音開頭名詞。搭配：an occupation／full of adventures（充滿冒險）。"},
-    {hint:"f", ans:"features", zh:"以…為特色",
+     opts:["occupation","occupy","occupied","occupations"],
+     collo:[["an occupation","一份職業"],["full of adventures","充滿冒險"]],
+     tip:"前有 an → 母音開頭名詞。"},
+    {ans:"features", zh:"以…為特色",
      sentence:["The experimental school ","features"," freedom for students to arrange their own courses. They won't be forced to take courses they don't like."],
-     tip:"主詞單數 → 動詞加 s。搭配：feature freedom／arrange their own courses。"},
-    {hint:"g", ans:"general", zh:"一般的",
+     opts:["features","feature","featured","featuring"],
+     collo:[["feature freedom","以自由為特色"],["arrange their own courses","安排自己的課程"]],
+     tip:"主詞單數 → 動詞加 s。"},
+    {ans:"general", zh:"一般的",
      sentence:["This type of glue is intended for ","general"," household use rather than specific industrial use."],
-     tip:"與 specific（特定的）對比 → general。搭配：general household use（一般家庭用途）。"},
-    {hint:"c", ans:"chased", zh:"追捕（過去式）",
+     opts:["general","generally","generation","generous"],
+     collo:[["be intended for","用於、旨在"],["general household use","一般家庭用途"]],
+     tip:"與 specific（特定的）對比 → general。"},
+    {ans:"chased", zh:"追捕（過去式）",
      sentence:["As soon as the suspect made his appearance in the alley, the police ","chased"," him all over the neighborhood."],
-     tip:"配合 made his appearance（過去式）→ chased。搭配：chase sb. all over the neighborhood。"},
-    {hint:"e", ans:"edition", zh:"版本",
+     opts:["chased","chase","chases","chasing"],
+     collo:[["as soon as","一…就…"],["make one's appearance","現身"],["chase sb. all over","到處追捕某人"]],
+     tip:"配合 made（過去式）→ chased。"},
+    {ans:"edition", zh:"版本",
      sentence:["The novelist wasn't satisfied with some sections of the novel, so he revised them and the new ","edition"," will be available next month."],
-     tip:"修訂後的新版本。搭配：new edition／be available（上市）。"},
-    {hint:"g", ans:"gossip", zh:"八卦",
+     opts:["edition","edit","editor","editions"],
+     collo:[["be satisfied with","對…滿意"],["new edition","新版本"],["be available","可購得、上市"]],
+     tip:"修訂後的新版本。"},
+    {ans:"gossip", zh:"八卦",
      sentence:["Lena writes a ","gossip"," column for a magazine, revealing the personal lives of famous figures from show business."],
-     tip:"揭露名人私生活的專欄。搭配：gossip column（八卦專欄）／show business（演藝圈）。"},
-    {hint:"a", ans:"alternative", zh:"替代的、備用的",
+     opts:["gossip","gospel","goggle","gossips"],
+     collo:[["gossip column","八卦專欄"],["show business","演藝圈"]],
+     tip:"揭露名人私生活的專欄。"},
+    {ans:"alternative", zh:"替代的、備用的",
      sentence:["In case of rain, we need to conjure up an ","alternative"," place to hold the activity."],
-     tip:"以防下雨 → 需備用地點。搭配：alternative place／conjure up（想出）。"},
-    {hint:"b", ans:"brand", zh:"品牌",
+     opts:["alternative","alternate","alter","alternatively"],
+     collo:[["in case of","以防、萬一"],["alternative place","替代地點"],["conjure up","想出、變出"]],
+     tip:"以防下雨 → 需備用地點。"},
+    {ans:"brand", zh:"品牌",
      sentence:["This new ","brand"," of soap is known for being able to remove stains that no other soaps can."],
-     tip:"新品牌的肥皂。搭配：brand of soap／remove stains（去除污漬）。"},
-    {hint:"c", ans:"constantly", zh:"不斷地",
+     opts:["brand","band","brandy","branch"],
+     collo:[["brand of soap","肥皂品牌"],["be known for","以…聞名"],["remove stains","去除污漬"]],
+     tip:"新品牌的肥皂。"},
+    {ans:"constantly", zh:"不斷地",
      sentence:["In the plum rain season, it rains ","constantly"," and people get annoyed due to staying indoors for so long."],
-     tip:"修飾動詞 rains → 副詞。搭配：rain constantly（雨下個不停）／plum rain season（梅雨季）。"},
-    {hint:"m", ans:"modifications", zh:"修改",
+     opts:["constantly","constant","consist","constancy"],
+     collo:[["rain constantly","雨下個不停"],["plum rain season","梅雨季"]],
+     tip:"修飾動詞 rains → 副詞。"},
+    {ans:"modifications", zh:"修改",
      sentence:["The plan has some problems, so some ","modifications"," need to be made."],
-     tip:"前有 some，可數 → 加 s。搭配：make some modifications（做些修改）。"},
-    {hint:"e", ans:"existence", zh:"存在",
+     opts:["modifications","modification","modify","modified"],
+     collo:[["make modifications","做修改"]],
+     tip:"前有 some，可數 → 加 s。"},
+    {ans:"existence", zh:"存在",
      sentence:["Though there are many stories about the giant Loch Ness Monster, there's still no concrete evidence to prove its ","existence","."],
-     tip:"所有格 its 之後填名詞。搭配：prove its existence／concrete evidence（具體證據）。"},
-    {hint:"s", ans:"sacrifices", zh:"犧牲",
+     opts:["existence","exist","existing","existent"],
+     collo:[["prove its existence","證明其存在"],["concrete evidence","具體證據"]],
+     tip:"所有格 its 之後填名詞。"},
+    {ans:"sacrifices", zh:"犧牲",
      sentence:["Many parents make ","sacrifices"," in order to offer their children the best educational opportunities."],
-     tip:"各種犧牲 → 複數。搭配：make sacrifices／educational opportunities。"},
-    {hint:"d", ans:"decrease", zh:"減少、下降",
+     opts:["sacrifices","sacrifice","sacrificed","sacrificing"],
+     collo:[["make sacrifices","做出犧牲"],["educational opportunities","教育機會"]],
+     tip:"各種犧牲 → 複數。"},
+    {ans:"decrease", zh:"減少、下降",
      sentence:["Japan's birth rate in the past few decades has been on the ","decrease",", leading to an older population structure."],
-     tip:"on the decrease（在下降中）。搭配：birth rate（出生率）。"},
-    {hint:"v", ans:"vision", zh:"視力",
+     opts:["decrease","decreased","increase","decreasing"],
+     collo:[["on the decrease","在下降中"],["birth rate","出生率"]],
+     tip:"on the decrease（在下降中）。"},
+    {ans:"vision", zh:"視力",
      sentence:["The singer wasn't born blind. He lost his ","vision"," in an accident at the age of ten."],
-     tip:"失去視力。搭配：lose one's vision／born blind（天生失明）。"},
-    {hint:"m", ans:"maintain", zh:"維持",
+     opts:["vision","visit","visual","visions"],
+     collo:[["lose one's vision","失去視力"],["born blind","天生失明"]],
+     tip:"失去視力。"},
+    {ans:"maintain", zh:"維持",
      sentence:["Many elderly people are worried that they may not be able to ","maintain"," their living standards after they retire."],
-     tip:"不定詞 to 之後接原形動詞。搭配：maintain one's living standards（維持生活水準）。"},
-    {hint:"g", ans:"gathered", zh:"聚集（過去式）",
+     opts:["maintain","maintenance","maintained","maintains"],
+     collo:[["maintain living standards","維持生活水準"]],
+     tip:"to 之後接原形動詞。"},
+    {ans:"gathered", zh:"聚集（過去式）",
      sentence:["A great number of mourners ","gathered"," at the square, paying tribute to the heroes who died in the war."],
-     tip:"過去發生 → 加 -ed。搭配：gather at the square／pay tribute to（向…致敬）。"}
+     opts:["gathered","gather","gathers","gathering"],
+     collo:[["a great number of","大量的"],["gather at the square","聚集在廣場"],["pay tribute to","向…致敬"]],
+     tip:"過去發生 → 加 -ed。"}
   ],
 
-  // ---------- II. Guided Translation（引導式翻譯） ----------
-  // blanks: 用 {0}{1}... 標記空格；answers 對應填入字
   guided: [
     {zh:"Patrick 決定要嘗試吃臭豆腐，看看它的味道如何。",
-     tmpl:"Patrick decided to {0} stinky tofu {1} {2} and see how it tasted.",
-     answers:["give","a","try"], phrase:"give sth. a try（嘗試某事物）"},
+     before:"Patrick decided to", pieces:["give","stinky tofu","a","try"], after:"and see how it tasted.",
+     collo:[["give sth. a try","嘗試某事物"]]},
     {zh:"旅行是拓展視野的好方法之一。",
-     tmpl:"Traveling is one of the best ways to {0} one's {1}.",
-     answers:["broaden","horizons"], phrase:"broaden one's horizons（拓展視野；horizon 用複數）"},
+     before:"Traveling is one of the best ways to", pieces:["broaden","one's","horizons"], after:".",
+     collo:[["broaden one's horizons","拓展視野"]]},
     {zh:"在課程開始前，每個學生都會拿到一顆籃球和一件運動衫。",
-     tmpl:"Before the program starts, every student will be given a basketball {0} {1} {2} a sweatshirt.",
-     answers:["as","well","as"], phrase:"A as well as B（A 以及 B）"},
+     before:"…will be given a basketball", pieces:["as","well","as"], after:"a sweatshirt.",
+     collo:[["A as well as B","A 以及 B"]]},
     {zh:"任何進來酒吧的人都可以免費喝一大杯啤酒。",
-     tmpl:"Anyone who comes into the bar can get a mug of beer {0} {1}.",
-     answers:["for","free"], phrase:"for free（免費地）"},
+     before:"…can get a mug of beer", pieces:["for","free"], after:".",
+     collo:[["for free","免費地"]]},
     {zh:"超過兩萬人走上街頭，參加抗議活動。",
-     tmpl:"Over twenty thousand people took to the streets, {0} {1} in the protests.",
-     answers:["taking","part"], phrase:"分詞構句；take part in（參加）／take to the streets（走上街頭）"},
+     before:"…took to the streets,", pieces:["taking","part"], after:"in the protests.",
+     collo:[["take part in","參加"],["take to the streets","走上街頭"]]},
     {zh:"這位目擊者描述這場嚴重意外如何發生。",
-     tmpl:"The witness described how the serious accident had {0} {1}.",
-     answers:["come","about"], phrase:"had 之後接過去分詞；come about（發生）"},
+     before:"…how the serious accident had", pieces:["come","about"], after:".",
+     collo:[["come about","發生"]]},
     {zh:"這麵攤晚上生意很好，所以老闆的女兒那時通常會來幫他。",
-     tmpl:"The noodle stand is busy in the evening, so the owner's daughter usually {0} him {1} then.",
-     answers:["helps","out"], phrase:"主詞單數→helps；help sb. out（協助某人）"},
+     before:"…the owner's daughter usually", pieces:["helps","him","out"], after:"then.",
+     collo:[["help sb. out","協助某人"]]},
     {zh:"這堂課一開始，老師就把課程大綱發放給學生們。",
-     tmpl:"At the beginning of the class, the teacher {0} {1} the syllabus to her students.",
-     answers:["handed","out"], phrase:"過去式；hand out / give out（發放）"},
+     before:"…the teacher", pieces:["handed","out"], after:"the syllabus to her students.",
+     collo:[["hand out","發放"]]},
     {zh:"水在我們身體的化學組成中扮演一個非常重要的角色。",
-     tmpl:"Water {0} a very important {1} {2} our body's chemistry.",
-     answers:["plays","role","in"], phrase:"Water 不可數→plays；play a role in（扮演角色）"},
+     before:"Water", pieces:["plays","a very important","role","in"], after:"our body's chemistry.",
+     collo:[["play a role in","在…扮演角色"]]},
     {zh:"Cindy 聽到那個壞消息時，展露出了震驚的表情。",
-     tmpl:"Cindy's face {0} {1} a shocked look when she heard the bad news.",
-     answers:["took","on"], phrase:"過去式；take on a look（呈現…的表情）"},
+     before:"Cindy's face", pieces:["took","on"], after:"a shocked look when she heard the bad news.",
+     collo:[["take on a look","呈現…的表情"]]},
     {zh:"一開始，Diana 覺得 Darren 很無趣。",
-     tmpl:"{0} {1} {2}, Diana found Darren boring.",
-     answers:["In","the","beginning"], phrase:"in the beginning（一開始）"},
+     before:"", pieces:["In","the","beginning"], after:", Diana found Darren boring.",
+     collo:[["in the beginning","一開始"]]},
     {zh:"老師期待我們能想出比上一個更好的解決方法。",
-     tmpl:"The teacher expected us to {0} {1} a better solution than the last one.",
-     answers:["think","up"], phrase:"think up（想出、構思）"},
+     before:"The teacher expected us to", pieces:["think","up"], after:"a better solution than the last one.",
+     collo:[["think up","想出"]]},
     {zh:"Rose 要她女兒躺下休息，因為她看起來虛弱且臉色蒼白。",
-     tmpl:"Rose wanted her daughter to {0} a {1} because she looked weak and pale.",
-     answers:["have","lie-down"], phrase:"have a lie-down（躺下休息）"},
+     before:"Rose wanted her daughter to", pieces:["have","a","lie-down"], after:"because she looked weak and pale.",
+     collo:[["have a lie-down","躺下休息"]]},
     {zh:"運動了幾分鐘之後，Jenny 就開始流汗了。",
-     tmpl:"After exercising for several minutes, Jenny started to {0} {1} a {2}.",
-     answers:["work","up","sweat"], phrase:"work up a sweat（運動到流汗）"},
+     before:"…Jenny started to", pieces:["work","up","a","sweat"], after:".",
+     collo:[["work up a sweat","運動到流汗"]]},
     {zh:"Will 每天都在健身房健身。",
-     tmpl:"Will {0} {1} at the gym every day.",
-     answers:["works","out"], phrase:"主詞單數→works；work out（健身）"},
+     before:"Will", pieces:["works","out"], after:"at the gym every day.",
+     collo:[["work out","健身"]]},
     {zh:"東臺灣的風景非常棒，所以 Alex 常到那邊度假。",
-     tmpl:"The scenery in eastern Taiwan is {0} {1} this {2}, so Alex often takes trips there.",
-     answers:["out","of","world"], phrase:"out of this world（極好的、無與倫比的）"}
+     before:"The scenery in eastern Taiwan is", pieces:["out","of","this","world"], after:", so Alex often takes trips there.",
+     collo:[["out of this world","極好的、無與倫比的"]]}
   ],
 
-  // ---------- III. Translation（句子翻譯） ----------
   sentence: {
     zh:"據報導，颱風將於本週末侵襲這個島嶼。",
     note:"（限用本次段考句型）",
@@ -1342,7 +1510,7 @@ const EXAM = {
       "It is believed that…（據信…）",
       "It is known that…（眾所皆知…）"
     ],
-    wrong:"學生易寫成 It's report that…（少了被動 -ed），report 須改被動 reported。"
+    wrong:"易寫成 It's report that…（少了被動 -ed），report 須改被動 reported。"
   }
 };
 
@@ -3050,11 +3218,40 @@ $('rcReset').addEventListener('click',()=>{
 });
 
 /* ===================================================================
-   非選特訓：I.字彙填空 / II.引導翻譯 / III.句子翻譯
+   非選特訓（互動版）：I.四選一 / II.拖曳排序 / III.翻牌
    =================================================================== */
 let exSub='vocab';
-const exVocabState={};   // i -> true
-const exGuidedState={};  // i -> true
+const exVocabState={};   // i -> 'right' | 'wrong-then-right' ; 答對才記 true
+const exVocabPicked={};  // i -> 已選過的選項集合（給連擊判斷：一次答對才連擊）
+const exGuidedState={};  // i -> true（排對）
+// 得分系統
+let exScore=0, exCombo=0, exStars=0, exBestCombo=0;
+function exAddScore(firstTry){
+  if(firstTry){ exCombo++; } else { exCombo=0; }
+  if(exCombo>exBestCombo) exBestCombo=exCombo;
+  let mult = exCombo>=8?3 : exCombo>=5?2.5 : exCombo>=3?2 : exCombo>=2?1.5 : 1;
+  let gain = Math.round(100*mult);
+  exScore += gain;
+  // 每答對 1 題給 1 星；連擊 3/5/8 額外給星
+  exStars++;
+  if(firstTry && (exCombo===3||exCombo===5||exCombo===8)) exStars++;
+  updateExHud();
+  return {gain, mult};
+}
+function updateExHud(){
+  const hud=$('exHud');
+  if(!hud) return;
+  $('exScore').textContent=exScore;
+  $('exCombo').textContent=exCombo;
+  $('exStars').textContent=exStars;
+  const cw=$('exComboWrap');
+  if(exCombo>=2){ cw.classList.add('hot'); } else { cw.classList.remove('hot'); }
+}
+function exComboText(mult){
+  if(mult>=3) return `🔥🔥 ${exCombo} 連擊！×${mult}`;
+  if(mult>=1.5) return `🔥 ${exCombo} 連擊 ×${mult}`;
+  return '';
+}
 
 function renderExam(){ renderExamVocab(); renderExamGuided(); renderExamSent(); setExSub('vocab'); }
 
@@ -3072,45 +3269,95 @@ $('exTabVocab').addEventListener('click',()=>setExSub('vocab'));
 $('exTabGuided').addEventListener('click',()=>setExSub('guided'));
 $('exTabSent').addEventListener('click',()=>setExSub('sent'));
 
-/* ---- I. 字彙填空 ---- */
+/* 搭配詞畫底線：把句子整段文字裡的搭配詞用底線標起來，hover/點顯示中文 */
+function markCollocations(text, collo){
+  if(!collo||!collo.length) return text;
+  let out=text;
+  collo.forEach(([en,zh])=>{
+    // 用不分大小寫、避免重複包：只取第一個出現
+    const idx=out.toLowerCase().indexOf(en.toLowerCase());
+    if(idx>=0){
+      const raw=out.substr(idx,en.length);
+      const chip=`<span class="collo" tabindex="0">${raw}<span class="collo-zh">${zh}</span></span>`;
+      out = out.slice(0,idx)+chip+out.slice(idx+en.length);
+    }
+  });
+  return out;
+}
 function exFull(item){ return item.sentence.join('').replace(/\s+([,.;!?])/g,'$1').replace(/\s{2,}/g,' ').trim(); }
+
+/* ---- I. 字彙填空（四選一點選） ---- */
+function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
 function renderExamVocab(){
   const box=$('exVocabList'); box.innerHTML='';
   EXAM.vocab.forEach((item,i)=>{
     const solved=exVocabState[i];
-    let sent='';
+    // 句子：空格處顯示選到的答案 or ___
+    let sentHTML='';
     item.sentence.forEach(seg=>{
       if(seg===item.ans){
-        sent += solved
-          ? `<span class="rfi-blankspot"><span class="rfi-ans">${item.ans}</span></span>`
-          : `<span class="rfi-blankspot"><span class="rfi-hint">${item.hint}</span><span style="color:var(--ink-soft)">______</span></span>`;
-      } else sent += seg;
+        sentHTML += solved
+          ? `<span class="exv-blank filled">${item.ans}</span>`
+          : `<span class="exv-blank" id="exvBlank${i}">？</span>`;
+      } else {
+        sentHTML += markCollocations(seg, item.collo);
+      }
     });
     const card=document.createElement('div');
-    card.className='rfi'+(solved?' done':'');
+    card.className='exv'+(solved?' done':'');
+    // 選項（打散，但只打散一次→存起來）
+    if(!item._opts) item._opts = shuffle(item.opts);
+    let optsHTML = item._opts.map(o=>{
+      let cls='exv-opt';
+      if(solved){
+        cls+=' locked';
+        if(o===item.ans) cls+=' correct';
+        else cls+=' fade';
+      }
+      return `<button class="${cls}" data-o="${o.replace(/"/g,'&quot;')}">${o}</button>`;
+    }).join('');
+    // 搭配詞中文小卡
+    let colloHTML='';
+    if(item.collo&&item.collo.length){
+      colloHTML='<div class="exv-collo">'+item.collo.map(([en,zh])=>`<span class="cc"><b>${en}</b> ${zh}</span>`).join('')+'</div>';
+    }
     card.innerHTML=`
-      <div class="rfi-q"><span class="rfi-num">${i+1}.</span>${sent}</div>
-      <div class="rfi-row">
-        ${solved? '<span style="color:var(--mint-deep);font-weight:800;font-family:Baloo 2">✅ 答對了！</span>'
-          : `<input class="rfi-input" type="text" placeholder="輸入單字（首字母 ${item.hint}）" autocomplete="off" autocapitalize="off" spellcheck="false">
-             <button class="rfi-check">送出</button>`}
-        <button class="rfi-sp" title="念整句">${speakIcon()}</button>
+      <div class="exv-q"><span class="exv-num">${i+1}.</span>${sentHTML}
+        <button class="exv-sp" title="念整句">${speakIcon()}</button>
       </div>
-      <div class="rfi-zh">💡 ${item.ans}（${item.zh}）　${item.tip||''}</div>`;
-    const sp=card.querySelector('.rfi-sp');
+      <div class="exv-opts">${optsHTML}</div>
+      <div class="exv-info" ${solved?'':'style="display:none"'}>
+        <div class="exv-zh">💡 ${item.ans}（${item.zh}）　${item.tip||''}</div>
+        ${colloHTML}
+      </div>`;
+    // speak
+    const sp=card.querySelector('.exv-sp');
     sp.addEventListener('click',()=>speak(exFull(item),0.92,sp));
     if(!solved){
-      const inp=card.querySelector('.rfi-input');
-      const chk=card.querySelector('.rfi-check');
-      const submit=()=>{
-        const v=(inp.value||'').trim().toLowerCase();
-        if(!v) return;
-        if(v===item.ans.toLowerCase()){
-          exVocabState[i]=true; updateExVocabScore(); burstConfetti(); cheerMascot('答對了！🎉'); renderExamVocab();
-        } else { inp.classList.remove('no'); void inp.offsetWidth; inp.classList.add('no'); sayMascot(`再試試～開頭是 ${item.hint}`); }
-      };
-      chk.addEventListener('click',submit);
-      inp.addEventListener('keydown',e=>{ if(e.key==='Enter') submit(); });
+      const picked = exVocabPicked[i] || (exVocabPicked[i]=new Set());
+      card.querySelectorAll('.exv-opt').forEach(btn=>{
+        btn.addEventListener('click',()=>{
+          const o=btn.getAttribute('data-o');
+          if(exVocabState[i]) return;
+          const blank=$('exvBlank'+i);
+          if(o===item.ans){
+            const firstTry = picked.size===0;
+            exVocabState[i]=true;
+            const {mult}=exAddScore(firstTry);
+            if(blank){ blank.textContent=item.ans; blank.classList.add('filled','pop'); }
+            burstConfetti();
+            const ct=exComboText(mult);
+            cheerMascot(firstTry? (ct||'答對了！🎉') : '答對了！再接再厲 💪');
+            renderExamVocab();
+          } else {
+            picked.add(o);
+            btn.classList.remove('wrong'); void btn.offsetWidth; btn.classList.add('wrong','shake');
+            btn.classList.add('fade');
+            exCombo=0; updateExHud();
+            sayMascot('不是這個，再看看搭配詞 🤔');
+          }
+        });
+      });
     }
     box.appendChild(card);
   });
@@ -3118,72 +3365,159 @@ function renderExamVocab(){
 }
 function updateExVocabScore(){ $('exvDone').textContent = Object.values(exVocabState).filter(Boolean).length; }
 $('exvReveal').addEventListener('click',()=>{ EXAM.vocab.forEach((_,i)=>exVocabState[i]=true); renderExamVocab(); sayMascot('已顯示全部答案，對照記憶 👀'); });
-$('exvReset').addEventListener('click',()=>{ for(const k in exVocabState) delete exVocabState[k]; renderExamVocab(); sayMascot('字彙填空重置！再做一次 ✏️'); });
+$('exvReset').addEventListener('click',()=>{
+  for(const k in exVocabState) delete exVocabState[k];
+  for(const k in exVocabPicked) delete exVocabPicked[k];
+  EXAM.vocab.forEach(v=>delete v._opts);
+  exScore=0;exCombo=0;exStars=0;updateExHud();
+  renderExamVocab(); sayMascot('重新開始！加油拿高分 ✨');
+});
 
-/* ---- II. 引導翻譯 ---- */
+/* ---- II. 引導翻譯（拖曳排序） ---- */
 function renderExamGuided(){
   const box=$('exGuidedList'); box.innerHTML='';
   EXAM.guided.forEach((g,i)=>{
     const solved=exGuidedState[i];
-    // build english template with blanks/answers
-    let html=g.tmpl;
-    html = html.replace(/\{(\d+)\}/g,(m,idx)=>{
-      if(solved){ return `<span class="gt-blank">${g.answers[idx]}</span>`; }
-      return `<span class="gt-blank empty" data-i="${idx}">____</span>`;
-    });
-    const card=document.createElement('div');
-    card.className='rfi'+(solved?' done':'');
-    let inputs='';
-    if(!solved){
-      g.answers.forEach((a,idx)=>{ inputs+=`<input class="gt-in" data-i="${idx}" placeholder="第${idx+1}格" autocomplete="off" autocapitalize="off" spellcheck="false">`; });
-      inputs+=`<button class="rfi-check gt-submit">送出</button>`;
-    } else {
-      inputs=`<span style="color:var(--mint-deep);font-weight:800;font-family:Baloo 2">✅ 全對！</span>`;
+    if(!g._scrambled){
+      // 打散；確保和正解不同（若長度>1）
+      let sc=shuffle(g.pieces);
+      if(g.pieces.length>1){ let t=0; while(sc.join('|')===g.pieces.join('|')&&t<10){ sc=shuffle(g.pieces); t++; } }
+      g._scrambled=sc;
+      g._slots=new Array(g.pieces.length).fill(null); // 玩家放置的內容
     }
-    card.innerHTML=`
-      <div class="gt-zh-q"><span class="rfi-num">${i+1}.</span>${g.zh}</div>
-      <div class="gt-q">${html}</div>
-      <div class="gt-inputs">${inputs}<button class="rfi-sp gt-sp" title="念整句">${speakIcon()}</button></div>
-      <div class="rfi-zh">💡 ${g.phrase}</div>`;
-    // speak full english answer
-    const full=g.tmpl.replace(/\{(\d+)\}/g,(m,idx)=>g.answers[idx]);
-    const sp=card.querySelector('.gt-sp');
-    sp.addEventListener('click',()=>speak(full,0.92,sp));
-    if(!solved){
-      const chk=card.querySelector('.gt-submit');
-      const ins=Array.from(card.querySelectorAll('.gt-in'));
-      const submit=()=>{
-        let allOk=true;
-        ins.forEach((inp,idx)=>{
-          const v=(inp.value||'').trim().toLowerCase().replace(/[.,]/g,'');
-          const ans=g.answers[idx].toLowerCase();
-          if(v===ans){ inp.classList.remove('no'); inp.classList.add('ok'); }
-          else { allOk=false; if(v){ inp.classList.remove('ok'); inp.classList.remove('no'); void inp.offsetWidth; inp.classList.add('no'); } }
-        });
-        if(allOk){ exGuidedState[i]=true; updateExGuidedScore(); burstConfetti(); cheerMascot('全對！🎉'); renderExamGuided(); }
-        else sayMascot('有幾格還沒對，紅色的再想想 💪');
-      };
-      chk.addEventListener('click',submit);
-      ins.forEach(inp=>inp.addEventListener('keydown',e=>{ if(e.key==='Enter') submit(); }));
+    const card=document.createElement('div');
+    card.className='exg'+(solved?' done':'');
+    // collo chips
+    let colloHTML='';
+    if(g.collo&&g.collo.length){
+      colloHTML='<div class="exv-collo">'+g.collo.map(([en,zh])=>`<span class="cc"><b>${en}</b> ${zh}</span>`).join('')+'</div>';
+    }
+    // 句子框架：before + [slots] + after
+    const beforeHTML = g.before? markCollocations(g.before, g.collo)+' ' : '';
+    const afterHTML = g.after? ' '+markCollocations(g.after, g.collo) : '';
+    if(solved){
+      const full = (g.before?g.before+' ':'')+g.pieces.join(' ')+(g.after?' '+g.after:'');
+      card.innerHTML=`
+        <div class="exg-zh"><span class="exv-num">${i+1}.</span>${g.zh} <span class="exg-ok">✅ 排對了！</span></div>
+        <div class="exg-sentence">${beforeHTML}${g.pieces.map(p=>`<span class="exg-fixed">${p}</span>`).join(' ')}${afterHTML}
+          <button class="exv-sp exg-sp" title="念整句">${speakIcon()}</button></div>
+        <div class="exv-info"><div class="exv-zh">💡 ${g.collo.map(c=>c[0]+'（'+c[1]+'）').join('、')}</div>${colloHTML}</div>`;
+      card.querySelector('.exg-sp').addEventListener('click',(e)=>{ speak(full,0.92,e.currentTarget); });
+    } else {
+      const slotsHTML = g._slots.map((s,si)=>`<span class="exg-slot${s?' filled':''}" data-slot="${si}">${s? s : (si+1)}</span>`).join(' ');
+      const bankHTML = g._scrambled.map((p,bi)=>{
+        const used = g._slots.includes(p) && g._slots.filter(x=>x===p).length >= g._scrambled.filter(x=>x===p).length;
+        return `<button class="exg-piece${used?' used':''}" data-piece="${p.replace(/"/g,'&quot;')}" draggable="true">${p}</button>`;
+      }).join('');
+      card.innerHTML=`
+        <div class="exg-zh"><span class="exv-num">${i+1}.</span>${g.zh}</div>
+        <div class="exg-sentence">${beforeHTML}<span class="exg-slots">${slotsHTML}</span>${afterHTML}</div>
+        <div class="exg-bankwrap"><div class="exg-banklabel">👇 把單字拖進空格（或點單字→點空格）</div>
+          <div class="exg-bank">${bankHTML}</div></div>
+        <div class="exg-actions"><button class="exv-mini exg-check">✅ 檢查答案</button><button class="exv-mini exg-clear">↺ 清空</button></div>`;
+      wireGuided(card, g, i);
     }
     box.appendChild(card);
   });
   updateExGuidedScore();
 }
-function updateExGuidedScore(){ $('exgDone').textContent = Object.values(exGuidedState).filter(Boolean).length; }
-$('exgReveal').addEventListener('click',()=>{ EXAM.guided.forEach((_,i)=>exGuidedState[i]=true); renderExamGuided(); sayMascot('已顯示全部答案 👀'); });
-$('exgReset').addEventListener('click',()=>{ for(const k in exGuidedState) delete exGuidedState[k]; renderExamGuided(); sayMascot('引導翻譯重置！🔁'); });
 
-/* ---- III. 句子翻譯 ---- */
+let exDragData=null, exTapPiece=null;
+function wireGuided(card, g, i){
+  const bank=card.querySelector('.exg-bank');
+  const slots=Array.from(card.querySelectorAll('.exg-slot'));
+  const pieces=Array.from(card.querySelectorAll('.exg-piece'));
+
+  function refreshUsed(){
+    // 標記 bank 中已被使用的字塊
+    const counts={};
+    g._slots.forEach(s=>{ if(s) counts[s]=(counts[s]||0)+1; });
+    const seen={};
+    pieces.forEach(pb=>{
+      const p=pb.getAttribute('data-piece');
+      seen[p]=(seen[p]||0)+1;
+      pb.classList.toggle('used', (counts[p]||0) >= seen[p]);
+    });
+  }
+  function placeIntoSlot(piece, slotEl){
+    const si=+slotEl.getAttribute('data-slot');
+    g._slots[si]=piece;
+    slotEl.textContent=piece; slotEl.classList.add('filled','pop');
+    setTimeout(()=>slotEl.classList.remove('pop'),250);
+    refreshUsed();
+    clearMarks();
+  }
+  function clearMarks(){ slots.forEach(s=>s.classList.remove('ok','no')); }
+
+  // 點選模式：先點字塊，再點空格
+  pieces.forEach(pb=>{
+    pb.addEventListener('click',()=>{
+      if(pb.classList.contains('used')) return;
+      exTapPiece && exTapPiece.classList.remove('sel');
+      if(exTapPiece===pb){ exTapPiece=null; return; }
+      exTapPiece=pb; pb.classList.add('sel');
+    });
+    // 拖曳
+    pb.addEventListener('dragstart',()=>{ exDragData=pb.getAttribute('data-piece'); pb.classList.add('dragging'); });
+    pb.addEventListener('dragend',()=>{ pb.classList.remove('dragging'); });
+  });
+  slots.forEach(slotEl=>{
+    slotEl.addEventListener('click',()=>{
+      // 點空格：若有選取的字塊→放入；否則清空該格
+      if(exTapPiece){ placeIntoSlot(exTapPiece.getAttribute('data-piece'), slotEl); exTapPiece.classList.remove('sel'); exTapPiece=null; }
+      else if(g._slots[+slotEl.getAttribute('data-slot')]){ // 取消該格
+        g._slots[+slotEl.getAttribute('data-slot')]=null; slotEl.textContent=(+slotEl.getAttribute('data-slot')+1); slotEl.classList.remove('filled'); refreshUsed();
+      }
+    });
+    slotEl.addEventListener('dragover',e=>{ e.preventDefault(); slotEl.classList.add('over'); });
+    slotEl.addEventListener('dragleave',()=>slotEl.classList.remove('over'));
+    slotEl.addEventListener('drop',e=>{ e.preventDefault(); slotEl.classList.remove('over'); if(exDragData){ placeIntoSlot(exDragData, slotEl); exDragData=null; } });
+  });
+
+  card.querySelector('.exg-check').addEventListener('click',()=>{
+    if(g._slots.includes(null)){ sayMascot('還有空格沒填喔～'); return; }
+    let ok=true;
+    slots.forEach((s,si)=>{
+      if(g._slots[si]===g.pieces[si]){ s.classList.add('ok'); s.classList.remove('no'); }
+      else { ok=false; s.classList.remove('ok'); void s.offsetWidth; s.classList.add('no'); }
+    });
+    if(ok){
+      const firstTry=!g._tried;
+      exGuidedState[i]=true;
+      const {mult}=exAddScore(firstTry);
+      burstConfetti();
+      cheerMascot(firstTry? (exComboText(mult)||'排對了！🎉') : '排對了！👍');
+      renderExamGuided();
+    } else {
+      g._tried=true; exCombo=0; updateExHud();
+      sayMascot('順序再調整一下，紅色的位置不對 🔀');
+    }
+  });
+  card.querySelector('.exg-clear').addEventListener('click',()=>{
+    g._slots=new Array(g.pieces.length).fill(null);
+    renderExamGuided();
+  });
+  refreshUsed();
+}
+function updateExGuidedScore(){ $('exgDone').textContent = Object.values(exGuidedState).filter(Boolean).length; }
+$('exgReveal').addEventListener('click',()=>{ EXAM.guided.forEach((g,i)=>{ exGuidedState[i]=true; }); renderExamGuided(); sayMascot('已顯示全部答案 👀'); });
+$('exgReset').addEventListener('click',()=>{
+  for(const k in exGuidedState) delete exGuidedState[k];
+  EXAM.guided.forEach(g=>{ delete g._scrambled; delete g._slots; delete g._tried; });
+  exScore=0;exCombo=0;exStars=0;updateExHud();
+  renderExamGuided(); sayMascot('重新排！拖拖看 🧩');
+});
+
+/* ---- III. 句子翻譯（翻牌看解答） ---- */
 function renderExamSent(){
   const s=EXAM.sentence;
   const card=$('exSentCard');
   card.innerHTML=`
     <div class="exsent-zh">${s.zh}</div>
     <div class="exsent-note">${s.note}</div>
-    <textarea class="exsent-input" id="exSentInput" placeholder="在這裡寫下你的英文翻譯…"></textarea>
+    <textarea class="exsent-input" id="exSentInput" placeholder="先自己想想看，再翻牌對答案…"></textarea>
     <div class="exsent-btns">
-      <button class="exsent-reveal" id="exSentReveal">看解答與句型</button>
+      <button class="exsent-reveal" id="exSentReveal">🔄 翻牌看解答</button>
       <button class="exsent-sp" id="exSentSp" title="念解答">${speakIcon()}</button>
     </div>
     <div class="exsent-ans" id="exSentAns">
