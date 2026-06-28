@@ -377,8 +377,7 @@ footer{text-align:center;color:var(--ink-soft);font-size:12px;font-weight:600;ma
 .cface.cback{background:linear-gradient(165deg,#fff 55%,#fff0f5);transform:rotateY(180deg)}
 .cpos{font-family:"Fredoka";font-weight:700;font-size:13px;color:#fff;background:var(--grape);border-radius:999px;padding:3px 12px;margin-bottom:14px;align-self:center}
 .cback .cpos{background:var(--bubble-deep)}
-.cen{font-family:"Baloo 2","Noto Sans TC";font-weight:800;color:var(--ink);font-size:clamp(30px,7vw,44px);line-height:1.15;word-break:break-word}
-.czh{font-family:"Noto Sans TC";font-weight:700;color:var(--grape-deep);font-size:clamp(22px,5vw,30px);line-height:1.4;word-break:break-word}
+.cen{font-family:"Baloo 2","Noto Sans TC";font-weight:800;color:var(--ink);font-size:clamp(30px,7vw,44px);line-height:1.15;word-break:break-word}.czh{font-family:"Noto Sans TC";font-weight:700;color:var(--grape-deep);font-size:clamp(22px,5vw,30px);line-height:1.4;word-break:break-word}
 .cface .cspeak{margin-top:18px;width:54px;height:54px;border:2.5px solid var(--sky);background:#eaf7fe;color:#2f9fd6;border-radius:16px;
   cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 0 #b9e3f6;transition:transform .12s var(--pop),background .2s}
 .cface .cspeak svg{width:28px;height:28px}
@@ -388,6 +387,21 @@ footer{text-align:center;color:var(--ink-soft);font-size:12px;font-weight:600;ma
 .chint{position:absolute;bottom:10px;left:0;right:0;text-align:center;font-size:11px;color:var(--ink-soft);font-weight:600;opacity:.65}
 .cmastered-tag{position:absolute;top:12px;right:14px;font-size:12px;font-weight:800;color:var(--mint-deep);background:#e6fff6;border:2px solid var(--mint-deep);border-radius:999px;padding:2px 9px;display:none}
 .cflip.ismastered .cmastered-tag{display:block}
+.cface-lang{position:absolute;top:12px;left:14px;font-family:"Baloo 2","Noto Sans TC";font-weight:800;font-size:12px;
+  padding:3px 10px;border-radius:999px;letter-spacing:.5px}
+.cface-lang.en{background:#e7f1ff;color:#2f6fd6;border:2px solid #9fc3f5}
+.cface-lang.zh{background:#fff0f5;color:var(--bubble-deep);border:2px solid #f3b9d2}
+/* 我會了 / 還不熟 */
+.cknow{display:flex;gap:10px;margin-top:14px}
+.cknow-btn{flex:1;font-family:"Baloo 2","Noto Sans TC";font-weight:800;font-size:16px;border:3px solid var(--ink);
+  border-radius:16px;padding:13px 10px;cursor:pointer;box-shadow:0 5px 0 rgba(66,52,42,.16);transition:transform .12s var(--pop),box-shadow .12s,background .2s}
+.cknow-btn:active{transform:translateY(3px);box-shadow:0 2px 0 rgba(66,52,42,.16)}
+.cknow-btn.yes{background:var(--mint);color:#fff;border-color:var(--mint-deep);box-shadow:0 5px 0 var(--mint-deep)}
+.cknow-btn.no{background:#fff;color:var(--coral);border-color:var(--coral);box-shadow:0 5px 0 #e0613f}
+.cknow-btn.yes:hover,.cknow-btn.no:hover{transform:translateY(-2px)}
+.cknow-stat{text-align:center;font-family:"Baloo 2","Noto Sans TC";font-weight:700;color:var(--ink-soft);font-size:13px;margin-top:9px;min-height:18px}
+.cknow-stat .yn{color:var(--mint-deep)}
+.cknow-stat .nn{color:var(--coral)}
 
 .cnav{display:flex;gap:8px;margin-top:16px}
 .carrow{font-family:"Baloo 2","Noto Sans TC";font-weight:800;border:3px solid var(--ink);background:#fff;color:var(--ink);cursor:pointer;
@@ -905,6 +919,13 @@ footer{text-align:center;color:var(--ink-soft);font-size:12px;font-weight:600;ma
         <button class="carrow cnext" id="cNext">下一張<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
       </div>
 
+      <!-- 我會了 / 還不熟（記錄答對答錯） -->
+      <div class="cknow">
+        <button class="cknow-btn no" id="cDontKnow">✗ 還不熟</button>
+        <button class="cknow-btn yes" id="cKnow">✓ 我會了</button>
+      </div>
+      <div class="cknow-stat" id="cKnowStat"></div>
+
       <div class="cdots" id="cDots"></div>
     </div>
 
@@ -1214,27 +1235,27 @@ const REVIEW = {
     }
   ],
 
-  // ---------- 一、單字填空（首字母提示） ----------
+  // ---------- 一、單字填空（四選一） ----------
   fill: [
-    { hint:"s", ans:"slogan", zh:"口號；標語",
+    { hint:"s", ans:"slogan", zh:"口號；標語", opts:["slogan","slang","slot","slope"],
       sentence:["A catchy campaign ","slogan"," helps a candidate connect with voters and make a long lasting impression in the minds."] },
-    { hint:"m", ans:"medical", zh:"醫療的",
+    { hint:"m", ans:"medical", zh:"醫療的", opts:["medical","medicine","medication","medically"],
       sentence:["Although the injury is not life-threatening, it still requires urgent ","medical"," attention. It is necessary that the injured person be sent to the emergency room now."] },
-    { hint:"r", ans:"released", zh:"釋放；獲釋",
+    { hint:"r", ans:"released", zh:"釋放；獲釋", opts:["released","release","releases","releasing"],
       sentence:["After twenty years of imprisonment, the freedom fighter was ","released"," from prison on humanitarian grounds."] },
-    { hint:"f", ans:"feature", zh:"特色；特徵",
+    { hint:"f", ans:"feature", zh:"特色；特徵", opts:["feature","factor","feast","fixture"],
       sentence:["The most obvious ","feature"," of a zebra is the sharp pattern of black and white stripes."] },
-    { hint:"o", ans:"origin", zh:"起源",
+    { hint:"o", ans:"origin", zh:"起源", opts:["origin","original","originate","origins"],
       sentence:["The ","origin"," of wine making can be traced back to the twelfth century in Europe."] },
-    { hint:"t", ans:"temporary", zh:"臨時的；暫時的",
+    { hint:"t", ans:"temporary", zh:"臨時的；暫時的", opts:["temporary","temporarily","temper","temporal"],
       sentence:["Father bought a recreational vehicle so that we can go camping on holidays. With a bathroom, a kitchen, and beds, it is like a ","temporary"," home when we travel."] },
-    { hint:"c", ans:"collection", zh:"收藏品；一批",
+    { hint:"c", ans:"collection", zh:"收藏品；一批", opts:["collection","collect","collective","collections"],
       sentence:["Mickey has a good ","collection"," of Starbucks City Mugs. His house is just like a mini museum of Starbucks."] },
-    { hint:"d", ans:"discussed", zh:"討論",
+    { hint:"d", ans:"discussed", zh:"討論", opts:["discussed","discuss","discusses","discussion"],
       sentence:["We ","discussed"," the problem in great detail and finally reached an agreement on a solution."] },
-    { hint:"f", ans:"fascination", zh:"著迷；吸引力",
+    { hint:"f", ans:"fascination", zh:"著迷；吸引力", opts:["fascination","fascinate","fascinating","fascinated"],
       sentence:["People believe that blonde hair holds a ","fascination"," for man, so some women dye their hair blonde to be more attractive."] },
-    { hint:"s", ans:"sacrificed", zh:"犧牲",
+    { hint:"s", ans:"sacrificed", zh:"犧牲", opts:["sacrificed","sacrifice","sacrifices","sacrificing"],
       sentence:["The National Revolutionary Martyrs' Shrine was built in 1969 to honor the 330,000 fallen soldiers who ","sacrificed"," their lives to the revolution and the WWII."] }
   ],
 
@@ -2525,6 +2546,34 @@ let cardSeen = {};
 try{ cardSeen = JSON.parse(localStorage.getItem(CARD_LS)||'{}')||{}; }catch(e){ cardSeen={}; }
 function saveCardSeen(){ if(!storageOK) return; try{ localStorage.setItem(CARD_LS, JSON.stringify(cardSeen)); }catch(e){} }
 
+// 我會了 / 還不熟 紀錄： { "groupId|en": {y:答對次數, n:答錯次數} }
+const CARD_KNOW_LS = 'wordlab.cardknow.v1';
+let cardKnow = {};
+try{ cardKnow = JSON.parse(localStorage.getItem(CARD_KNOW_LS)||'{}')||{}; }catch(e){ cardKnow={}; }
+function saveCardKnow(){ if(!storageOK) return; try{ localStorage.setItem(CARD_KNOW_LS, JSON.stringify(cardKnow)); }catch(e){} }
+function cardKnowKey(c){ return (cGroup?cGroup.id:'?')+'|'+c.en; }
+function markKnow(yes){
+  if(!cCards.length) return;
+  const c=cCards[cPos];
+  const k=cardKnowKey(c);
+  const rec=cardKnow[k]||(cardKnow[k]={y:0,n:0});
+  if(yes) rec.y++; else rec.n++;
+  saveCardKnow();
+  markSeen();
+  // 答錯也加入錯字表（沿用既有 wordwrong 系統）
+  if(!yes && typeof addWrong==='function'){ addWrong(c); }
+  updateKnowStat();
+  // 自動跳下一張
+  setTimeout(()=>{ if(cPos<cCards.length-1){ cGo(1); } else { cheerMascot('這組複習完囉！可以洗牌再來一輪 🔁'); } }, 280);
+}
+function updateKnowStat(){
+  const el=$('cKnowStat'); if(!el||!cCards.length) return;
+  const c=cCards[cPos];
+  const rec=cardKnow[cardKnowKey(c)];
+  if(!rec||(!rec.y&&!rec.n)){ el.innerHTML='這張還沒做紀錄'; return; }
+  el.innerHTML=`這張：<span class="yn">會 ${rec.y}</span> ・ <span class="nn">不熟 ${rec.n}</span>`;
+}
+
 let cSrcIdx = 0;          // 目前來源
 let cGroup = null;        // 目前分組物件
 let cCards = [];          // 目前牌組（可能被洗牌）
@@ -2605,17 +2654,23 @@ function renderCard(){
   cflip.classList.toggle('ismastered', seenArr.includes(c._i));
 
   // 正面 / 背面內容由 cFrontIsZh 決定
-  const enHTML = `<div class="cpos">${c.pos||'　'}</div><div class="cen">${c.en}</div>
-     <button class="cspeak" id="cSpeakFront" title="念這個字">${speakIcon()}</button>
-     <div class="chint">點卡片任意處翻面 ·　空白鍵也可翻</div>
+  // 英文面（無論在正或反，都明確標示 English，且字大）
+  const enFace = (faceId, isBack) => `
+     <div class="cface-lang en">🔤 English</div>
+     <div class="cpos">${c.pos||'　'}</div>
+     <div class="cen">${c.en||'—'}</div>
+     <button class="cspeak" id="${faceId}" title="念這個字">${speakIcon()}</button>
+     <div class="chint">點卡片任意處${isBack?'翻回':'翻面'} ·　空白鍵也可翻</div>
      <div class="cmastered-tag">✓ 看過</div>`;
-  const zhHTML = `<div class="cpos">${c.pos||'　'}</div><div class="czh">${c.zh||'—'}</div>
-     <button class="cspeak" id="cSpeakBack" title="念英文">${speakIcon()}</button>
-     <div class="chint">點卡片任意處翻回</div>
+  const zhFace = (isBack) => `
+     <div class="cface-lang zh">🀄 中文</div>
+     <div class="cpos">${c.pos||'　'}</div>
+     <div class="czh">${c.zh||'—'}</div>
+     <div class="chint">點卡片任意處${isBack?'翻回':'翻面'} ·　空白鍵也可翻</div>
      <div class="cmastered-tag">✓ 看過</div>`;
 
-  if(cFrontIsZh){ $('cfront').innerHTML=zhHTML; $('cback').innerHTML=enHTML; }
-  else { $('cfront').innerHTML=enHTML; $('cback').innerHTML=zhHTML; }
+  if(cFrontIsZh){ $('cfront').innerHTML=zhFace(false); $('cback').innerHTML=enFace('cSpeakBack',true); }
+  else { $('cfront').innerHTML=enFace('cSpeakFront',false); $('cback').innerHTML=zhFace(true); }
 
   $('cIdx').textContent=cPos+1;
   $('cMastered').textContent = seenArr.length;
@@ -2628,6 +2683,7 @@ function renderCard(){
 
   sizeCFlip();
   renderDots();
+  updateKnowStat();
   cflip.animate([{transform:'scale(.97)'},{transform:'scale(1)'}],{duration:240,easing:'cubic-bezier(.34,1.56,.64,1)'});
 }
 function sizeCFlip(){
@@ -2710,6 +2766,8 @@ $('cflip').addEventListener('click',cFlip);
 $('cFlipBtn').addEventListener('click',(e)=>{e.stopPropagation();cFlip();});
 $('cPrev').addEventListener('click',(e)=>{e.stopPropagation();cGo(-1);});
 $('cNext').addEventListener('click',(e)=>{e.stopPropagation();cGo(1);});
+$('cKnow').addEventListener('click',(e)=>{e.stopPropagation();markKnow(true);});
+$('cDontKnow').addEventListener('click',(e)=>{e.stopPropagation();markKnow(false);});
 $('cShuffle').addEventListener('click',cShuffleDeck);
 $('cAuto').addEventListener('click',toggleAuto);
 $('cBackHint').addEventListener('click',()=>{
